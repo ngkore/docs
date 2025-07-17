@@ -1,0 +1,699 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Space Giants: Who’s Building the Internet in the Sky" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="ntn/p2-of-5.html" />
+<meta property="og:site_name" content="NgKore" />
+<meta property="og:description" content="Part 2 of 5: The Internet is Moving to Space Series* The race to control space-based internet infrastructure is one of the most ambitious and expensive competitions in modern business history. With..." />
+<meta property="og:image" content=".sphinx/_static/tag.png" />
+<meta property="og:image:alt" content="NgKore" />
+<meta name="description" content="Part 2 of 5: The Internet is Moving to Space Series* The race to control space-based internet infrastructure is one of the most ambitious and expensive competitions in modern business history. With..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Delay-Tolerant Networks (DTNs): Networking Beyond Earth" href="dtn.html" /><link rel="prev" title="From Ground to Space: The 5G Revolution Above the Clouds" href="p1-of-5.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Space Giants: Who’s Building the Internet in the Sky - NgKore Docs</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/youtube.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/related-links.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/terminal-output.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f84bc4ab" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=23b7cbea" />
+    <link rel="stylesheet" type="text/css" href="../_static/github_issue_links.css?v=be107c51" />
+    <link rel="stylesheet" type="text/css" href="../_static/furo_colors.css?v=0eedd8e7" />
+    
+</head>
+  <body>
+    <header id="header" class="p-navigation">
+
+  <div class="p-navigation__nav" role="menubar">
+
+    <ul class="p-navigation__links" role="menu">
+
+      <li>
+        <a class="p-logo" href="https://github.com/ngkore" aria-current="page">
+          <img src="../_static/tag.png" alt="Logo" class="p-logo-image">
+          <!-- <div class="p-logo-text p-heading--4">NgKore
+          </div> -->
+        </a>
+      </li>
+
+
+    </ul>
+    <!-- Add your website link here -->
+    <a href="https://ngkore.org" target="_blank" class="p-header-link">
+      NgKore.org
+    </a>
+  </div>
+</header>
+   
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NgKore Docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">NgKore Docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kernel-bypass/index.html">Kernel Bypass Mechanisms</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Kernel Bypass Mechanisms</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/af_xdp.html">AF_XDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/dpdk.html">DPDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/sriov.html">SR-IOV</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oran/index.html">O-RAN</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of O-RAN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part1.html">Challenges in L1-L2 Interoperability within O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part2.html">Understanding xFAPI: Bridging L1 and L2 Layers of O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part3.html">Open RAN (O-RAN) Interoperability with xFAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-qoe-prediction.html">QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-uav-path-preduction.html">UAV Path Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ebpf/index.html">eBPF</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of eBPF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-meets-5g.html">eBPF Meets 5G: Transforming User Plane Function for Next-Gen Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/hexaebpf.html">HEXAeBPF: The Future of Interoperable eBPF Defined 5G Core (eDC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf.html">eBPF : Unveiling the Future of Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-maps.html">The Magic of eBPF Maps: Building a High-Performance Rate Limiter Without Touching User Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/xdp-ebpf.html">Unlocking Network Performance with XDP and eBPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-cuda.html">Inside CUDA: Building eBPF uprobes for GPU Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-gpu.html">The Silent Revolution: eBPF Is Hacking Your GPU (For Good)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-monitoring.html">Building an eBPF Process Monitor with Go: A Step-by-Step Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-network-detective.html">eBPF: The Network Detective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-ssd.html">Your SSD Is About to Get Superpowers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/l4-lb.html">Load Balancing at Light Speed:</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g-operator/index.html">5G Core Operator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 5G Core Operator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g-operator/ngkore_operator.html">NgKore Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../l3af/index.html">L3AF</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of L3AF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../l3af/l3af.html">L3AF Integration with 5G-UPF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../security/index.html">Networking and Security</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Networking and Security</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../security/tls.html">TLS/SSL Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/supi.html">Can 5G SUPI Concealment really ensure Forward Secrecy?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/ipsec.html">Understanding IPsec: How Internet Security Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/quic.html">QUIC: The Future of Internet Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">NTN</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of NTN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ntn1.html">Introduction to NTN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ntn2.html">OAI NTN Part 1: Breaking the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p1-of-5.html">From Ground to Space: The 5G Revolution Above the Clouds</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Space Giants: Who’s Building the Internet in the Sky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtn.html">Delay-Tolerant Networks (DTNs): Networking Beyond Earth</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pqc/index.html">PQC</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of PQC</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/pqc-intro.html">Introduction To Post-Quantum Cryptography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/oqs-lib.html">Working of Open Quantum Safe Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/quantum-proof-algo.html">Learning with Errors: Quantum-Proof Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g/index.html">5G Core</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 5G Core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g/5g-upf.html">5G UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/rewrite-upf.html">Rewiring the 5G Data Plane: XDP/eBPF in the Fast Lane of UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/os-5g-compare.html">Understanding Open-Source 5G Core Network Evolution in 2025</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/index.html">AI/ML</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of AI/ML</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/ai-gpu.html">The Hidden Army: How AI Training Actually Happens Across Thousands of GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/route-phone-call.html">The AI Traffic Cops: How Machine Learning Routes Your Phone Calls in Real-Time</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/ntn/p2-of-5.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="space-giants-whos-building-the-internet-in-the-sky">
+<h1>Space Giants: Who’s Building the Internet in the Sky<a class="headerlink" href="#space-giants-whos-building-the-internet-in-the-sky" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><p>Part 2 of 5: The Internet is Moving to Space Series*</p>
+</div></blockquote>
+<p>The race to control space-based internet infrastructure is one of the most ambitious and expensive competitions in modern business history. With billions of dollars at stake and the potential to connect every person on Earth, tech giants, aerospace companies, and innovative startups are launching thousands of satellites to claim their piece of the orbital internet pie.</p>
+<p>But who are the key players in this cosmic competition? And what strategies are they using to build the internet infrastructure of tomorrow? Let’s meet the space giants reshaping how humanity connects.</p>
+<section id="the-current-leader-spacex-starlink">
+<h2>The Current Leader: SpaceX Starlink<a class="headerlink" href="#the-current-leader-spacex-starlink" title="Link to this heading">¶</a></h2>
+<p><strong>The Numbers Game</strong></p>
+<p>SpaceX didn’t just enter the satellite internet market — they revolutionized it through sheer scale and speed. As of 2024, Starlink has become the undisputed leader in the LEO satellite internet space, with over 6,000 satellites currently operational and serving customers across the globe.</p>
+<p>But here’s where it gets interesting: SpaceX is uniquely positioned to rapidly scale their Direct to Cell network and will rapidly launch a constellation of hundreds of satellites to enable text service in 2024 and voice, data, and Internet of Things (IoT) services.</p>
+<section id="the-direct-to-cell-revolution">
+<h3>The Direct-to-Cell Revolution<a class="headerlink" href="#the-direct-to-cell-revolution" title="Link to this heading">¶</a></h3>
+<p>The game-changer came with Starlink’s direct-to-cell technology. SpaceX launched its first batch of Starlink satellites designed to connect directly to unmodified smartphones Jan. 2 after getting a temporary experimental license to start testing the capability in the United States.</p>
+<p>By late 2024, SpaceX Starlink has 227 direct to cellphone capable satellites in orbit, representing a massive leap in space-based cellular infrastructure. This technology was put to the test during real emergencies, with this capability being activated in North Carolina and Georgia where communications have failed in many areas due to the hurricane.</p>
+</section>
+<section id="strategic-partnerships">
+<h3>Strategic Partnerships<a class="headerlink" href="#strategic-partnerships" title="Link to this heading">¶</a></h3>
+<p>SpaceX’s success isn’t just about satellites — it’s about strategic partnerships with terrestrial carriers. The company has formed alliances with major telecom providers globally, including T-Mobile in the United States and Rogers Communications in Canada, creating a hybrid space-terrestrial network.</p>
+</section>
+<section id="the-starlink-advantage">
+<h3>The Starlink Advantage<a class="headerlink" href="#the-starlink-advantage" title="Link to this heading">¶</a></h3>
+<p>What makes Starlink particularly formidable is SpaceX’s vertical integration. The company manufactures its own rockets, satellites, and ground equipment, giving them unprecedented control over costs and deployment speed. This allows them to launch satellites at a fraction of the cost of traditional aerospace companies.</p>
+</section>
+</section>
+<section id="the-sleeping-giant-amazons-project-kuiper">
+<h2>The Sleeping Giant: Amazon’s Project Kuiper<a class="headerlink" href="#the-sleeping-giant-amazons-project-kuiper" title="Link to this heading">¶</a></h2>
+<p><strong>Ambitious Scale</strong></p>
+<p>While SpaceX grabbed early headlines, Amazon’s Project Kuiper represents perhaps the most ambitious satellite internet project ever conceived. Project Kuiper is an initiative to increase global broadband access through a constellation of 3,236 satellites in low Earth orbit (LEO).</p>
+<section id="the-regulatory-timeline">
+<h3>The Regulatory Timeline<a class="headerlink" href="#the-regulatory-timeline" title="Link to this heading">¶</a></h3>
+<p>Amazon faces a critical regulatory deadline that’s driving their deployment strategy. Under its granted FCC license, Amazon is required to launch and operate half of its satellites no later than July 30, 2026, and must launch and operate the remaining satellites no later than July 30, 2029.</p>
+</section>
+<section id="recent-developments">
+<h3>Recent Developments<a class="headerlink" href="#recent-developments" title="Link to this heading">¶</a></h3>
+<p>Amazon has been quietly building momentum. Amazon launched two prototype satellites in 2023 in tests it said were successful, before de-orbiting them in 2024. More significantly, the company began serious deployment in 2025, marking a major escalation in the satellite internet competition.</p>
+</section>
+<section id="the-launch-strategy">
+<h3>The Launch Strategy<a class="headerlink" href="#the-launch-strategy" title="Link to this heading">¶</a></h3>
+<p>Amazon has taken a massive bet on launch capacity, having purchased 92 rocket launches with United Launch Alliance, ArianeGroup, and Blue Origin. This represents one of the largest commercial launch contracts in history and demonstrates Amazon’s commitment to rapid deployment.</p>
+</section>
+<section id="unique-positioning">
+<h3>Unique Positioning<a class="headerlink" href="#unique-positioning" title="Link to this heading">¶</a></h3>
+<p>Unlike SpaceX, which started as a space company, Amazon brings different strengths to the satellite internet game:</p>
+<ul class="simple">
+<li><p><strong>Cloud Infrastructure:</strong> Amazon Web Services (AWS) provides the backbone for global internet infrastructure</p></li>
+<li><p><strong>Global Logistics:</strong> Amazon’s worldwide distribution network could streamline ground equipment deployment</p></li>
+<li><p><strong>Financial Resources:</strong> With deep pockets and patient capital, Amazon can sustain losses during the deployment phase</p></li>
+<li><p><strong>Ecosystem Integration:</strong> Potential integration with Alexa, Prime, and other Amazon services</p></li>
+</ul>
+</section>
+</section>
+<section id="the-established-players-fighting-back">
+<h2>The Established Players Fighting Back<a class="headerlink" href="#the-established-players-fighting-back" title="Link to this heading">¶</a></h2>
+<section id="oneweb-the-comeback-story">
+<h3>OneWeb: The Comeback Story<a class="headerlink" href="#oneweb-the-comeback-story" title="Link to this heading">¶</a></h3>
+<p>OneWeb represents one of the most dramatic comeback stories in the satellite industry. After filing for bankruptcy in 2020, the company was rescued by the UK government and Bharti Global. OneWeb has a fully functional phase one constellation and is focusing on enterprise and government customers rather than direct consumer services.</p>
+</section>
+<section id="traditional-satellite-giants">
+<h3>Traditional Satellite Giants<a class="headerlink" href="#traditional-satellite-giants" title="Link to this heading">¶</a></h3>
+<p>The established satellite internet providers aren’t giving up without a fight:</p>
+<ul class="simple">
+<li><p><strong>Viasat:</strong> Known for high-throughput satellites, Viasat is focusing on fewer, more powerful satellites rather than large constellations. Legacy giants Hughesnet and Viasat have significant new capabilities stumbling online.</p></li>
+<li><p><strong>Hughes Network Systems (HughesNet):</strong> The longtime leader in satellite internet is upgrading their infrastructure to compete with LEO constellations, though they’re still primarily focused on geostationary satellite technology.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-innovation-disruptors">
+<h2>The Innovation Disruptors<a class="headerlink" href="#the-innovation-disruptors" title="Link to this heading">¶</a></h2>
+<section id="ast-spacemobile-the-direct-to-device-pioneer">
+<h3>AST SpaceMobile: The Direct-to-Device Pioneer<a class="headerlink" href="#ast-spacemobile-the-direct-to-device-pioneer" title="Link to this heading">¶</a></h3>
+<p>AST SpaceMobile is taking a different approach, focusing specifically on direct-to-device connectivity. Their strategy involves deploying massive satellites with large phased-array antennas designed to communicate directly with standard smartphones without requiring any modifications.</p>
+</section>
+<section id="lynk-global-the-5g-space-pioneer">
+<h3>Lynk Global: The 5G Space Pioneer<a class="headerlink" href="#lynk-global-the-5g-space-pioneer" title="Link to this heading">¶</a></h3>
+<p>Lynk Global made headlines by launching what they claimed was the world’s first 5G base station in space. Their focus is on providing cellular connectivity to areas with no terrestrial infrastructure, particularly in developing countries.</p>
+</section>
+</section>
+<section id="regional-and-national-players">
+<h2>Regional and National Players<a class="headerlink" href="#regional-and-national-players" title="Link to this heading">¶</a></h2>
+<p>Several countries are developing their own satellite internet capabilities:</p>
+<ul class="simple">
+<li><p><strong>China:</strong> Multiple state-owned companies are developing competing constellations</p></li>
+<li><p><strong>European Union:</strong> The IRIS² program aims to provide sovereign satellite internet capability</p></li>
+<li><p><strong>India:</strong> Bharti Airtel is partnering with OneWeb for Indian satellite internet services</p></li>
+</ul>
+</section>
+<section id="the-investment-landscape">
+<h2>The Investment Landscape<a class="headerlink" href="#the-investment-landscape" title="Link to this heading">¶</a></h2>
+<p>The satellite internet market has attracted unprecedented investment:</p>
+<section id="venture-capital-and-private-equity">
+<h3>Venture Capital and Private Equity<a class="headerlink" href="#venture-capital-and-private-equity" title="Link to this heading">¶</a></h3>
+<p>Billions of dollars are flowing into satellite internet startups, with investors betting on the next generation of space-based connectivity.</p>
+</section>
+<section id="government-investment">
+<h3>Government Investment<a class="headerlink" href="#government-investment" title="Link to this heading">¶</a></h3>
+<p>National governments are recognizing satellite internet as critical infrastructure, leading to significant public investment in domestic capabilities.</p>
+</section>
+<section id="stock-market-impact">
+<h3>Stock Market Impact<a class="headerlink" href="#stock-market-impact" title="Link to this heading">¶</a></h3>
+<p>Public companies in the satellite internet space have seen dramatic stock price movements based on deployment milestones and partnership announcements.</p>
+</section>
+</section>
+<section id="strategic-differentiation-how-companies-are-competing">
+<h2>Strategic Differentiation: How Companies Are Competing<a class="headerlink" href="#strategic-differentiation-how-companies-are-competing" title="Link to this heading">¶</a></h2>
+<section id="technology-approaches">
+<h3>Technology Approaches<a class="headerlink" href="#technology-approaches" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>SpaceX:</strong> Mass production, vertical integration, rapid iteration</p></li>
+<li><p><strong>Amazon:</strong> Scale, global infrastructure integration, patient capital</p></li>
+<li><p><strong>OneWeb:</strong> Enterprise focus, government partnerships</p></li>
+<li><p><strong>AST SpaceMobile:</strong> Direct-to-device specialization</p></li>
+</ul>
+</section>
+<section id="market-positioning">
+<h3>Market Positioning<a class="headerlink" href="#market-positioning" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Consumer Broadband:</strong> SpaceX Starlink, Amazon Kuiper</p></li>
+<li><p><strong>Enterprise Connectivity:</strong> OneWeb, Viasat</p></li>
+<li><p><strong>Emergency Services:</strong> Multiple players focusing on disaster response</p></li>
+<li><p><strong>Government/Military:</strong> Specialized secure constellations</p></li>
+</ul>
+</section>
+<section id="geographic-strategies">
+<h3>Geographic Strategies<a class="headerlink" href="#geographic-strategies" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Global Coverage:</strong> SpaceX, Amazon</p></li>
+<li><p><strong>Regional Focus:</strong> Various national champions</p></li>
+<li><p><strong>Developing Markets:</strong> Companies focusing on underserved regions</p></li>
+</ul>
+</section>
+</section>
+<section id="partnership-strategies-the-hybrid-approach">
+<h2>Partnership Strategies: The Hybrid Approach<a class="headerlink" href="#partnership-strategies-the-hybrid-approach" title="Link to this heading">¶</a></h2>
+<p>The most successful satellite internet companies are realizing that pure space-based solutions aren’t enough. They’re forming strategic partnerships with:</p>
+<section id="telecom-carriers">
+<h3>Telecom Carriers<a class="headerlink" href="#telecom-carriers" title="Link to this heading">¶</a></h3>
+<p>Vodafone and Vodacom have announced a partnership with Amazon to use Project Kuiper’s LEO network to extend the reach of 4G and 5G cellular networks in Europe and Africa when the service comes online in late 2024.</p>
+</section>
+<section id="cloud-providers">
+<h3>Cloud Providers<a class="headerlink" href="#cloud-providers" title="Link to this heading">¶</a></h3>
+<p>Integration with cloud services creates new revenue opportunities and improves service quality.</p>
+</section>
+<section id="equipment-manufacturers">
+<h3>Equipment Manufacturers<a class="headerlink" href="#equipment-manufacturers" title="Link to this heading">¶</a></h3>
+<p>Partnerships with device manufacturers ensure compatibility and reduce customer acquisition costs.</p>
+</section>
+</section>
+<section id="the-competitive-landscape-whos-winning">
+<h2>The Competitive Landscape: Who’s Winning?<a class="headerlink" href="#the-competitive-landscape-whos-winning" title="Link to this heading">¶</a></h2>
+<section id="current-market-share">
+<h3>Current Market Share<a class="headerlink" href="#current-market-share" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>SpaceX Starlink:</strong> Clear leader with operational services and growing customer base</p></li>
+<li><p><strong>Amazon Kuiper:</strong> Significant potential but still in deployment phase</p></li>
+<li><p><strong>OneWeb:</strong> Solid enterprise position but limited consumer presence</p></li>
+<li><p><strong>Others:</strong> Various players carving out niches</p></li>
+</ul>
+</section>
+<section id="key-success-factors">
+<h3>Key Success Factors<a class="headerlink" href="#key-success-factors" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Launch Capacity:</strong> Access to reliable, cost-effective launch services</p></li>
+<li><p><strong>Regulatory Approval:</strong> Navigating complex international telecommunications regulations</p></li>
+<li><p><strong>Capital Efficiency:</strong> Managing the enormous upfront investment required</p></li>
+<li><p><strong>Customer Acquisition:</strong> Building distribution channels and brand recognition</p></li>
+<li><p><strong>Technology Innovation:</strong> Continuous improvement in satellite and ground equipment</p></li>
+</ul>
+</section>
+</section>
+<section id="whats-coming-next">
+<h2>What’s Coming Next<a class="headerlink" href="#whats-coming-next" title="Link to this heading">¶</a></h2>
+<p>The satellite internet competition is far from over. Here’s what to watch for:</p>
+<section id="upcoming-milestones">
+<h3>Upcoming Milestones<a class="headerlink" href="#upcoming-milestones" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Amazon’s rapid deployment to meet regulatory deadlines</p></li>
+<li><p>SpaceX’s expansion of direct-to-cell services globally</p></li>
+<li><p>OneWeb’s enterprise customer acquisition</p></li>
+<li><p>New entrants with innovative approaches</p></li>
+</ul>
+</section>
+<section id="technology-evolution">
+<h3>Technology Evolution<a class="headerlink" href="#technology-evolution" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>More powerful satellites with increased capacity</p></li>
+<li><p>Improved ground equipment and user terminals</p></li>
+<li><p>Better integration with terrestrial networks</p></li>
+<li><p>Advanced antenna technologies</p></li>
+</ul>
+</section>
+<section id="market-consolidation">
+<h3>Market Consolidation<a class="headerlink" href="#market-consolidation" title="Link to this heading">¶</a></h3>
+<p>As the industry matures, we’re likely to see consolidation through mergers, acquisitions, and partnerships. The companies that survive will be those with the best combination of technology, capital, and strategic positioning.</p>
+</section>
+</section>
+<section id="the-stakes-why-this-matters">
+<h2>The Stakes: Why This Matters<a class="headerlink" href="#the-stakes-why-this-matters" title="Link to this heading">¶</a></h2>
+<p>The companies building the internet in the sky aren’t just competing for market share — they’re positioning themselves to control the fundamental infrastructure of the digital age. The winners will influence:</p>
+<ul class="simple">
+<li><p><strong>Global Communications:</strong> How the world stays connected</p></li>
+<li><p><strong>Economic Development:</strong> Which regions gain access to high-speed internet</p></li>
+<li><p><strong>National Security:</strong> Critical infrastructure and data sovereignty</p></li>
+<li><p><strong>Innovation:</strong> The foundation for future technologies like autonomous vehicles and IoT</p></li>
+</ul>
+</section>
+<section id="looking-ahead-the-series-continues">
+<h2>Looking Ahead: The Series Continues<a class="headerlink" href="#looking-ahead-the-series-continues" title="Link to this heading">¶</a></h2>
+<p>The space giants are launching thousands of satellites, but how do their services actually compare to traditional internet? In our next installment, we’ll dive deep into the performance, cost, and real-world applications of satellite 5G versus terrestrial networks.</p>
+<p>The race to build the internet in the sky is heating up, and the decisions made by these companies in the next few years will shape how humanity connects for decades to come.</p>
+<p><strong>Next Week</strong>: “The Great Comparison: Satellite 5G vs. Everything Else” — Deep dive into performance, benefits, and real-world applications of space-based internet.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>SpaceX Starlink Official Updates — Direct to Cell Deployment 2024</p></li>
+<li><p>NextBigFuture — SpaceX Starlink Direct-to-Cellphone Satellite Count</p></li>
+<li><p>Amazon Project Kuiper Official Documentation</p></li>
+<li><p>FCC Licensing Requirements for Satellite Constellations</p></li>
+<li><p>Mobile Internet Resource Center — Early 2024 Satellite Internet Update</p></li>
+<li><p>SpaceNews — Direct-to-Smartphone Satellite Deployments</p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+   
+
+<div class="related-pages">
+  
+  
+      
+  
+  
+  
+    
+</div>
+<div style="text-align:center; font-size:0.95em; margin-top:1em;">
+  For any query please contact: <a href="mailto:contact@ngkore.org">contact@ngkore.org</a>
+</div>
+<div class="bottom-of-page">
+  <div class="left-details">
+    <!--
+    <div class="copyright">
+        Copyright &#169; 
+    </div> -->
+
+    
+
+    <!--<div class="last-updated">
+      Last updated on Jul 18, 2025</div> -->
+
+    <!--
+    <div class="show-source">
+      <a class="muted-link" href="../_sources/ntn/p2-of-5.md.txt"
+         rel="nofollow">Show source</a>
+    </div> -->
+  </div>
+  <div class="right-details">
+
+    
+
+    <!--  -->
+
+    <!--  -->
+
+
+    </div>
+  </div>
+</div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+<div class="toc-sticky toc-scroll">
+   
+    <div class="toc-title-container">
+      <span class="toc-title">
+       Contents
+      </span>
+    </div>
+    <div class="toc-tree-container">
+      <div class="toc-tree">
+        <ul>
+<li><a class="reference internal" href="#">Space Giants: Who’s Building the Internet in the Sky</a><ul>
+<li><a class="reference internal" href="#the-current-leader-spacex-starlink">The Current Leader: SpaceX Starlink</a><ul>
+<li><a class="reference internal" href="#the-direct-to-cell-revolution">The Direct-to-Cell Revolution</a></li>
+<li><a class="reference internal" href="#strategic-partnerships">Strategic Partnerships</a></li>
+<li><a class="reference internal" href="#the-starlink-advantage">The Starlink Advantage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-sleeping-giant-amazons-project-kuiper">The Sleeping Giant: Amazon’s Project Kuiper</a><ul>
+<li><a class="reference internal" href="#the-regulatory-timeline">The Regulatory Timeline</a></li>
+<li><a class="reference internal" href="#recent-developments">Recent Developments</a></li>
+<li><a class="reference internal" href="#the-launch-strategy">The Launch Strategy</a></li>
+<li><a class="reference internal" href="#unique-positioning">Unique Positioning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-established-players-fighting-back">The Established Players Fighting Back</a><ul>
+<li><a class="reference internal" href="#oneweb-the-comeback-story">OneWeb: The Comeback Story</a></li>
+<li><a class="reference internal" href="#traditional-satellite-giants">Traditional Satellite Giants</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-innovation-disruptors">The Innovation Disruptors</a><ul>
+<li><a class="reference internal" href="#ast-spacemobile-the-direct-to-device-pioneer">AST SpaceMobile: The Direct-to-Device Pioneer</a></li>
+<li><a class="reference internal" href="#lynk-global-the-5g-space-pioneer">Lynk Global: The 5G Space Pioneer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#regional-and-national-players">Regional and National Players</a></li>
+<li><a class="reference internal" href="#the-investment-landscape">The Investment Landscape</a><ul>
+<li><a class="reference internal" href="#venture-capital-and-private-equity">Venture Capital and Private Equity</a></li>
+<li><a class="reference internal" href="#government-investment">Government Investment</a></li>
+<li><a class="reference internal" href="#stock-market-impact">Stock Market Impact</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#strategic-differentiation-how-companies-are-competing">Strategic Differentiation: How Companies Are Competing</a><ul>
+<li><a class="reference internal" href="#technology-approaches">Technology Approaches</a></li>
+<li><a class="reference internal" href="#market-positioning">Market Positioning</a></li>
+<li><a class="reference internal" href="#geographic-strategies">Geographic Strategies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#partnership-strategies-the-hybrid-approach">Partnership Strategies: The Hybrid Approach</a><ul>
+<li><a class="reference internal" href="#telecom-carriers">Telecom Carriers</a></li>
+<li><a class="reference internal" href="#cloud-providers">Cloud Providers</a></li>
+<li><a class="reference internal" href="#equipment-manufacturers">Equipment Manufacturers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-competitive-landscape-whos-winning">The Competitive Landscape: Who’s Winning?</a><ul>
+<li><a class="reference internal" href="#current-market-share">Current Market Share</a></li>
+<li><a class="reference internal" href="#key-success-factors">Key Success Factors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#whats-coming-next">What’s Coming Next</a><ul>
+<li><a class="reference internal" href="#upcoming-milestones">Upcoming Milestones</a></li>
+<li><a class="reference internal" href="#technology-evolution">Technology Evolution</a></li>
+<li><a class="reference internal" href="#market-consolidation">Market Consolidation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-stakes-why-this-matters">The Stakes: Why This Matters</a></li>
+<li><a class="reference internal" href="#looking-ahead-the-series-continues">Looking Ahead: The Series Continues</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+   
+    
+  </div>
+
+    </aside>
+  </div>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/header-nav.js?v=e117ad08"></script>
+    
+<script>
+  const github_url = "https://github.com/ngkore";
+</script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Introduction To Post-Quantum Cryptography" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="pqc/pqc-intro.html" />
+<meta property="og:site_name" content="NgKore" />
+<meta property="og:description" content="WHY POST-QUANTUM CRYPTOGRAPHY??: Before moving to the part WHAT is post-quantum cryptography, let’s directly jump into the part WHY post-quantum cryptography and that will be sufficient for you to ..." />
+<meta property="og:image" content=".sphinx/_static/tag.png" />
+<meta property="og:image:alt" content="NgKore" />
+<meta name="description" content="WHY POST-QUANTUM CRYPTOGRAPHY??: Before moving to the part WHAT is post-quantum cryptography, let’s directly jump into the part WHY post-quantum cryptography and that will be sufficient for you to ..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Working of Open Quantum Safe Library" href="oqs-lib.html" /><link rel="prev" title="PQC" href="index.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Introduction To Post-Quantum Cryptography - NgKore Docs</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/youtube.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/related-links.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/terminal-output.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f84bc4ab" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=23b7cbea" />
+    <link rel="stylesheet" type="text/css" href="../_static/github_issue_links.css?v=be107c51" />
+    <link rel="stylesheet" type="text/css" href="../_static/furo_colors.css?v=0eedd8e7" />
+    
+</head>
+  <body>
+    <header id="header" class="p-navigation">
+
+  <div class="p-navigation__nav" role="menubar">
+
+    <ul class="p-navigation__links" role="menu">
+
+      <li>
+        <a class="p-logo" href="https://github.com/ngkore" aria-current="page">
+          <img src="../_static/tag.png" alt="Logo" class="p-logo-image">
+          <!-- <div class="p-logo-text p-heading--4">NgKore
+          </div> -->
+        </a>
+      </li>
+
+
+    </ul>
+    <!-- Add your website link here -->
+    <a href="https://ngkore.org" target="_blank" class="p-header-link">
+      NgKore.org
+    </a>
+  </div>
+</header>
+   
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NgKore Docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">NgKore Docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kernel-bypass/index.html">Kernel Bypass Mechanisms</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Kernel Bypass Mechanisms</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/af_xdp.html">AF_XDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/dpdk.html">DPDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/sriov.html">SR-IOV</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oran/index.html">O-RAN</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of O-RAN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part1.html">Challenges in L1-L2 Interoperability within O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part2.html">Understanding xFAPI: Bridging L1 and L2 Layers of O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part3.html">Open RAN (O-RAN) Interoperability with xFAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-qoe-prediction.html">QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-uav-path-preduction.html">UAV Path Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ebpf/index.html">eBPF</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of eBPF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-meets-5g.html">eBPF Meets 5G: Transforming User Plane Function for Next-Gen Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/hexaebpf.html">HEXAeBPF: The Future of Interoperable eBPF Defined 5G Core (eDC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf.html">eBPF : Unveiling the Future of Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-maps.html">The Magic of eBPF Maps: Building a High-Performance Rate Limiter Without Touching User Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/xdp-ebpf.html">Unlocking Network Performance with XDP and eBPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-cuda.html">Inside CUDA: Building eBPF uprobes for GPU Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-gpu.html">The Silent Revolution: eBPF Is Hacking Your GPU (For Good)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-monitoring.html">Building an eBPF Process Monitor with Go: A Step-by-Step Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-network-detective.html">eBPF: The Network Detective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-ssd.html">Your SSD Is About to Get Superpowers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/l4-lb.html">Load Balancing at Light Speed:</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g-operator/index.html">5G Core Operator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 5G Core Operator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g-operator/ngkore_operator.html">NgKore Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../l3af/index.html">L3AF</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of L3AF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../l3af/l3af.html">L3AF Integration with 5G-UPF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../security/index.html">Networking and Security</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Networking and Security</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../security/tls.html">TLS/SSL Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/supi.html">Can 5G SUPI Concealment really ensure Forward Secrecy?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/ipsec.html">Understanding IPsec: How Internet Security Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/quic.html">QUIC: The Future of Internet Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ntn/index.html">NTN</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of NTN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/ntn1.html">Introduction to NTN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/ntn2.html">OAI NTN Part 1: Breaking the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/p1-of-5.html">From Ground to Space: The 5G Revolution Above the Clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/p2-of-5.html">Space Giants: Who’s Building the Internet in the Sky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/dtn.html">Delay-Tolerant Networks (DTNs): Networking Beyond Earth</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">PQC</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of PQC</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Introduction To Post-Quantum Cryptography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oqs-lib.html">Working of Open Quantum Safe Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quantum-proof-algo.html">Learning with Errors: Quantum-Proof Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g/index.html">5G Core</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 5G Core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g/5g-upf.html">5G UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/rewrite-upf.html">Rewiring the 5G Data Plane: XDP/eBPF in the Fast Lane of UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/os-5g-compare.html">Understanding Open-Source 5G Core Network Evolution in 2025</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/index.html">AI/ML</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of AI/ML</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/ai-gpu.html">The Hidden Army: How AI Training Actually Happens Across Thousands of GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/route-phone-call.html">The AI Traffic Cops: How Machine Learning Routes Your Phone Calls in Real-Time</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/pqc/pqc-intro.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="introduction-to-post-quantum-cryptography">
+<h1>Introduction To Post-Quantum Cryptography<a class="headerlink" href="#introduction-to-post-quantum-cryptography" title="Link to this heading">¶</a></h1>
+<section id="why-post-quantum-cryptography">
+<h2>WHY POST-QUANTUM CRYPTOGRAPHY??<a class="headerlink" href="#why-post-quantum-cryptography" title="Link to this heading">¶</a></h2>
+<p>Before moving to the part WHAT is post-quantum cryptography, let’s directly jump into the part WHY post-quantum cryptography and that will be sufficient for you to know the answers to both the questions. So, we have been using symmetric and asymmetric key cryptography for a long time now. But suddenly, why is there a need for post-quantum cryptography, a term that sounds so complicated. Well, you might be thinking that as it contains the word ‘quantum’ so it must have some connection with ‘quantum computers’. And yes you are absolutely correct and for those who don’t know what a quantum computer is then a quantum computer is a computer that works on the properties of quantum physics which is on a whole different level when compared with a classical computer, the computer that we use right now, and quantum computers could vastly outperform even our best supercomputers that have been made till now. They can perform very big computations in just a few seconds as they are made of ‘qubits’. Think of it in this way: A classical computer is a candle and a quantum computer is a light bulb. You can observe how big the difference is. Quantum computers can perform several things such as searching huge amounts of data in just a few minutes or seconds, can also be used in the medical field and there are many more such examples. BUT there are some side-effects of quantum computers like they can break the current cryptography system which usually uses key-pair for encrypting and decrypting the data. This is when post-quantum cryptography comes into the picture. So, post-quantum cryptography, also known as quantum-safe cryptography, refers to cryptographic algorithms that are thought to be secure against the attack of a quantum computer. We’ll take a deep dive into this topic further, but before that let’s know more about cryptography, encryption and decryption, and its types.</p>
+</section>
+<section id="cryptography-and-its-types">
+<h2>CRYPTOGRAPHY AND ITS TYPES<a class="headerlink" href="#cryptography-and-its-types" title="Link to this heading">¶</a></h2>
+<p>Cryptography is the technique of securing information and communications through the use of codes so that only those persons for whom the information is intended can understand it and process it. Thus preventing unauthorized access to information. The prefix “crypt” means “hidden” and the suffix graphy means “writing”.</p>
+<p>Let’s try to understand it more clearly with the help of the types of cryptography.</p>
+<p>There are two types of cryptography that we use currently — Symmetric key cryptography and Asymmetric key cryptography. The main features of cryptography are confidentiality, integrity, and authentication.</p>
+<section id="symmetric-key-cryptography-private-key-cryptography">
+<h3>SYMMETRIC KEY CRYPTOGRAPHY (private key cryptography)<a class="headerlink" href="#symmetric-key-cryptography-private-key-cryptography" title="Link to this heading">¶</a></h3>
+<p>It is an encryption system where the sender and receiver of a message use a single common key called shared key/ symmetric key/ shared secret to encrypt and decrypt</p>
+<p>messages. Encryption systems like AES and DES are commonly used in symmetric cryptography and they are considered to be secured right now. The problem in this cryptography is that the sender and receiver have to somehow exchange key in a secure manner. When we encrypt any data with a key then the data is converted into ciphered data and now no one will be able to read this ciphered data as it will be converted into nonreadable form and then we use the same key to decrypt this ciphered data into the original data which was in a readable form.</p>
+<p><img alt="alt text" src="../_images/pqc-intro-01.png" /></p>
+</section>
+<section id="asymmetric-key-cryptography-public-key-cryptography">
+<h3>ASYMMETRIC KEY CRYPTOGRAPHY (public-key cryptography)<a class="headerlink" href="#asymmetric-key-cryptography-public-key-cryptography" title="Link to this heading">¶</a></h3>
+<p>In this cryptography instead of using a single key, we now use key pairs. Now both the sender and receiver will carry two-two keys i.e. Public key and the Secret Key(Private key) on both sides, which means now there will be a total of four numbers of keys. As the name suggests public key will be known to everyone and the secret key or private key will remain secret i.e. will be known only to the person carrying it. The sender will now use the public key of the receiver to encrypt the data and since the data is encrypted with the public key of the receiver, only the secret key of the receiver will be able to decrypt it.</p>
+<p><img alt="alt text" src="../_images/pqc-intro-02.png" /></p>
+<p>Asymmetric key cryptography uses RSA and ECC for encryption and decryption purposes which is now really vulnerable against quantum computers. Quantum computers performing Shor’s Algorithm can easily break such methods. Although AES(that we used in symmetric cryptography) is still considered to be secure, there are many fields where we use asymmetric key cryptography as it has some special features such as digital signatures. BLOCKCHAIN also uses asymmetric key cryptography. So, now we need a solution for this problem. Here’s when POST-QUANTUM CRYPTOGRAPHY comes into the picture.</p>
+</section>
+</section>
+<section id="post-quantum-cryptography">
+<h2>POST-QUANTUM CRYPTOGRAPHY<a class="headerlink" href="#post-quantum-cryptography" title="Link to this heading">¶</a></h2>
+<p>NIST (National Institute Of Standards and Technology) started its Post-Quantum Cryptography Standardization program with 69 selected algorithms in its first round, which after the third round is now left with only 7 finalists and 8 alternate algorithms.</p>
+<p>The main algorithms were lattice-based, code-based, multivariate, hash-based, and Isogeny based cryptography. The final seven algorithms consist of 4 key encapsulation mechanisms(KEM) and 3 signature algorithms. Out of 4 algorithms of KEM, 3 are from the lattice-based family: Kyber, NTRU, and SABER whereas McEliece is from the code-based family. Currently, Kyber is amongst the top contenders. Let’s see what happens in its Key Encapsulation Mechanism:</p>
+<p>Firstly the key generation process is performed which creates a public key and a secret key. Then the sender performs the ENCAPSULATION process and takes the receiver’s public key which then creates two different things: a SHARED SECRET(ss1) and a CIPHER TEXT(ct). Now the receiver takes this ciphertext and DECAPSULATES it with his/her own secret key and this process also creates a Shared Secret(ss2). If both the shared secrets are equal i.e. ss1 = ss2 then the verified process has been done. This is how the key encapsulation mechanism is performed.</p>
+<p><img alt="alt text" src="../_images/pqc-intro-03.png" /></p>
+<p>There are also some other processes that are performed in this whole Kyber mechanism and will definitely look into that in some other articles. We’ll also see some other lattice-based algorithms and signature algorithms in some other articles.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+   
+
+<div class="related-pages">
+  
+  
+      
+  
+  
+  
+    
+</div>
+<div style="text-align:center; font-size:0.95em; margin-top:1em;">
+  For any query please contact: <a href="mailto:contact@ngkore.org">contact@ngkore.org</a>
+</div>
+<div class="bottom-of-page">
+  <div class="left-details">
+    <!--
+    <div class="copyright">
+        Copyright &#169; 
+    </div> -->
+
+    
+
+    <!--<div class="last-updated">
+      Last updated on Jul 18, 2025</div> -->
+
+    <!--
+    <div class="show-source">
+      <a class="muted-link" href="../_sources/pqc/pqc-intro.md.txt"
+         rel="nofollow">Show source</a>
+    </div> -->
+  </div>
+  <div class="right-details">
+
+    
+
+    <!--  -->
+
+    <!--  -->
+
+
+    </div>
+  </div>
+</div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+<div class="toc-sticky toc-scroll">
+   
+    <div class="toc-title-container">
+      <span class="toc-title">
+       Contents
+      </span>
+    </div>
+    <div class="toc-tree-container">
+      <div class="toc-tree">
+        <ul>
+<li><a class="reference internal" href="#">Introduction To Post-Quantum Cryptography</a><ul>
+<li><a class="reference internal" href="#why-post-quantum-cryptography">WHY POST-QUANTUM CRYPTOGRAPHY??</a></li>
+<li><a class="reference internal" href="#cryptography-and-its-types">CRYPTOGRAPHY AND ITS TYPES</a><ul>
+<li><a class="reference internal" href="#symmetric-key-cryptography-private-key-cryptography">SYMMETRIC KEY CRYPTOGRAPHY (private key cryptography)</a></li>
+<li><a class="reference internal" href="#asymmetric-key-cryptography-public-key-cryptography">ASYMMETRIC KEY CRYPTOGRAPHY (public-key cryptography)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#post-quantum-cryptography">POST-QUANTUM CRYPTOGRAPHY</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+   
+    
+  </div>
+
+    </aside>
+  </div>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/header-nav.js?v=e117ad08"></script>
+    
+<script>
+  const github_url = "https://github.com/ngkore";
+</script>
+</body>
+</html>

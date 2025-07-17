@@ -1,0 +1,622 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Your SSD Is About to Get Superpowers" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="ebpf/ebpf-ssd.html" />
+<meta property="og:site_name" content="NgKore" />
+<meta property="og:description" content="alt text What if your SSD wasn’t just a place to store files — but actually helped process them too? Imagine your storage working alongside your processor, doing real-time filtering, searching, and..." />
+<meta property="og:image" content=".sphinx/_static/tag.png" />
+<meta property="og:image:alt" content="NgKore" />
+<meta name="description" content="alt text What if your SSD wasn’t just a place to store files — but actually helped process them too? Imagine your storage working alongside your processor, doing real-time filtering, searching, and..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Load Balancing at Light Speed:" href="l4-lb.html" /><link rel="prev" title="eBPF: The Network Detective" href="ebpf-network-detective.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Your SSD Is About to Get Superpowers - NgKore Docs</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/youtube.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/related-links.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/terminal-output.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f84bc4ab" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=23b7cbea" />
+    <link rel="stylesheet" type="text/css" href="../_static/github_issue_links.css?v=be107c51" />
+    <link rel="stylesheet" type="text/css" href="../_static/furo_colors.css?v=0eedd8e7" />
+    
+</head>
+  <body>
+    <header id="header" class="p-navigation">
+
+  <div class="p-navigation__nav" role="menubar">
+
+    <ul class="p-navigation__links" role="menu">
+
+      <li>
+        <a class="p-logo" href="https://github.com/ngkore" aria-current="page">
+          <img src="../_static/tag.png" alt="Logo" class="p-logo-image">
+          <!-- <div class="p-logo-text p-heading--4">NgKore
+          </div> -->
+        </a>
+      </li>
+
+
+    </ul>
+    <!-- Add your website link here -->
+    <a href="https://ngkore.org" target="_blank" class="p-header-link">
+      NgKore.org
+    </a>
+  </div>
+</header>
+   
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NgKore Docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">NgKore Docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kernel-bypass/index.html">Kernel Bypass Mechanisms</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Kernel Bypass Mechanisms</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/af_xdp.html">AF_XDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/dpdk.html">DPDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/sriov.html">SR-IOV</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oran/index.html">O-RAN</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of O-RAN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part1.html">Challenges in L1-L2 Interoperability within O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part2.html">Understanding xFAPI: Bridging L1 and L2 Layers of O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part3.html">Open RAN (O-RAN) Interoperability with xFAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-qoe-prediction.html">QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-uav-path-preduction.html">UAV Path Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">eBPF</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of eBPF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ebpf-meets-5g.html">eBPF Meets 5G: Transforming User Plane Function for Next-Gen Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hexaebpf.html">HEXAeBPF: The Future of Interoperable eBPF Defined 5G Core (eDC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf.html">eBPF : Unveiling the Future of Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-maps.html">The Magic of eBPF Maps: Building a High-Performance Rate Limiter Without Touching User Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xdp-ebpf.html">Unlocking Network Performance with XDP and eBPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-cuda.html">Inside CUDA: Building eBPF uprobes for GPU Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-gpu.html">The Silent Revolution: eBPF Is Hacking Your GPU (For Good)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-monitoring.html">Building an eBPF Process Monitor with Go: A Step-by-Step Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-network-detective.html">eBPF: The Network Detective</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Your SSD Is About to Get Superpowers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="l4-lb.html">Load Balancing at Light Speed:</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g-operator/index.html">5G Core Operator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 5G Core Operator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g-operator/ngkore_operator.html">NgKore Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../l3af/index.html">L3AF</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of L3AF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../l3af/l3af.html">L3AF Integration with 5G-UPF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../security/index.html">Networking and Security</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Networking and Security</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../security/tls.html">TLS/SSL Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/supi.html">Can 5G SUPI Concealment really ensure Forward Secrecy?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/ipsec.html">Understanding IPsec: How Internet Security Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/quic.html">QUIC: The Future of Internet Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ntn/index.html">NTN</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of NTN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/ntn1.html">Introduction to NTN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/ntn2.html">OAI NTN Part 1: Breaking the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/p1-of-5.html">From Ground to Space: The 5G Revolution Above the Clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/p2-of-5.html">Space Giants: Who’s Building the Internet in the Sky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/dtn.html">Delay-Tolerant Networks (DTNs): Networking Beyond Earth</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pqc/index.html">PQC</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of PQC</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/pqc-intro.html">Introduction To Post-Quantum Cryptography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/oqs-lib.html">Working of Open Quantum Safe Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/quantum-proof-algo.html">Learning with Errors: Quantum-Proof Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g/index.html">5G Core</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 5G Core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g/5g-upf.html">5G UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/rewrite-upf.html">Rewiring the 5G Data Plane: XDP/eBPF in the Fast Lane of UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/os-5g-compare.html">Understanding Open-Source 5G Core Network Evolution in 2025</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/index.html">AI/ML</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of AI/ML</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/ai-gpu.html">The Hidden Army: How AI Training Actually Happens Across Thousands of GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/route-phone-call.html">The AI Traffic Cops: How Machine Learning Routes Your Phone Calls in Real-Time</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/ebpf/ebpf-ssd.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="your-ssd-is-about-to-get-superpowers">
+<h1>Your SSD Is About to Get Superpowers<a class="headerlink" href="#your-ssd-is-about-to-get-superpowers" title="Link to this heading">¶</a></h1>
+<p><img alt="alt text" src="../_images/ebpf-ssd.webp" /></p>
+<p>What if your SSD wasn’t just a place to store files — but actually helped process them too? Imagine your storage working alongside your processor, doing real-time filtering, searching, and even computing — before the data ever leaves the drive.</p>
+<p>This is eBPF offloading to computational storage, and it’s about to change how we think about hardware forever.</p>
+<section id="the-problem-with-todays-storage">
+<h2>The Problem with Today’s Storage<a class="headerlink" href="#the-problem-with-todays-storage" title="Link to this heading">¶</a></h2>
+<p>Let’s say you want to find all photos from your 2023 vacation.</p>
+<p>Right now, your computer must:</p>
+<ol class="arabic simple">
+<li><p>Read every single photo from the SSD.</p></li>
+<li><p>Move them into memory (RAM).</p></li>
+<li><p>Ask the processor to check each photo’s date.</p></li>
+<li><p>Finally, show you the results.</p></li>
+</ol>
+<p>It’s like searching for a book in a giant library — by reading every book first. It’s slow, inefficient, and wastes energy.</p>
+</section>
+<section id="the-smarter-way-computational-storage">
+<h2>The Smarter Way: Computational Storage<a class="headerlink" href="#the-smarter-way-computational-storage" title="Link to this heading">¶</a></h2>
+<p>What if your SSD could search the files by itself?</p>
+<p>Instead of dragging everything into memory, the SSD does the checking internally. Only the relevant results — say, the 2023 vacation photos — get sent back.</p>
+<p>This is called computational storage: storage that can also think.</p>
+</section>
+<section id="meet-ebpf-your-tiny-storage-assistant">
+<h2>Meet eBPF: Your Tiny Storage Assistant<a class="headerlink" href="#meet-ebpf-your-tiny-storage-assistant" title="Link to this heading">¶</a></h2>
+<p>Now, how does this magic happen? With something called eBPF.</p>
+<p>eBPF stands for Extended Berkeley Packet Filter (yeah, the name’s a mouthful). But think of it like this:</p>
+<blockquote>
+<div><p>eBPF is a tiny, secure, and fast program you can run inside hardware like the SSD.</p>
+</div></blockquote>
+<p>Like a robot assistant, eBPF can:</p>
+<ul class="simple">
+<li><p>Do specific tasks (like filtering or analyzing data)</p></li>
+<li><p>Run safely without crashing the system</p></li>
+<li><p>Be updated quickly for new jobs</p></li>
+</ul>
+</section>
+<section id="the-breakthrough-ebpf-on-the-ssd-itself">
+<h2>The Breakthrough: eBPF on the SSD itself<a class="headerlink" href="#the-breakthrough-ebpf-on-the-ssd-itself" title="Link to this heading">¶</a></h2>
+<p>Researchers have now figured out how to run these eBPF programs inside NVMe SSDs — storage devices with a bit of brain power.</p>
+<p>With this, your SSD can:</p>
+<ul class="simple">
+<li><p>Pre-process data before it hits the CPU</p></li>
+<li><p>Filter results at the source</p></li>
+<li><p>Run simple analytics, like counting, sorting, or tagging</p></li>
+<li><p>Save time, memory, and battery</p></li>
+</ul>
+</section>
+<section id="real-example-photo-search-reinvented">
+<h2>Real Example: Photo Search Reinvented<a class="headerlink" href="#real-example-photo-search-reinvented" title="Link to this heading">¶</a></h2>
+<p><strong>Old Way:</strong></p>
+<ul class="simple">
+<li><p>Load 10,000 photos into RAM</p></li>
+<li><p>CPU filters them one by one</p></li>
+<li><p>Takes time and energy</p></li>
+</ul>
+<p><strong>New Way:</strong></p>
+<ul class="simple">
+<li><p>eBPF runs on the SSD</p></li>
+<li><p>Filters photos by year on the device</p></li>
+<li><p>Sends back only what you asked for (e.g., 50 photos from 2023)</p></li>
+</ul>
+<p>Result? <em>Faster</em>, <em>lighter</em>, and <em>smarter computing</em>.</p>
+</section>
+<section id="cool-uses-youll-see-soon">
+<h2>Cool Uses You’ll See Soon<a class="headerlink" href="#cool-uses-youll-see-soon" title="Link to this heading">¶</a></h2>
+<p><strong>Netflix</strong></p>
+<ul class="simple">
+<li><p>Convert videos on the fly, directly on the SSD</p></li>
+<li><p>Buffer next episode faster</p></li>
+<li><p>Analyze watch habits in real-time</p></li>
+</ul>
+<p>Your Phone</p>
+<ul class="simple">
+<li><p>Auto-sort photos by face or event — right in storage</p></li>
+<li><p>Back up only the best images to cloud</p></li>
+<li><p>Save power by offloading tasks from the CPU</p></li>
+</ul>
+<p>E-commerce Sites</p>
+<ul class="simple">
+<li><p>Search through products faster</p></li>
+<li><p>Sort reviews before sending them to users</p></li>
+<li><p>Speed up real-time updates</p></li>
+</ul>
+</section>
+<section id="the-research-meet-delilah">
+<h2>The Research: Meet Delilah<a class="headerlink" href="#the-research-meet-delilah" title="Link to this heading">¶</a></h2>
+<p>A team in Copenhagen created the first working prototype of this idea, called Delilah. It showed that eBPF can safely and effectively run inside smart SSDs.</p>
+<p>It’s not just theory — it works.</p>
+</section>
+<section id="whats-coming-next">
+<h2>What’s Coming Next?<a class="headerlink" href="#whats-coming-next" title="Link to this heading">¶</a></h2>
+<p><strong>In 2 Years</strong></p>
+<ul class="simple">
+<li><p>Smart SSDs appear in cloud data centers</p></li>
+<li><p>Developers start writing eBPF programs for storage</p></li>
+</ul>
+<p><strong>In 5 Years</strong></p>
+<ul class="simple">
+<li><p>Laptops and phones get smart storage</p></li>
+<li><p>Streaming and file apps get way faster</p></li>
+</ul>
+<p><strong>In 10 Years</strong></p>
+<ul class="simple">
+<li><p>Smart storage becomes standard</p></li>
+<li><p>Even your fridge might have it 😄</p></li>
+</ul>
+</section>
+<section id="why-should-you-care">
+<h2>Why Should You Care?<a class="headerlink" href="#why-should-you-care" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Less waiting: Faster file access, instant searches</p></li>
+<li><p>Longer battery life: Fewer data transfers = less energy</p></li>
+<li><p>Smarter apps: Devices that help you instead of making you wait</p></li>
+</ul>
+</section>
+<section id="a-few-challenges">
+<h2>A Few Challenges<a class="headerlink" href="#a-few-challenges" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>New programming style: Developers need to learn how to write storage-aware code</p></li>
+<li><p>Higher cost (for now): Early devices may be pricey</p></li>
+<li><p>Need for standards: Different companies must agree on how this tech works together</p></li>
+</ul>
+</section>
+<section id="companies-working-on-this">
+<h2>Companies Working on This<a class="headerlink" href="#companies-working-on-this" title="Link to this heading">¶</a></h2>
+<p>Big players and startups are racing to bring smart storage to:</p>
+<ul class="simple">
+<li><p>Data centers (for cloud speedups)</p></li>
+<li><p>Laptops and desktops (for better user experience)</p></li>
+<li><p>Phones and edge devices (for offline AI and battery savings)</p></li>
+</ul>
+</section>
+<section id="final-thoughts-the-age-of-smart-storage">
+<h2>Final Thoughts: The Age of Smart Storage<a class="headerlink" href="#final-thoughts-the-age-of-smart-storage" title="Link to this heading">¶</a></h2>
+<p>Your SSD used to be a passive box. Now, it’s becoming a smart worker that:</p>
+<ul class="simple">
+<li><p>Filters data</p></li>
+<li><p>Makes decisions</p></li>
+<li><p>Saves time and power</p></li>
+</ul>
+<p>Think of it as your data’s personal assistant, working silently in the background.</p>
+<blockquote>
+<div><p>Before:
+“Here are 10,000 files. You figure it out.”</p>
+</div></blockquote>
+<blockquote>
+<div><p>After:
+“Here are the 5 files you actually need.”</p>
+</div></blockquote>
+</section>
+<section id="what-can-you-do-right-now">
+<h2>What Can You Do Right Now?<a class="headerlink" href="#what-can-you-do-right-now" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Stay curious — Keep an eye on eBPF + computational storage news</p></li>
+<li><p>Ask smarter questions — When shopping for tech, ask: “Is the storage smart?”</p></li>
+<li><p>Be ready — The apps you use daily are about to get smarter, faster, and cooler</p></li>
+</ol>
+<p>The future of data isn’t just storage — it’s storage that thinks.
+And it’s coming sooner than you think.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<p>Primary Research:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://dl.acm.org/doi/10.1145/3592980.3595319">Delilah: eBPF-offload on Computational Storage</a> — ACM Digital Library</p></li>
+<li><p><a class="reference external" href="https://pure.itu.dk/en/publications/delilah-ebpf-offload-on-computational-storage">IT University of Copenhagen — Delilah Project</a></p></li>
+<li><p><a class="reference external" href="https://github.com/delilah-csp">Delilah GitHub Repository</a> — Source code and implementation</p></li>
+<li><p>Industry Standards:</p>
+<ul>
+<li><p><a class="reference external" href="https://nvmexpress.org/nvm-express-announces-the-release-of-the-computational-storage-feature/">NVMe Computational Storage Feature Release — Official announcement</a></p></li>
+<li><p><a class="reference external" href="https://www.snia.org/educational-library/nvme-computational-storage-update-standard-2022">SNIA Computational Storage Standards — Technical specifications</a></p></li>
+</ul>
+</li>
+<li><p>Technical Deep Dives:</p>
+<ul>
+<li><p><a class="reference external" href="https://sniacmsiblog.org/2021/07/what-is-ebpf-and-why-does-it-matter-for-computational-storage/">What is eBPF and Computational Storage?</a> — SNIA Blog</p></li>
+<li><p>Niclas Hedam’s Research Portfolio — Project creator’s overview</p></li>
+<li><p><a class="reference external" href="https://www.researchgate.net/publication/370818368_Delilah_eBPF-offload_on_Computational_Storage">ResearchGate Publication</a> — Academic paper</p></li>
+</ul>
+</li>
+<li><p>Industry News:</p>
+<ul>
+<li><p><a class="reference external" href="https://www.theregister.com/2024/01/17/nvme_specs_get_an_update/">The Register: NVMe Computational Storage Update</a> — Tech news coverage</p></li>
+</ul>
+</li>
+</ul>
+<hr>
+> The Delilah project represents the first working eBPF computational storage prototype. NVMe officially standardized this technology in January 2024.</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+   
+
+<div class="related-pages">
+  
+  
+      
+  
+  
+  
+    
+</div>
+<div style="text-align:center; font-size:0.95em; margin-top:1em;">
+  For any query please contact: <a href="mailto:contact@ngkore.org">contact@ngkore.org</a>
+</div>
+<div class="bottom-of-page">
+  <div class="left-details">
+    <!--
+    <div class="copyright">
+        Copyright &#169; 
+    </div> -->
+
+    
+
+    <!--<div class="last-updated">
+      Last updated on Jul 18, 2025</div> -->
+
+    <!--
+    <div class="show-source">
+      <a class="muted-link" href="../_sources/ebpf/ebpf-ssd.md.txt"
+         rel="nofollow">Show source</a>
+    </div> -->
+  </div>
+  <div class="right-details">
+
+    
+
+    <!--  -->
+
+    <!--  -->
+
+
+    </div>
+  </div>
+</div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+<div class="toc-sticky toc-scroll">
+   
+    <div class="toc-title-container">
+      <span class="toc-title">
+       Contents
+      </span>
+    </div>
+    <div class="toc-tree-container">
+      <div class="toc-tree">
+        <ul>
+<li><a class="reference internal" href="#">Your SSD Is About to Get Superpowers</a><ul>
+<li><a class="reference internal" href="#the-problem-with-todays-storage">The Problem with Today’s Storage</a></li>
+<li><a class="reference internal" href="#the-smarter-way-computational-storage">The Smarter Way: Computational Storage</a></li>
+<li><a class="reference internal" href="#meet-ebpf-your-tiny-storage-assistant">Meet eBPF: Your Tiny Storage Assistant</a></li>
+<li><a class="reference internal" href="#the-breakthrough-ebpf-on-the-ssd-itself">The Breakthrough: eBPF on the SSD itself</a></li>
+<li><a class="reference internal" href="#real-example-photo-search-reinvented">Real Example: Photo Search Reinvented</a></li>
+<li><a class="reference internal" href="#cool-uses-youll-see-soon">Cool Uses You’ll See Soon</a></li>
+<li><a class="reference internal" href="#the-research-meet-delilah">The Research: Meet Delilah</a></li>
+<li><a class="reference internal" href="#whats-coming-next">What’s Coming Next?</a></li>
+<li><a class="reference internal" href="#why-should-you-care">Why Should You Care?</a></li>
+<li><a class="reference internal" href="#a-few-challenges">A Few Challenges</a></li>
+<li><a class="reference internal" href="#companies-working-on-this">Companies Working on This</a></li>
+<li><a class="reference internal" href="#final-thoughts-the-age-of-smart-storage">Final Thoughts: The Age of Smart Storage</a></li>
+<li><a class="reference internal" href="#what-can-you-do-right-now">What Can You Do Right Now?</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+   
+    
+  </div>
+
+    </aside>
+  </div>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/header-nav.js?v=e117ad08"></script>
+    
+<script>
+  const github_url = "https://github.com/ngkore";
+</script>
+</body>
+</html>

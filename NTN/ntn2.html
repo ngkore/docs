@@ -1,0 +1,705 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="OAI NTN Part 1: Breaking the Source Code" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="ntn/ntn2.html" />
+<meta property="og:site_name" content="NgKore" />
+<meta property="og:description" content="Continuing our exploration of Non-Terrestrial Networks (NTN), this second part of the series delves into the technical implementation within the 5G network architecture. We will examine the code fl..." />
+<meta property="og:image" content=".sphinx/_static/tag.png" />
+<meta property="og:image:alt" content="NgKore" />
+<meta name="description" content="Continuing our exploration of Non-Terrestrial Networks (NTN), this second part of the series delves into the technical implementation within the 5G network architecture. We will examine the code fl..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="From Ground to Space: The 5G Revolution Above the Clouds" href="p1-of-5.html" /><link rel="prev" title="Introduction to NTN" href="ntn1.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>OAI NTN Part 1: Breaking the Source Code - NgKore Docs</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/youtube.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/related-links.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/terminal-output.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f84bc4ab" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=23b7cbea" />
+    <link rel="stylesheet" type="text/css" href="../_static/github_issue_links.css?v=be107c51" />
+    <link rel="stylesheet" type="text/css" href="../_static/furo_colors.css?v=0eedd8e7" />
+    
+</head>
+  <body>
+    <header id="header" class="p-navigation">
+
+  <div class="p-navigation__nav" role="menubar">
+
+    <ul class="p-navigation__links" role="menu">
+
+      <li>
+        <a class="p-logo" href="https://github.com/ngkore" aria-current="page">
+          <img src="../_static/tag.png" alt="Logo" class="p-logo-image">
+          <!-- <div class="p-logo-text p-heading--4">NgKore
+          </div> -->
+        </a>
+      </li>
+
+
+    </ul>
+    <!-- Add your website link here -->
+    <a href="https://ngkore.org" target="_blank" class="p-header-link">
+      NgKore.org
+    </a>
+  </div>
+</header>
+   
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NgKore Docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">NgKore Docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kernel-bypass/index.html">Kernel Bypass Mechanisms</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Kernel Bypass Mechanisms</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/af_xdp.html">AF_XDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/dpdk.html">DPDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/sriov.html">SR-IOV</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oran/index.html">O-RAN</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of O-RAN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part1.html">Challenges in L1-L2 Interoperability within O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part2.html">Understanding xFAPI: Bridging L1 and L2 Layers of O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part3.html">Open RAN (O-RAN) Interoperability with xFAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-qoe-prediction.html">QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-uav-path-preduction.html">UAV Path Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ebpf/index.html">eBPF</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of eBPF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-meets-5g.html">eBPF Meets 5G: Transforming User Plane Function for Next-Gen Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/hexaebpf.html">HEXAeBPF: The Future of Interoperable eBPF Defined 5G Core (eDC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf.html">eBPF : Unveiling the Future of Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-maps.html">The Magic of eBPF Maps: Building a High-Performance Rate Limiter Without Touching User Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/xdp-ebpf.html">Unlocking Network Performance with XDP and eBPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-cuda.html">Inside CUDA: Building eBPF uprobes for GPU Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-gpu.html">The Silent Revolution: eBPF Is Hacking Your GPU (For Good)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-monitoring.html">Building an eBPF Process Monitor with Go: A Step-by-Step Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-network-detective.html">eBPF: The Network Detective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/ebpf-ssd.html">Your SSD Is About to Get Superpowers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf/l4-lb.html">Load Balancing at Light Speed:</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g-operator/index.html">5G Core Operator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 5G Core Operator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g-operator/ngkore_operator.html">NgKore Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../l3af/index.html">L3AF</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of L3AF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../l3af/l3af.html">L3AF Integration with 5G-UPF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../security/index.html">Networking and Security</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Networking and Security</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../security/tls.html">TLS/SSL Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/supi.html">Can 5G SUPI Concealment really ensure Forward Secrecy?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/ipsec.html">Understanding IPsec: How Internet Security Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/quic.html">QUIC: The Future of Internet Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">NTN</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of NTN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ntn1.html">Introduction to NTN</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">OAI NTN Part 1: Breaking the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p1-of-5.html">From Ground to Space: The 5G Revolution Above the Clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="p2-of-5.html">Space Giants: Who’s Building the Internet in the Sky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dtn.html">Delay-Tolerant Networks (DTNs): Networking Beyond Earth</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pqc/index.html">PQC</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of PQC</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/pqc-intro.html">Introduction To Post-Quantum Cryptography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/oqs-lib.html">Working of Open Quantum Safe Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/quantum-proof-algo.html">Learning with Errors: Quantum-Proof Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g/index.html">5G Core</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 5G Core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g/5g-upf.html">5G UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/rewrite-upf.html">Rewiring the 5G Data Plane: XDP/eBPF in the Fast Lane of UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/os-5g-compare.html">Understanding Open-Source 5G Core Network Evolution in 2025</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/index.html">AI/ML</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of AI/ML</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/ai-gpu.html">The Hidden Army: How AI Training Actually Happens Across Thousands of GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/route-phone-call.html">The AI Traffic Cops: How Machine Learning Routes Your Phone Calls in Real-Time</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/ntn/ntn2.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="oai-ntn-part-1-breaking-the-source-code">
+<h1>OAI NTN Part 1: Breaking the Source Code<a class="headerlink" href="#oai-ntn-part-1-breaking-the-source-code" title="Link to this heading">¶</a></h1>
+<p>Continuing our exploration of Non-Terrestrial Networks (NTN), this
+second part of the series delves into the technical implementation
+within the 5G network architecture. We will examine the code flow and
+the necessary extensions made to the gNB and UE software to enable
+communication with satellites and other non-terrestrial platforms. This
+will involve looking at how standard procedures are modified to account
+for NTN-specific characteristics.</p>
+<p>For a clearer understanding of the sequence and interaction between
+layers, we’ve created a simplified flowchart showing the step-by-step
+flow of how NTN support is integrated into the OAI stack — from gNB
+initialization to timing adjustments and message scheduling.</p>
+<p>For better visibility, you can access a clearer version of the flowchart
+using the following link:</p>
+<p>Link:
+<a class="reference external" href="https://app.diagrams.net/#G1pdG863MVB1PmqTQG2HVdMAC9hXP82mJm#%7B%22pageId%22%3A%22KzjFfqPiEhOPBe0r8-R2%22%7D">OAI NTN Codeflow</a></p>
+<p><img alt="alt text" src="../_images/ntn_codeflow_oai.svg" /></p>
+<blockquote>
+<div><p>Flowchart showing the step-by-step flow of how NTN support is integrated into the OAI stack — from gNB initialization to timing adjustments and message scheduling.</p>
+</div></blockquote>
+<section id="step-by-step-breakdown-of-the-ntn-flowchart">
+<h2>Step-by-Step Breakdown of the NTN Flowchart<a class="headerlink" href="#step-by-step-breakdown-of-the-ntn-flowchart" title="Link to this heading">¶</a></h2>
+<section id="gnb">
+<h3>gNB<a class="headerlink" href="#gnb" title="Link to this heading">¶</a></h3>
+<p><strong>Step 1:</strong><br>
+<em>RCconfig_nr_macrlc(cfg) – MAC &amp; RLC Layer Configuration Entry Point:</em> <br>
+This is the first major configuration function called after the
+basic system initialization. It sets up the gNB’s MAC and RLC layers by
+reading the configuration from the config interface.</p>
+<p><strong>Step 2:</strong><br>
+<em>nr_mac_config_scc() – Applying NTN Offsets in MAC:</em> <br> This
+function takes the serving cell config (scc) and applies timing offset
+calculations that are critical for NTN.</p>
+<p>Calls <code class="docutils literal notranslate"><span class="pre">get_NTN_Koffset()</span></code> to calculate delay-based offsets: - GEO → 478,
+LEO → 40</p>
+<ul class="simple">
+<li><p>Sets scheduling delays for Msg2, Msg4, and HARQ.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_MAC]</span> <span class="pre">Candidates</span> <span class="pre">per</span> <span class="pre">PDCCH</span> <span class="pre">aggregation</span> <span class="pre">level</span> <span class="pre">on</span> <span class="pre">UESS:</span> <span class="pre">L1:</span> <span class="pre">0,</span> <span class="pre">L2:</span> <span class="pre">2,</span> <span class="pre">L4:</span> <span class="pre">0,</span> <span class="pre">L8:</span> <span class="pre">0,</span> <span class="pre">L16:</span> <span class="pre">0</span> <span class="pre">These</span> <span class="pre">MAC</span> <span class="pre">logs</span> <span class="pre">show</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">MAC</span> <span class="pre">scheduler</span> <span class="pre">is</span> <span class="pre">initialized</span> <span class="pre">and</span> <span class="pre">now</span> <span class="pre">considers</span> <span class="pre">NTN-specific</span> <span class="pre">timing</span> <span class="pre">shifts.</span></code></p>
+<p><strong>Step 3: prepare_scc() – Finalizing Serving Cell Config (RRC Layer)</strong>
+It’s part of the early setup flow — and it’s crucial because this is
+where the gNB learns how to behave in terms of frequency, bandwidth, and
+timing.Constructs the <code class="docutils literal notranslate"><span class="pre">ServingCellConfigCommon</span></code> used in RRC to build
+SIBs (System Information Blocks). This is where the gNB gets ready to
+broadcast configuration to UEs.</p>
+<ul class="simple">
+<li><p>Checks <code class="docutils literal notranslate"><span class="pre">scc-&gt;ext2-&gt;ntn_Config_r17</span></code>, which signals that NTN mode is
+enabled.</p></li>
+<li><p>When true, it enables support for additional timing parameters and
+satellite-specific features.</p></li>
+<li><p>It ensures memory is allocated for extended SIBs (v1700).</p></li>
+</ul>
+<p><strong>Step 4: get_SIB1_NR() – Populating NTN-Specific Fields in SIB1</strong> -
+Check if the gNB is operating in an NTN band using <code class="docutils literal notranslate"><span class="pre">is_ntn_band(band)</span></code>
+band=254 and is_ntn_band() controls whether SIB1/SIB19 are filled with
+satellite parameters</p>
+<ul class="simple">
+<li><p>Allocate memory for extended SIB1 versions (v1610, v1630, v1700) as
+required by 3GPP Release 17</p></li>
+<li><p>NR_UE_Timers And Constants values are assigned(ms)
+t300=t301=t310=t319=2000,n310=10,n311=1,t311=3000</p></li>
+<li><p>Set the <code class="docutils literal notranslate"><span class="pre">cellBarredNTN_r17</span></code> flag to notBarred, indicating that the
+cell supports NTN UE.</p></li>
+</ul>
+<p>These changes ensure that all satellite-related parameters — like
+orbit type, timing advance support, and satellite position — are made
+available to the UE early in the connection process.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_RRC]</span> <span class="pre">SIB1</span> <span class="pre">freq:</span> <span class="pre">offsetToPointA</span> <span class="pre">5</span> <span class="pre">This</span> <span class="pre">log</span> <span class="pre">confirms</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">frequency</span> <span class="pre">domain</span> <span class="pre">resource</span> <span class="pre">parameters</span> <span class="pre">in</span> <span class="pre">SIB1</span> <span class="pre">are</span> <span class="pre">set</span> <span class="pre">-</span> <span class="pre">specifically,</span> <span class="pre">offsetToPointA,</span> <span class="pre">which</span> <span class="pre">defines</span> <span class="pre">the</span> <span class="pre">starting</span> <span class="pre">point</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">carrier</span> <span class="pre">grid.</span></code></p>
+<p><strong>Step 5: Control Returns to `RCconfig_nr_macrlc(cfg)`</strong> Now , all
+NTN-specific configuration — including SIB1/SIB19 values, timing
+adjustments, and band identification — has been passed from RRC to
+MAC.</p>
+<p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(IS_SA_MODE(get_softmodem_params()))</span> <span class="pre">Checks</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">system</span> <span class="pre">is</span> <span class="pre">running</span> <span class="pre">in</span> <span class="pre">Standalone</span> <span class="pre">(SA)</span> <span class="pre">mode</span></code></p>
+<p>and If <code class="docutils literal notranslate"><span class="pre">ntn_Config_r17</span></code> is present:</p>
+<ul class="simple">
+<li><p>Calls <code class="docutils literal notranslate"><span class="pre">nr_mac_configure_sib19()</span></code> to schedule SIB19, which includes:</p></li>
+<li><p>Satellite position and velocity</p></li>
+<li><p>Timing advance and Doppler compensation data</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">[HW]</span> <span class="pre">No</span> <span class="pre">connected</span> <span class="pre">device,</span> <span class="pre">generating</span> <span class="pre">void</span> <span class="pre">samples...</span></code></p>
+<p><strong>Step 6: gNB_dlsch_ulsch_scheduler() – Main Downlink+Uplink Scheduling
+Function, called every slot.</strong> - SIB1 / SIB19 scheduling</p>
+<ul class="simple">
+<li><p>PRACH (Msg1) resource reservation using <code class="docutils literal notranslate"><span class="pre">NTN_Koffset</span></code>.</p></li>
+<li><p>Calls schedule_nr_sib19() to broadcast satellite parameters</p></li>
+<li><p>Ensures UE Msg1 timing aligns with the long delay of GEO/LEO
+satellites</p></li>
+</ul>
+<p>As <code class="docutils literal notranslate"><span class="pre">gNB_dlsch_ulsch_scheduler()</span></code> runs continuously in the slot loop, it
+checks if any UE has initiated random access — and then triggers the
+required message handling steps.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_feasible_msg3_tda()</span></code> is called-</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_MAC]</span> <span class="pre">414.4</span> <span class="pre">UE</span> <span class="pre">RA-RNTI</span> <span class="pre">003d</span> <span class="pre">TC-RNTI</span> <span class="pre">d7f9:</span> <span class="pre">Activating</span> <span class="pre">RA</span> <span class="pre">process</span> <span class="pre">index</span> <span class="pre">0</span> <span class="pre">[NR_MAC]</span> <span class="pre">Adding</span> <span class="pre">new</span> <span class="pre">UE</span> <span class="pre">context</span> <span class="pre">with</span> <span class="pre">RNTI</span> <span class="pre">0xd64f</span></code></p>
+<p>UE has sent a Random Access Preamble (Msg1) The gNB has received Msg1
+and now starts the Random Access process</p>
+<p>From now on, all MAC-layer decisions (buffer handling, scheduling, etc.)
+are tracked for this UE This happens just before Msg2</p>
+<p><strong>Step 7: Uplink Preprocessor – nr_ulsch_preprocessor()</strong> After the UE
+context is created, the gNB calls <code class="docutils literal notranslate"><span class="pre">nr_ulsch_preprocessor()</span></code> to schedule
+uplink data.</p>
+<p>For NTN, the function applies an adjusted K2 value using
+<code class="docutils literal notranslate"><span class="pre">get_NTN_Koffset()</span></code>.GEO : <code class="docutils literal notranslate"><span class="pre">K2</span> <span class="pre">=484</span></code>, LEO : <code class="docutils literal notranslate"><span class="pre">K2</span> <span class="pre">=46</span></code></p>
+<p>k2 defines the UL scheduling delay between DCI grant and PUSCH
+transmission</p>
+<p><code class="docutils literal notranslate"><span class="pre">NR_MAC]</span>&#160;&#160; <span class="pre">UE</span> <span class="pre">f8de:</span> <span class="pre">Msg3</span> <span class="pre">scheduled</span> <span class="pre">(415.3</span> <span class="pre">TDA</span> <span class="pre">0)</span> <span class="pre">[NR_MAC]</span>&#160; <span class="pre">UE</span> <span class="pre">d7f9:</span> <span class="pre">415.3</span> <span class="pre">Generating</span> <span class="pre">RA-Msg2</span> <span class="pre">DCI</span></code></p>
+<p>At slot 415.3, the gNB schedules Msg3 for UE <code class="docutils literal notranslate"><span class="pre">f8de</span></code> while simultaneously
+generating Msg2 for UE <code class="docutils literal notranslate"><span class="pre">d7f9</span></code>.</p>
+<p>This overlap is possible because OAI uses the calculated K2 delay (from
+<code class="docutils literal notranslate"><span class="pre">get_NTN_Koffset()</span></code>) to shift Msg3 far enough into the future —
+ensuring that it arrives correctly even in the presence of GEO/LEO
+satellite delays.</p>
+<p><strong>Step 8: Msg3 Received and Msg4 Scheduling Begins</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_MAC]</span>&#160;&#160; <span class="pre">507.</span> <span class="pre">3</span> <span class="pre">PUSCH</span> <span class="pre">with</span> <span class="pre">TC_RNTI</span> <span class="pre">0xd64f</span> <span class="pre">received</span> <span class="pre">correctly</span> <span class="pre">[NR_MAC]</span>&#160;&#160; <span class="pre">Activating</span> <span class="pre">scheduling</span> <span class="pre">Msg4</span> <span class="pre">for</span> <span class="pre">TC_RNTI</span> <span class="pre">0xd64f</span> <span class="pre">(state</span> <span class="pre">WAIT_Msg3)</span> <span class="pre">[NR_RRC]</span>&#160;&#160; <span class="pre">Decoding</span> <span class="pre">CCCH:</span> <span class="pre">RNTI</span> <span class="pre">d64f,</span> <span class="pre">payload_size</span> <span class="pre">6</span></code></p>
+<p>The gNB successfully received Msg 3, confirmed by
+<code class="docutils literal notranslate"><span class="pre">[NR_MAC]</span> <span class="pre">PUSCH</span> <span class="pre">with</span> <span class="pre">TC_RNTI</span> <span class="pre">0xd64f</span> <span class="pre">received</span> <span class="pre">correctly.</span></code></p>
+<p>It then transitions the UE to <code class="docutils literal notranslate"><span class="pre">WAIT_Msg4</span></code> state and begins preparing
+Msg4. At the same time, <code class="docutils literal notranslate"><span class="pre">[NR_RRC]</span> <span class="pre">Decoding</span> <span class="pre">CCCH</span></code> indicates that the gNB
+is now reading the RRC Connection Request from the UE — the final step
+before establishing full RRC connection.</p>
+<p><strong>Step 9: Continuous Loop After Msg3</strong> Once Msg3 is received, the gNB
+enters a continuous loop where it calls the
+<code class="docutils literal notranslate"><span class="pre">gNB_dlsch_ulsch_scheduler()</span></code> function every slot. Within this loop, it
+keeps checking and preparing for upcoming events-Msg4 scheduling, uplink
+timing, and measurement reporting.</p>
+<p>This loop also repeatedly triggers functions like
+<code class="docutils literal notranslate"><span class="pre">nr_ulsch_preprocessor()</span></code> and <code class="docutils literal notranslate"><span class="pre">nr_csi_meas_reporting()</span></code> as part of
+regular slot-based processing.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_RRC]</span> <span class="pre">[DL]</span> <span class="pre">Send</span> <span class="pre">RRC</span> <span class="pre">Setup</span></code></p>
+<p>This log confirms that the Msg4 content has been prepared for the UE
+It’s now ready to be delivered via PDSCH in Msg4.</p>
+<p><strong>Step 10: Msg4 Scheduling Phase</strong> After looping through the scheduler,
+the gNB eventually builds Msg4 using <code class="docutils literal notranslate"><span class="pre">nr_generate_Msg4_MsgB()</span></code> and
+calculates the expected ACK/NACK feedback time using
+<code class="docutils literal notranslate"><span class="pre">nr_acknack_scheduling()</span></code>. The feedback slot is again shifted using
+<code class="docutils literal notranslate"><span class="pre">NTN_gNB_Koffset()</span></code> to compensate for satellite delay. Finally, the gNB
+logs that Msg4 is sent and waits for the UE’s acknowledgment</p>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_MAC]</span> <span class="pre">UE</span> <span class="pre">dGenerate</span> <span class="pre">Msg4:</span> <span class="pre">feedback</span> <span class="pre">at</span>&#160; <span class="pre">557.</span> <span class="pre">2,</span> <span class="pre">payload</span> <span class="pre">201</span> <span class="pre">bytes,</span>&#160; <span class="pre">next</span> <span class="pre">state</span> <span class="pre">nrRA_WAIT_Msg4_MsgB_ACK</span></code></p>
+</section>
+<section id="ue">
+<h3>UE<a class="headerlink" href="#ue" title="Link to this heading">¶</a></h3>
+<p><strong>Step 1: apply_ntn_config() Called from UE_thread() (Repeatedly)</strong>
+Inside <code class="docutils literal notranslate"><span class="pre">UE_thread()</span></code> (in <code class="docutils literal notranslate"><span class="pre">nr-ue.c</span></code>), the function <code class="docutils literal notranslate"><span class="pre">apply_ntn_config()</span></code>
+is called repeatedly during the main loop.</p>
+<p>It checks and applies satellite-related timing configurations for the
+UE, such as orbit type and delay offsets, based on whether NTN is
+active.</p>
+<p>This step ensures the UE keeps adjusting itself per-slot for accurate
+timing under satellite conditions like GEO or LEO.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_RRC]</span>&#160;&#160; <span class="pre">Found</span> <span class="pre">SIB19</span></code></p>
+<p><strong>Step 2: SIB19 Decoding and NTN Configuration Transfer</strong> This marks the
+point where the UE officially detects it’s in an NTN-enabled cell. After
+successfully decoding SIB19 the function <code class="docutils literal notranslate"><span class="pre">process_msg_rcc_to_mac()</span></code> is
+triggered to send NTN-related configuration — such as orbit type and
+TA adjustments — from RRC down to the MAC layer.</p>
+<p><strong>Step 3: nr_rrc_mac_config_other_sib() – Applying SIB19 and Starting
+RA (NTN-Specific)</strong> This function applies the NTN configuration received
+via SIB19 into the UE’s MAC layer.</p>
+<p>It updates <code class="docutils literal notranslate"><span class="pre">ntn_Config_r17</span></code>, computes timing advance using
+<code class="docutils literal notranslate"><span class="pre">configure_ntn_ta()</span></code>, and transitions the UE to <code class="docutils literal notranslate"><span class="pre">UE_PERFORMING_RA</span></code> —
+meaning it’s now ready to start Random Access using satellite-aligned
+timing.</p>
+<p><strong>Step 4: configure_ntn_ta() – Computing Total UE Timing Advance for
+NTN</strong> - The function <code class="docutils literal notranslate"><span class="pre">calculate_ue_sat_ta()</span></code> is called which computes
+the UE-to-satellite signal delay using the 3D positions of both the UE
+and the satellite.</p>
+<ul class="simple">
+<li><p>It returns <code class="docutils literal notranslate"><span class="pre">238.74</span> <span class="pre">ms</span></code>, which becomes part of the UE’s total timing
+advance.</p></li>
+<li><p>This value ensures that Msg3 is transmitted early enough to reach the
+gNB precisely when expected, even in high-orbit NTN conditions like
+GEO.</p></li>
+</ul>
+<p><strong>Step 5: schedule_ntn_config_command() – Delivering NTN Timing to PHY
+Layer</strong> - Once all NTN timing values are computed in MAC, the function
+<code class="docutils literal notranslate"><span class="pre">schedule_ntn_config_command()</span></code> prepares a special FAPI PDU that passes
+this information to the PHY layer.</p>
+<ul class="simple">
+<li><p>This ensures the physical layer can align uplink transmissions (Msg3)
+— with the expected satellite delay.</p></li>
+<li><p>It includes the full timing advance, TA drift, and Koffset scheduling
+offset, enabling slot-accurate scheduling for LEO/GEO scenarios.</p></li>
+</ul>
+<p><strong>Step 6: nr_ue_scheduled_response_dl() – Applying NTN Timing at PHY
+Layer and configure_ntn_params() – Final PHY Configuration</strong> - At the
+final step of NTN setup, the function <code class="docutils literal notranslate"><span class="pre">nr_ue_scheduled_response_dl()</span></code>
+processes the timing configuration message from MAC.</p>
+<ul class="simple">
+<li><p>When it sees <code class="docutils literal notranslate"><span class="pre">case</span> <span class="pre">:FAPI_NR_DL_NTN_CONFIG_PARAMS</span></code>, it calls
+<code class="docutils literal notranslate"><span class="pre">configure_ntn_params()</span></code>, which loads all satellite-specific timing
+values into the PHY layer.</p></li>
+<li><p>These include the combined delay (<code class="docutils literal notranslate"><span class="pre">ntn_total_time_advance_ms</span></code>) and
+drift correction, enabling the UE to send uplink messages -Msg3 and
+PUCCH precisely aligned with gNB expectations.</p></li>
+</ul>
+<p><strong>Step 7(a): UE Starts 4-Step Random Access with NTN Adjustments</strong>
+<code class="docutils literal notranslate"><span class="pre">apply_ntn_config()</span></code> is called again from within the per-slot processing
+loop in the UE PHY.</p>
+<p><code class="docutils literal notranslate"><span class="pre">[MAC]</span> <span class="pre">Initialization</span> <span class="pre">of</span> <span class="pre">4-Step</span> <span class="pre">CBRA</span> <span class="pre">procedure</span> <span class="pre">[NR_MAC]</span> <span class="pre">PRACH</span> <span class="pre">scheduler:</span> <span class="pre">Selected</span> <span class="pre">RO</span> <span class="pre">Frame</span> <span class="pre">x,</span> <span class="pre">Slot</span> <span class="pre">9,</span> <span class="pre">Symbol</span> <span class="pre">0,</span> <span class="pre">Fdm</span> <span class="pre">0</span></code></p>
+<p>After all NTN configuration is applied, the UE begins Random Access
+using the 4-step CBRA procedure.</p>
+<p>It selects a PRACH occasion ([NR_MAC] PRACH scheduler…) for Msg1
+transmission, fully adjusted using satellite timing parameters.</p>
+<p>When preparing Msg3, the UE <code class="docutils literal notranslate"><span class="pre">usesGET_DURATION_RX_TO_TX()</span></code> to compute how
+many slots to wait between DL reception and UL transmission — ensuring
+all uplink messages align with gNB expectations</p>
+<p><strong>Step 7(b): UE Msg1 Sent → Msg2 Received and TA Applied (NTN Flow)</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[PHY]</span> <span class="pre">PRACH</span> <span class="pre">[UE</span> <span class="pre">0]</span> <span class="pre">in</span> <span class="pre">frame.slot</span> <span class="pre">--</span> <span class="pre">placing</span> <span class="pre">PRACH</span> <span class="pre">in</span> <span class="pre">position,</span> <span class="pre">Msg1/MsgA-Preamble</span> <span class="pre">[PHY]</span> <span class="pre">RAR-Msg2</span> <span class="pre">decoded</span> <span class="pre">[NR</span> <span class="pre">MAC]</span> <span class="pre">[UE</span> <span class="pre">0]</span> <span class="pre">Found</span> <span class="pre">RAR</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">intended</span> <span class="pre">RAPID</span> <span class="pre">56</span> <span class="pre">[MAC]</span> <span class="pre">Received</span> <span class="pre">TA</span> <span class="pre">command</span> <span class="pre">31</span></code></p>
+<ul class="simple">
+<li><p>After transmitting Msg1, the UE enters its per-slot loop again
+(apply_ntn_config())and receives Msg2, confirmed by
+<code class="docutils literal notranslate"><span class="pre">[PHY]</span> <span class="pre">RAR-Msg2</span> <span class="pre">decoded</span></code> and <code class="docutils literal notranslate"><span class="pre">[NR</span> <span class="pre">MAC]</span> <span class="pre">Found</span> <span class="pre">RAR</span> <span class="pre">with</span> <span class="pre">RAPID</span> <span class="pre">56.</span></code></p></li>
+<li><p>The UE calculates the timing for Msg3 using <code class="docutils literal notranslate"><span class="pre">GET_DURATION_RX_TO_TX()</span></code>
+and applies the TA command received in Msg2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apply_ntn_config()</span></code> is invoked repeatedly to keep the PHY layer
+updated with the latest satellite delay and drift, especially
+important in fast-moving LEO orbits.</p></li>
+</ul>
+<p><strong>Step 7(c): Msg3 Transmission — NTN Timing Fully Applied</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Log:</span> <span class="pre">[NR</span> <span class="pre">MAC]</span> <span class="pre">[RAPROC]</span> <span class="pre">[163.3]</span> <span class="pre">RA-Msg3</span> <span class="pre">transmitted</span></code></p>
+<ul class="simple">
+<li><p>At slot 163.3, the UE successfully transmits Msg3, as confirmed by the
+<code class="docutils literal notranslate"><span class="pre">[RAPROC]</span> <span class="pre">RA-Msg3</span> <span class="pre">transmitted</span></code> log.</p></li>
+<li><p>Then function <code class="docutils literal notranslate"><span class="pre">nr_Msg3_transmitted()</span></code> is called to finalize the
+transmission, recording the total satellite-based delay
+(<code class="docutils literal notranslate"><span class="pre">ta_common_ms</span></code>) — 477.48 ms for GEO, and 37.66 ms for LEO.</p></li>
+<li><p>The timing was calculated using the combined result of SIB19,
+satellite ephemeris, and the Msg2 TA command.</p></li>
+<li><p>With Msg3 sent, the UE continues calling <code class="docutils literal notranslate"><span class="pre">apply_ntn_config()</span></code> to stay
+aligned for Msg4 and ACK/NACK scheduling.</p></li>
+</ul>
+<p><strong>Step 7(d): Final Step: Msg4 Acknowledged — RA Procedure Successful</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">GNB</span> <span class="pre">[NR_MAC]</span>&#160; <span class="pre">UE</span> <span class="pre">:</span> <span class="pre">Received</span> <span class="pre">Ack</span> <span class="pre">of</span> <span class="pre">Msg4.</span> <span class="pre">CBRA</span> <span class="pre">procedure</span> <span class="pre">succeeded!</span> <span class="pre">On</span> <span class="pre">UE</span>&#160; <span class="pre">4-Step</span> <span class="pre">RA</span> <span class="pre">procedure</span> <span class="pre">succeeded.</span> <span class="pre">CBRA:</span> <span class="pre">Contention</span> <span class="pre">Resolution</span> <span class="pre">is</span> <span class="pre">successful.</span></code></p>
+<ul class="simple">
+<li><p>Once Msg3 is transmitted and Msg4 is received, the UE sends an ACK
+using PUCCH.</p></li>
+<li><p>The gNB receives this ACK at some slot and confirms the completion of
+the contention-based RA procedure.</p></li>
+<li><p>The UE logs that contention resolution succeeded — meaning no
+collisions occurred — and the UE now transitions to the next stage
+of connection setup.</p></li>
+</ul>
+<p>This moment marks the <strong>successful hand-in-hand synchronization between
+UE and gNB over satellite</strong>, despite large and asymmetric delays.</p>
+<p><strong>Step 8 : Post-RA: UE Begins RRC Setup Completion</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[NR_RRC]</span> <span class="pre">[UE</span> <span class="pre">0]</span> <span class="pre">[RAPROC]</span> <span class="pre">Logical</span> <span class="pre">Channel</span> <span class="pre">UL-DCCH</span> <span class="pre">(SRB1),</span> <span class="pre">Generating</span> <span class="pre">RRCSetupComplete</span> <span class="pre">(bytes32)</span></code></p>
+<ul class="simple">
+<li><p>After the 4-step Random Access procedure finishes, the UE sends the
+[RRCSetupComplete]{.title-ref} message over the UL-DCCH channel using
+SRB1.</p></li>
+<li><p>This message confirms the establishment of the RRC connection with the
+gNB and finalizes the UE’s admission into the network.</p></li>
+<li><p>While this is happening, <code class="docutils literal notranslate"><span class="pre">apply_ntn_config()</span></code> continues looping each
+slot to maintain NTN timing precision — ensuring uplink and downlink
+remain correctly aligned over the satellite link.</p></li>
+</ul>
+</section>
+</section>
+<section id="data-exchange-between-ue-and-gnb">
+<h2>Data Exchange Between UE and gNB<a class="headerlink" href="#data-exchange-between-ue-and-gnb" title="Link to this heading">¶</a></h2>
+<p><img alt="Alternative text" src="../_images/gnb_GEO.png" />{width=”800px”}</p>
+<p>gNB(for GEO)</p>
+<p>gNB log output shows successful Msg4 acknowledgment, RRC connection
+establishment, and early uplink/downlink activity.</p>
+<p>The logs confirm the UE is in-sync and actively exchanging MAC-layer
+messages with the gNB, with all NTN timing offsets correctly applied.</p>
+<p><img alt="Alternative text" src="../_images/UE_GEO.png" />{width=”800px”}</p>
+<p>UE(for GEO)</p>
+<p>This concludes Part II of the NTN blog series, where we examined the
+overall code flow enabling Non-Terrestrial Network (NTN) support in
+OpenAirInterface. Through both gNB and UE perspectives, we walked
+through key components such as SIB19 processing, NTN-specific timing
+advance computation, and synchronization across the 4-step Random Access
+Procedure.</p>
+<p>The included flowchart offers a consolidated view of this interaction,
+highlighting the key function calls and log traces involved in
+establishing NTN-aware connectivity.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+   
+
+<div class="related-pages">
+  
+  
+      
+  
+  
+  
+    
+</div>
+<div style="text-align:center; font-size:0.95em; margin-top:1em;">
+  For any query please contact: <a href="mailto:contact@ngkore.org">contact@ngkore.org</a>
+</div>
+<div class="bottom-of-page">
+  <div class="left-details">
+    <!--
+    <div class="copyright">
+        Copyright &#169; 
+    </div> -->
+
+    
+
+    <!--<div class="last-updated">
+      Last updated on Jul 18, 2025</div> -->
+
+    <!--
+    <div class="show-source">
+      <a class="muted-link" href="../_sources/ntn/ntn2.md.txt"
+         rel="nofollow">Show source</a>
+    </div> -->
+  </div>
+  <div class="right-details">
+
+    
+
+    <!--  -->
+
+    <!--  -->
+
+
+    </div>
+  </div>
+</div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+<div class="toc-sticky toc-scroll">
+   
+    <div class="toc-title-container">
+      <span class="toc-title">
+       Contents
+      </span>
+    </div>
+    <div class="toc-tree-container">
+      <div class="toc-tree">
+        <ul>
+<li><a class="reference internal" href="#">OAI NTN Part 1: Breaking the Source Code</a><ul>
+<li><a class="reference internal" href="#step-by-step-breakdown-of-the-ntn-flowchart">Step-by-Step Breakdown of the NTN Flowchart</a><ul>
+<li><a class="reference internal" href="#gnb">gNB</a></li>
+<li><a class="reference internal" href="#ue">UE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-exchange-between-ue-and-gnb">Data Exchange Between UE and gNB</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+   
+    
+  </div>
+
+    </aside>
+  </div>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/header-nav.js?v=e117ad08"></script>
+    
+<script>
+  const github_url = "https://github.com/ngkore";
+</script>
+</body>
+</html>

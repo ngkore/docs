@@ -1,0 +1,776 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="eBPF: The Network Detective" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="ebpf/ebpf-network-detective.html" />
+<meta property="og:site_name" content="NgKore" />
+<meta property="og:description" content="How I Used eBPF to Solve a Mysterious 2AM Production Outage The Symptoms: When Everything Looks Normal: After stumbling to my laptop with coffee in hand, I dove into our monitoring dashboards. The ..." />
+<meta property="og:image" content=".sphinx/_static/tag.png" />
+<meta property="og:image:alt" content="NgKore" />
+<meta name="description" content="How I Used eBPF to Solve a Mysterious 2AM Production Outage The Symptoms: When Everything Looks Normal: After stumbling to my laptop with coffee in hand, I dove into our monitoring dashboards. The ..." />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Your SSD Is About to Get Superpowers" href="ebpf-ssd.html" /><link rel="prev" title="Building an eBPF Process Monitor with Go: A Step-by-Step Guide" href="ebpf-monitoring.html" />
+
+    <link rel="shortcut icon" href="../_static/favicon.png"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>eBPF: The Network Detective - NgKore Docs</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/youtube.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/related-links.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/terminal-output.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=f84bc4ab" />
+    <link rel="stylesheet" type="text/css" href="../_static/header.css?v=23b7cbea" />
+    <link rel="stylesheet" type="text/css" href="../_static/github_issue_links.css?v=be107c51" />
+    <link rel="stylesheet" type="text/css" href="../_static/furo_colors.css?v=0eedd8e7" />
+    
+</head>
+  <body>
+    <header id="header" class="p-navigation">
+
+  <div class="p-navigation__nav" role="menubar">
+
+    <ul class="p-navigation__links" role="menu">
+
+      <li>
+        <a class="p-logo" href="https://github.com/ngkore" aria-current="page">
+          <img src="../_static/tag.png" alt="Logo" class="p-logo-image">
+          <!-- <div class="p-logo-text p-heading--4">NgKore
+          </div> -->
+        </a>
+      </li>
+
+
+    </ul>
+    <!-- Add your website link here -->
+    <a href="https://ngkore.org" target="_blank" class="p-header-link">
+      NgKore.org
+    </a>
+  </div>
+</header>
+   
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">NgKore Docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">NgKore Docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../kernel-bypass/index.html">Kernel Bypass Mechanisms</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Kernel Bypass Mechanisms</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/af_xdp.html">AF_XDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/dpdk.html">DPDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kernel-bypass/sriov.html">SR-IOV</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../oran/index.html">O-RAN</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of O-RAN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part1.html">Challenges in L1-L2 Interoperability within O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part2.html">Understanding xFAPI: Bridging L1 and L2 Layers of O-RAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/xfapi-part3.html">Open RAN (O-RAN) Interoperability with xFAPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-qoe-prediction.html">QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../oran/smo-uav-path-preduction.html">UAV Path Prediction Using AI/ML Framework in Distributed ORAN Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">eBPF</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of eBPF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ebpf-meets-5g.html">eBPF Meets 5G: Transforming User Plane Function for Next-Gen Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hexaebpf.html">HEXAeBPF: The Future of Interoperable eBPF Defined 5G Core (eDC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf.html">eBPF : Unveiling the Future of Computing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-maps.html">The Magic of eBPF Maps: Building a High-Performance Rate Limiter Without Touching User Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xdp-ebpf.html">Unlocking Network Performance with XDP and eBPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-cuda.html">Inside CUDA: Building eBPF uprobes for GPU Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-gpu.html">The Silent Revolution: eBPF Is Hacking Your GPU (For Good)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-monitoring.html">Building an eBPF Process Monitor with Go: A Step-by-Step Guide</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">eBPF: The Network Detective</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-ssd.html">Your SSD Is About to Get Superpowers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="l4-lb.html">Load Balancing at Light Speed:</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g-operator/index.html">5G Core Operator</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 5G Core Operator</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g-operator/ngkore_operator.html">NgKore Operator</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../l3af/index.html">L3AF</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of L3AF</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../l3af/l3af.html">L3AF Integration with 5G-UPF</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../security/index.html">Networking and Security</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of Networking and Security</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../security/tls.html">TLS/SSL Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/supi.html">Can 5G SUPI Concealment really ensure Forward Secrecy?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/ipsec.html">Understanding IPsec: How Internet Security Works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../security/quic.html">QUIC: The Future of Internet Transport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ntn/index.html">NTN</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of NTN</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/ntn1.html">Introduction to NTN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/ntn2.html">OAI NTN Part 1: Breaking the Source Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/p1-of-5.html">From Ground to Space: The 5G Revolution Above the Clouds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/p2-of-5.html">Space Giants: Who’s Building the Internet in the Sky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ntn/dtn.html">Delay-Tolerant Networks (DTNs): Networking Beyond Earth</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pqc/index.html">PQC</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of PQC</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/pqc-intro.html">Introduction To Post-Quantum Cryptography</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/oqs-lib.html">Working of Open Quantum Safe Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pqc/quantum-proof-algo.html">Learning with Errors: Quantum-Proof Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5g/index.html">5G Core</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of 5G Core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5g/5g-upf.html">5G UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/rewrite-upf.html">Rewiring the 5G Data Plane: XDP/eBPF in the Fast Lane of UPF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5g/os-5g-compare.html">Understanding Open-Source 5G Core Network Evolution in 2025</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/index.html">AI/ML</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of AI/ML</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/ai-gpu.html">The Hidden Army: How AI Training Actually Happens Across Thousands of GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/route-phone-call.html">The AI Traffic Cops: How Machine Learning Routes Your Phone Calls in Real-Time</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/ebpf/ebpf-network-detective.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="ebpf-the-network-detective">
+<h1>eBPF: The Network Detective<a class="headerlink" href="#ebpf-the-network-detective" title="Link to this heading">¶</a></h1>
+<p><strong>How I Used eBPF to Solve a Mysterious 2AM Production Outage</strong></p>
+<hr>
+It was 2:03 AM when my phone buzzed with the familiar dread of a PagerDuty alert. Half-asleep, I squinted at the screen: **"CRITICAL: API response times spiking - 95th percentile timeout errors increasing"**. What started as another routine midnight fire drill would become one of the most educational debugging sessions of my career—and a testament to why eBPF has become indispensable in my observability toolkit.
+<section id="the-symptoms-when-everything-looks-normal">
+<h2>The Symptoms: When Everything Looks Normal<a class="headerlink" href="#the-symptoms-when-everything-looks-normal" title="Link to this heading">¶</a></h2>
+<p>After stumbling to my laptop with coffee in hand, I dove into our monitoring dashboards. The metrics painted a confusing picture:</p>
+<ul class="simple">
+<li><p><strong>CPU utilization</strong>: Normal (~30% across all instances)</p></li>
+<li><p><strong>Memory usage</strong>: Well within limits</p></li>
+<li><p><strong>Database performance</strong>: Query times looked healthy</p></li>
+<li><p><strong>Load balancer metrics</strong>: Even distribution of traffic</p></li>
+<li><p><strong>Application logs</strong>: No obvious errors or exceptions</p></li>
+</ul>
+<p>Yet our API was hemorrhaging. Response times that normally sat around 200ms were spiking to 30+ seconds before timing out. The pattern was maddeningly intermittent—some requests sailed through while others hung indefinitely.</p>
+</section>
+<section id="the-false-leads-when-traditional-tools-hit-their-limits">
+<h2>The False Leads: When Traditional Tools Hit Their Limits<a class="headerlink" href="#the-false-leads-when-traditional-tools-hit-their-limits" title="Link to this heading">¶</a></h2>
+<section id="dead-end-1-application-layer-investigation">
+<h3>Dead End #1: Application Layer Investigation<a class="headerlink" href="#dead-end-1-application-layer-investigation" title="Link to this heading">¶</a></h3>
+<p>My first instinct was to blame the application. I scaled up our API instances, thinking we might be hitting some hidden bottleneck. No improvement. I examined recent deployments—nothing had changed in 72 hours.</p>
+</section>
+<section id="dead-end-2-database-deep-dive">
+<h3>Dead End #2: Database Deep Dive<a class="headerlink" href="#dead-end-2-database-deep-dive" title="Link to this heading">¶</a></h3>
+<p>Next, I suspected database connection pooling issues. Our PostgreSQL metrics looked clean, but I increased the connection pool size anyway. Still nothing.</p>
+</section>
+<section id="dead-end-3-infrastructure-rabbit-holes">
+<h3>Dead End #3: Infrastructure Rabbit Holes<a class="headerlink" href="#dead-end-3-infrastructure-rabbit-holes" title="Link to this heading">¶</a></h3>
+<p>Maybe it was the cloud provider? I checked AWS status pages, examined ELB metrics, and even opened a support ticket. Everything appeared normal from their perspective.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Typical troubleshooting commands that yielded no insights</span>
+kubectl<span class="w"> </span>top<span class="w"> </span>pods
+kubectl<span class="w"> </span>describe<span class="w"> </span>pods<span class="w"> </span>api-service-xyz
+curl<span class="w"> </span>-v<span class="w"> </span>https://api.example.com/health
+</pre></div>
+</div>
+<p>Three hours in, I was stumped. Our traditional observability stack—Prometheus, Grafana, ELK—was telling me everything was fine while our users were experiencing a catastrophic service degradation.</p>
+</section>
+</section>
+<section id="the-breakthrough-thinking-below-the-application-layer">
+<h2>The Breakthrough: Thinking Below the Application Layer<a class="headerlink" href="#the-breakthrough-thinking-below-the-application-layer" title="Link to this heading">¶</a></h2>
+<p>At 5:47 AM, fueled by frustration and my fourth cup of coffee, I had an epiphany. What if the issue wasn’t <em>what</em> we were monitoring, but <em>where</em> we were monitoring?</p>
+<p>All our observability focused on application metrics and infrastructure resources. But what about the network layer? What if packets were getting lost, delayed, or malformed somewhere between our load balancer and application instances?</p>
+<p>This is where eBPF entered the story.</p>
+</section>
+<section id="enter-ebpf-the-network-microscope">
+<h2>Enter eBPF: The Network Microscope<a class="headerlink" href="#enter-ebpf-the-network-microscope" title="Link to this heading">¶</a></h2>
+<p>eBPF (Extended Berkeley Packet Filter) allows you to run sandboxed programs directly in the Linux kernel without changing kernel source code. Think of it as a microscope for your network stack—you can observe, measure, and trace network events with surgical precision.</p>
+<p>Instead of guessing what might be wrong, I could now <em>see</em> exactly what was happening to every packet flowing through our system.</p>
+</section>
+<section id="the-investigation-tracing-the-invisible">
+<h2>The Investigation: Tracing the Invisible<a class="headerlink" href="#the-investigation-tracing-the-invisible" title="Link to this heading">¶</a></h2>
+<section id="step-1-basic-packet-capture-with-tcpdump">
+<h3>Step 1: Basic Packet Capture with tcpdump<a class="headerlink" href="#step-1-basic-packet-capture-with-tcpdump" title="Link to this heading">¶</a></h3>
+<p>First, I established a baseline with traditional packet capture:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capture packets on the primary network interface</span>
+sudo<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>-n<span class="w"> </span>-c<span class="w"> </span><span class="m">1000</span><span class="w"> </span>host<span class="w"> </span>api.example.com
+
+<span class="c1"># Sample output showing normal traffic</span>
+<span class="m">14</span>:23:41.123456<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.0.1.100.45678<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.0.2.50.8080:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>S<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">1234567890</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">29200</span>
+<span class="m">14</span>:23:41.124567<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.0.2.50.8080<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.0.1.100.45678:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>S.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">987654321</span>,<span class="w"> </span>ack<span class="w"> </span><span class="m">1234567891</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">28960</span>
+</pre></div>
+</div>
+<p>The three-way handshake looked normal, but I needed deeper visibility into what was happening after the connection was established.</p>
+</section>
+<section id="step-2-ebpf-powered-tcp-analysis">
+<h3>Step 2: eBPF-powered TCP Analysis<a class="headerlink" href="#step-2-ebpf-powered-tcp-analysis" title="Link to this heading">¶</a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">bpftrace</span></code>, I created a custom probe to monitor TCP window sizes and scaling factors:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monitor TCP window scaling events</span>
+sudo<span class="w"> </span>bpftrace<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">kprobe:tcp_select_window {</span>
+<span class="s1">    printf(&quot;PID: %d, Window: %d, Scale: %d\n&quot;, </span>
+<span class="s1">           pid, arg1, arg2);</span>
+<span class="s1">}</span>
+
+<span class="s1">kprobe:tcp_window_scaling {</span>
+<span class="s1">    printf(&quot;Window scaling negotiation: %d\n&quot;, arg0);</span>
+<span class="s1">}&#39;</span>
+</pre></div>
+</div>
+<p>The output immediately revealed something suspicious:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PID</span><span class="p">:</span> <span class="mi">12847</span><span class="p">,</span> <span class="n">Window</span><span class="p">:</span> <span class="mi">65535</span><span class="p">,</span> <span class="n">Scale</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">PID</span><span class="p">:</span> <span class="mi">12847</span><span class="p">,</span> <span class="n">Window</span><span class="p">:</span> <span class="mi">32768</span><span class="p">,</span> <span class="n">Scale</span><span class="p">:</span> <span class="mi">7</span>
+<span class="n">PID</span><span class="p">:</span> <span class="mi">12851</span><span class="p">,</span> <span class="n">Window</span><span class="p">:</span> <span class="mi">65535</span><span class="p">,</span> <span class="n">Scale</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">Window</span> <span class="n">scaling</span> <span class="n">negotiation</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">PID</span><span class="p">:</span> <span class="mi">12851</span><span class="p">,</span> <span class="n">Window</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">Scale</span><span class="p">:</span> <span class="mi">7</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-deep-dive-with-bcc-tools">
+<h3>Step 3: Deep Dive with BCC Tools<a class="headerlink" href="#step-3-deep-dive-with-bcc-tools" title="Link to this heading">¶</a></h3>
+<p>The inconsistent window scaling caught my attention. I deployed a more sophisticated eBPF program using the BCC toolkit:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bcc</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPF</span>
+
+<span class="c1"># eBPF program to trace TCP window scaling</span>
+<span class="n">bpf_program</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &lt;net/sock.h&gt;</span>
+<span class="s2">#include &lt;linux/tcp.h&gt;</span>
+
+<span class="s2">BPF_HASH(tcp_windows, u32, u32);</span>
+
+<span class="s2">int trace_tcp_window(struct pt_regs *ctx) {</span>
+<span class="s2">    struct sock *sk = (struct sock *)PT_REGS_PARM1(ctx);</span>
+<span class="s2">    struct tcp_sock *tp = tcp_sk(sk);</span>
+<span class="s2">    </span>
+<span class="s2">    u32 pid = bpf_get_current_pid_tgid() &gt;&gt; 32;</span>
+<span class="s2">    u32 window = tp-&gt;rcv_wnd;</span>
+<span class="s2">    tcp_windows.update(&amp;pid, &amp;window);</span>
+<span class="s2">    </span>
+<span class="s2">    bpf_trace_printk(&quot;PID: </span><span class="si">%d</span><span class="s2">, RCV_WND: </span><span class="si">%d</span><span class="s2">, SND_WND: </span><span class="si">%d</span><span class="se">\\</span><span class="s2">n&quot;, </span>
+<span class="s2">                     pid, tp-&gt;rcv_wnd, tp-&gt;snd_wnd);</span>
+<span class="s2">    return 0;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">BPF</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">bpf_program</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">attach_kprobe</span><span class="p">(</span><span class="n">event</span><span class="o">=</span><span class="s2">&quot;tcp_recvmsg&quot;</span><span class="p">,</span> <span class="n">fn_name</span><span class="o">=</span><span class="s2">&quot;trace_tcp_window&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tracing TCP windows... Hit Ctrl-C to end.&quot;</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">trace_print</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Running this revealed a clear pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PID</span><span class="p">:</span> <span class="mi">12847</span><span class="p">,</span> <span class="n">RCV_WND</span><span class="p">:</span> <span class="mi">65535</span><span class="p">,</span> <span class="n">SND_WND</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">PID</span><span class="p">:</span> <span class="mi">12847</span><span class="p">,</span> <span class="n">RCV_WND</span><span class="p">:</span> <span class="mi">65535</span><span class="p">,</span> <span class="n">SND_WND</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">PID</span><span class="p">:</span> <span class="mi">12851</span><span class="p">,</span> <span class="n">RCV_WND</span><span class="p">:</span> <span class="mi">32768</span><span class="p">,</span> <span class="n">SND_WND</span><span class="p">:</span> <span class="mi">16384</span>
+<span class="n">PID</span><span class="p">:</span> <span class="mi">12851</span><span class="p">,</span> <span class="n">RCV_WND</span><span class="p">:</span> <span class="mi">32768</span><span class="p">,</span> <span class="n">SND_WND</span><span class="p">:</span> <span class="mi">16384</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-smoking-gun-tcp-window-scaling-misconfiguration">
+<h2>The Smoking Gun: TCP Window Scaling Misconfiguration<a class="headerlink" href="#the-smoking-gun-tcp-window-scaling-misconfiguration" title="Link to this heading">¶</a></h2>
+<p>The eBPF traces revealed that some connections were negotiating window scaling correctly while others weren’t. More critically, I noticed that failing connections consistently showed a sender window (<code class="docutils literal notranslate"><span class="pre">SND_WND</span></code>) of 0, indicating the receiver had advertised a zero-byte receive window.</p>
+<section id="understanding-the-root-cause">
+<h3>Understanding the Root Cause<a class="headerlink" href="#understanding-the-root-cause" title="Link to this heading">¶</a></h3>
+<p>TCP window scaling allows connections to use receive windows larger than 64KB by applying a scaling factor. Here’s what was happening:</p>
+<ol class="arabic simple">
+<li><p><strong>Normal flow</strong>: Client connects → Window scaling negotiated → Large windows enable high throughput</p></li>
+<li><p><strong>Broken flow</strong>: Client connects → Window scaling fails → Small windows cause throughput collapse</p></li>
+</ol>
+<p>The issue stemmed from a recent kernel parameter change on our load balancer nodes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># The problematic setting</span>
+net.ipv4.tcp_window_scaling<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+
+<span class="c1"># What it should have been</span>
+net.ipv4.tcp_window_scaling<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+</pre></div>
+</div>
+</section>
+<section id="the-chain-reaction">
+<h3>The Chain Reaction<a class="headerlink" href="#the-chain-reaction" title="Link to this heading">¶</a></h3>
+<p>With window scaling disabled on the load balancer but enabled on the application servers, we had a TCP window scaling mismatch:</p>
+<ol class="arabic simple">
+<li><p>Client connects to load balancer (no window scaling)</p></li>
+<li><p>Load balancer forwards to app server (expects window scaling)</p></li>
+<li><p>App server’s large receive buffers get constrained by the non-scaled window announcements</p></li>
+<li><p>Effective window size drops to ~1KB instead of the expected 64KB+</p></li>
+<li><p>High-throughput requests stall waiting for tiny window advertisements</p></li>
+</ol>
+</section>
+</section>
+<section id="the-resolution-a-simple-fix-with-profound-impact">
+<h2>The Resolution: A Simple Fix with Profound Impact<a class="headerlink" href="#the-resolution-a-simple-fix-with-profound-impact" title="Link to this heading">¶</a></h2>
+<p>The fix was embarrassingly simple:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># On all load balancer nodes</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;net.ipv4.tcp_window_scaling = 1&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/sysctl.conf
+sysctl<span class="w"> </span>-p
+
+<span class="c1"># Verify the change</span>
+sysctl<span class="w"> </span>net.ipv4.tcp_window_scaling
+</pre></div>
+</div>
+<p>Within minutes of applying this change, our API response times dropped back to normal. The 95th percentile went from 30+ seconds to under 300ms.</p>
+</section>
+<section id="lessons-learned-why-this-happened-and-how-to-prevent-it">
+<h2>Lessons Learned: Why This Happened and How to Prevent It<a class="headerlink" href="#lessons-learned-why-this-happened-and-how-to-prevent-it" title="Link to this heading">¶</a></h2>
+<section id="the-configuration-drift">
+<h3>The Configuration Drift<a class="headerlink" href="#the-configuration-drift" title="Link to this heading">¶</a></h3>
+<p>The root cause traced back to a well-intentioned security hardening script that had disabled TCP window scaling across our infrastructure. While this might make sense for certain security-sensitive environments, it’s generally counterproductive for high-throughput applications.</p>
+</section>
+<section id="why-traditional-monitoring-missed-it">
+<h3>Why Traditional Monitoring Missed It<a class="headerlink" href="#why-traditional-monitoring-missed-it" title="Link to this heading">¶</a></h3>
+<p>Our application-layer monitoring couldn’t see this issue because:</p>
+<ul class="simple">
+<li><p><strong>CPU and memory usage remained normal</strong> - the applications weren’t working harder</p></li>
+<li><p><strong>Connection counts looked healthy</strong> - TCP connections were established successfully</p></li>
+<li><p><strong>Application logs showed no errors</strong> - from the app’s perspective, it was just waiting for slow clients</p></li>
+</ul>
+<p>The problem lived in the kernel’s network stack, invisible to traditional observability tools.</p>
+</section>
+<section id="ebpf-the-missing-piece">
+<h3>eBPF: The Missing Piece<a class="headerlink" href="#ebpf-the-missing-piece" title="Link to this heading">¶</a></h3>
+<p>eBPF filled the observability gap by providing:</p>
+<ul class="simple">
+<li><p><strong>Kernel-level visibility</strong> without kernel modifications</p></li>
+<li><p><strong>Real-time tracing</strong> of network events as they happened</p></li>
+<li><p><strong>Programmable probes</strong> tailored to specific debugging needs</p></li>
+<li><p><strong>Minimal performance overhead</strong> compared to traditional packet capture</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices-building-better-network-observability">
+<h2>Best Practices: Building Better Network Observability<a class="headerlink" href="#best-practices-building-better-network-observability" title="Link to this heading">¶</a></h2>
+<section id="layer-your-monitoring">
+<h3>1. Layer Your Monitoring<a class="headerlink" href="#layer-your-monitoring" title="Link to this heading">¶</a></h3>
+<p>Don’t rely solely on application metrics. Build observability at multiple layers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Application layer</span>
+curl<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;@curl-format.txt&quot;</span><span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>https://api.example.com/health
+
+<span class="c1"># Transport layer (eBPF)</span>
+bpftrace<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;kprobe:tcp_sendmsg { @bytes = hist(arg2); }&#39;</span>
+
+<span class="c1"># Network layer</span>
+ss<span class="w"> </span>-i<span class="w">  </span><span class="c1"># Show TCP socket details including window scaling</span>
+</pre></div>
+</div>
+</section>
+<section id="proactive-tcp-health-monitoring">
+<h3>2. Proactive TCP Health Monitoring<a class="headerlink" href="#proactive-tcp-health-monitoring" title="Link to this heading">¶</a></h3>
+<p>Add these metrics to your regular monitoring:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monitor TCP window scaling usage</span>
+ss<span class="w"> </span>-i<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(wscale|rto|cwnd)&quot;</span>
+
+<span class="c1"># Track TCP retransmissions</span>
+nstat<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>retrans
+
+<span class="c1"># Monitor receive buffer usage</span>
+bpftrace<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;kprobe:tcp_recvmsg { @recv_buffer = hist(arg2); }&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-management">
+<h3>3. Configuration Management<a class="headerlink" href="#configuration-management" title="Link to this heading">¶</a></h3>
+<p>Treat network configuration as infrastructure as code:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ansible example for TCP tuning</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Enable TCP window scaling</span>
+<span class="w">  </span><span class="nt">sysctl</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">net.ipv4.tcp_window_scaling</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1&#39;</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">present</span>
+<span class="w">    </span><span class="nt">reload</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">yes</span>
+</pre></div>
+</div>
+</section>
+<section id="ebpf-toolkit-preparation">
+<h3>4. eBPF Toolkit Preparation<a class="headerlink" href="#ebpf-toolkit-preparation" title="Link to this heading">¶</a></h3>
+<p>Keep these eBPF tools in your debugging arsenal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install BCC tools</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bpfcc-tools
+
+<span class="c1"># Essential networking eBPF tools</span>
+tcpconnect<span class="w">    </span><span class="c1"># Trace TCP connections</span>
+tcpaccept<span class="w">     </span><span class="c1"># Trace TCP accepts</span>
+tcpretrans<span class="w">    </span><span class="c1"># Trace TCP retransmissions</span>
+tcplife<span class="w">       </span><span class="c1"># Summarize TCP session lifespans</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-bigger-picture-why-ebpf-matters-for-modern-infrastructure">
+<h2>The Bigger Picture: Why eBPF Matters for Modern Infrastructure<a class="headerlink" href="#the-bigger-picture-why-ebpf-matters-for-modern-infrastructure" title="Link to this heading">¶</a></h2>
+<p>This incident highlighted a fundamental shift in how we need to think about observability. As our systems become more distributed and complex, the gap between application-layer metrics and actual system behavior continues to widen.</p>
+<section id="traditional-observability-vs-ebpf-enhanced-observability">
+<h3>Traditional Observability vs. eBPF-Enhanced Observability<a class="headerlink" href="#traditional-observability-vs-ebpf-enhanced-observability" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Traditional</p></th>
+<th class="head"><p>eBPF-Enhanced</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Application metrics</p></td>
+<td><p>Kernel-level visibility</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sampling-based</p></td>
+<td><p>Real-time, complete picture</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-mortem debugging</p></td>
+<td><p>Live system introspection</p></td>
+</tr>
+<tr class="row-odd"><td><p>Limited network insights</p></td>
+<td><p>Deep packet-level analysis</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="the-future-of-network-debugging">
+<h3>The Future of Network Debugging<a class="headerlink" href="#the-future-of-network-debugging" title="Link to this heading">¶</a></h3>
+<p>eBPF represents a paradigm shift toward <strong>programmable observability</strong>. Instead of hoping your monitoring tools captured the right metrics, you can write custom probes that extract exactly the data you need to solve specific problems.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom eBPF probe for this specific issue</span>
+bpftrace<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">kprobe:tcp_select_window {</span>
+<span class="s1">    if (arg1 == 0) {</span>
+<span class="s1">        printf(&quot;Zero window detected! PID: %d, Comm: %s\n&quot;, </span>
+<span class="s1">               pid, comm);</span>
+<span class="s1">    }</span>
+<span class="s1">}&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conclusion-the-detective-s-new-tools">
+<h2>Conclusion: The Detective’s New Tools<a class="headerlink" href="#conclusion-the-detective-s-new-tools" title="Link to this heading">¶</a></h2>
+<p>What started as a mysterious production outage at 2 AM became a masterclass in the limitations of traditional monitoring and the power of kernel-level observability. Without eBPF, I might have spent days chasing application-layer ghosts while the real culprit—a simple TCP configuration mismatch—remained hidden in the kernel.</p>
+<p>The incident taught me three crucial lessons:</p>
+<ol class="arabic simple">
+<li><p><strong>Observability gaps are real and costly</strong> - Traditional monitoring tools excel at their intended scope but can miss critical system-level issues</p></li>
+<li><p><strong>Network-layer problems require network-layer tools</strong> - Application metrics can’t diagnose kernel networking issues</p></li>
+<li><p><strong>eBPF is not just a debugging tool, it’s a new observability paradigm</strong> - The ability to write custom, real-time kernel probes changes how we approach system introspection</p></li>
+</ol>
+<p>As our infrastructure becomes increasingly complex, tools like eBPF transition from “nice to have” to “essential.” The next time you’re staring at dashboards that show green while your users see red, remember: sometimes you need to look deeper than the application layer to find the truth.</p>
+<p>The network detective’s toolkit has evolved. Make sure yours has too.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+   
+
+<div class="related-pages">
+  
+  
+      
+  
+  
+  
+    
+</div>
+<div style="text-align:center; font-size:0.95em; margin-top:1em;">
+  For any query please contact: <a href="mailto:contact@ngkore.org">contact@ngkore.org</a>
+</div>
+<div class="bottom-of-page">
+  <div class="left-details">
+    <!--
+    <div class="copyright">
+        Copyright &#169; 
+    </div> -->
+
+    
+
+    <!--<div class="last-updated">
+      Last updated on Jul 18, 2025</div> -->
+
+    <!--
+    <div class="show-source">
+      <a class="muted-link" href="../_sources/ebpf/ebpf-network-detective.md.txt"
+         rel="nofollow">Show source</a>
+    </div> -->
+  </div>
+  <div class="right-details">
+
+    
+
+    <!--  -->
+
+    <!--  -->
+
+
+    </div>
+  </div>
+</div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+<div class="toc-sticky toc-scroll">
+   
+    <div class="toc-title-container">
+      <span class="toc-title">
+       Contents
+      </span>
+    </div>
+    <div class="toc-tree-container">
+      <div class="toc-tree">
+        <ul>
+<li><a class="reference internal" href="#">eBPF: The Network Detective</a><ul>
+<li><a class="reference internal" href="#the-symptoms-when-everything-looks-normal">The Symptoms: When Everything Looks Normal</a></li>
+<li><a class="reference internal" href="#the-false-leads-when-traditional-tools-hit-their-limits">The False Leads: When Traditional Tools Hit Their Limits</a><ul>
+<li><a class="reference internal" href="#dead-end-1-application-layer-investigation">Dead End #1: Application Layer Investigation</a></li>
+<li><a class="reference internal" href="#dead-end-2-database-deep-dive">Dead End #2: Database Deep Dive</a></li>
+<li><a class="reference internal" href="#dead-end-3-infrastructure-rabbit-holes">Dead End #3: Infrastructure Rabbit Holes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-breakthrough-thinking-below-the-application-layer">The Breakthrough: Thinking Below the Application Layer</a></li>
+<li><a class="reference internal" href="#enter-ebpf-the-network-microscope">Enter eBPF: The Network Microscope</a></li>
+<li><a class="reference internal" href="#the-investigation-tracing-the-invisible">The Investigation: Tracing the Invisible</a><ul>
+<li><a class="reference internal" href="#step-1-basic-packet-capture-with-tcpdump">Step 1: Basic Packet Capture with tcpdump</a></li>
+<li><a class="reference internal" href="#step-2-ebpf-powered-tcp-analysis">Step 2: eBPF-powered TCP Analysis</a></li>
+<li><a class="reference internal" href="#step-3-deep-dive-with-bcc-tools">Step 3: Deep Dive with BCC Tools</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-smoking-gun-tcp-window-scaling-misconfiguration">The Smoking Gun: TCP Window Scaling Misconfiguration</a><ul>
+<li><a class="reference internal" href="#understanding-the-root-cause">Understanding the Root Cause</a></li>
+<li><a class="reference internal" href="#the-chain-reaction">The Chain Reaction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-resolution-a-simple-fix-with-profound-impact">The Resolution: A Simple Fix with Profound Impact</a></li>
+<li><a class="reference internal" href="#lessons-learned-why-this-happened-and-how-to-prevent-it">Lessons Learned: Why This Happened and How to Prevent It</a><ul>
+<li><a class="reference internal" href="#the-configuration-drift">The Configuration Drift</a></li>
+<li><a class="reference internal" href="#why-traditional-monitoring-missed-it">Why Traditional Monitoring Missed It</a></li>
+<li><a class="reference internal" href="#ebpf-the-missing-piece">eBPF: The Missing Piece</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices-building-better-network-observability">Best Practices: Building Better Network Observability</a><ul>
+<li><a class="reference internal" href="#layer-your-monitoring">1. Layer Your Monitoring</a></li>
+<li><a class="reference internal" href="#proactive-tcp-health-monitoring">2. Proactive TCP Health Monitoring</a></li>
+<li><a class="reference internal" href="#configuration-management">3. Configuration Management</a></li>
+<li><a class="reference internal" href="#ebpf-toolkit-preparation">4. eBPF Toolkit Preparation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-bigger-picture-why-ebpf-matters-for-modern-infrastructure">The Bigger Picture: Why eBPF Matters for Modern Infrastructure</a><ul>
+<li><a class="reference internal" href="#traditional-observability-vs-ebpf-enhanced-observability">Traditional Observability vs. eBPF-Enhanced Observability</a></li>
+<li><a class="reference internal" href="#the-future-of-network-debugging">The Future of Network Debugging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion-the-detective-s-new-tools">Conclusion: The Detective’s New Tools</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+   
+    
+  </div>
+
+    </aside>
+  </div>
+</div><script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/header-nav.js?v=e117ad08"></script>
+    
+<script>
+  const github_url = "https://github.com/ngkore";
+</script>
+</body>
+</html>
