@@ -1,4 +1,4 @@
-# Contributing to NgKore Documentation
+# How to Contribute
 
 We welcome and encourage contributions to the NgKore documentation! This guide will help you get started with contributing to our community-driven documentation project.
 
@@ -10,164 +10,183 @@ We welcome and encourage contributions to the NgKore documentation! This guide w
    git clone https://github.com/YOUR_USERNAME/docs.git
    cd docs
    ```
-3. **Set up the development environment** (see [README.md](README.md))
-4. **Create a feature branch**:
+3. **Set up the development environment** (see below)
+4. **Create a topic branch**:
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b topic/your-topic-name
    ```
 
-## Before You Start
+## Development Setup
 
-**Please discuss your topic** before submitting content to ensure it aligns with our documentation goals:
+### Prerequisites
 
-- **Create a GitHub issue** describing your proposed topic
-- **Our team will review** and provide guidance on the content approach
-- **This helps avoid** duplicate content and ensures community value
+Before running the documentation locally, ensure you have the following installed:
+
+#### System Requirements
+
+- Python 3.8 or higher
+- pip
+- git
+- make
+
+#### Install Prerequisites
+
+**On Ubuntu/Debian:**
+
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv git make
+```
+
+**On CentOS/RHEL/Fedora:**
+
+```bash
+sudo yum install python3 python3-pip git make
+# or for newer versions
+sudo dnf install python3 python3-pip git make
+```
+
+**On macOS:**
+
+```bash
+# Install Homebrew if not already installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install prerequisites
+brew install python3 git make
+```
+
+### Virtual Environment Setup
+
+The documentation uses a Python virtual environment to manage dependencies.
+
+#### Option A: Using Make (Recommended)
+
+```bash
+make install
+```
+
+This command will:
+
+- Create a Python virtual environment in `.sphinx/venv`
+- Install all required dependencies from `.sphinx/requirements.txt`
+- Display available make commands
+
+#### Option B: Manual Virtual Environment Setup
+
+If you prefer to set up the virtual environment manually:
+
+```bash
+# Create virtual environment
+python3 -m venv .sphinx/venv
+
+# Activate virtual environment
+source .sphinx/venv/bin/activate
+
+# Upgrade pip
+pip install --upgrade pip
+
+# Install dependencies
+pip install -r .sphinx/requirements.txt
+```
+
+### Virtual Environment Management
+
+| Command                                   | Description                                |
+| ----------------------------------------- | ------------------------------------------ |
+| `source .sphinx/venv/bin/activate`        | Activate the virtual environment           |
+| `deactivate`                              | Deactivate the current virtual environment |
+| `python3 -m venv .sphinx/venv`            | Create virtual environment manually        |
+| `pip install -r .sphinx/requirements.txt` | Install dependencies manually              |
+| `make clean`                              | Remove build files and virtual environment |
+| `rm -rf .sphinx/venv _build`                     | Remove virtual environment manually        |
+
+## Building and Serving Documentation
+
+### Option A: Auto-rebuild and Serve (Recommended)
+
+To automatically build and serve the documentation with live reload:
+
+```bash
+make run
+```
+
+This will:
+
+- Start a development server with auto-rebuild functionality
+- Automatically refresh your browser when files change
+- Serve the documentation at `http://localhost:8000`
+
+### Option B: Build & Serve
+
+To build the documentation and serve it:
+
+```bash
+# Build the documentation to HTML format
+make html
+
+# Serve the built documentation
+make serve
+```
+
+This build the documentation and serve it at `http://localhost:8000`
+
+### Available Commands
+
+The following make commands are available for managing the documentation:
+
+| Command          | Description                                            |
+| ---------------- | ------------------------------------------------------ |
+| `make install`   | Set up virtual environment and install dependencies    |
+| `make run`       | Build, watch, and serve documentation with auto-reload |
+| `make html`      | Build documentation to HTML format                     |
+| `make epub`      | Build documentation to EPUB format                     |
+| `make serve`     | Serve pre-built documentation on localhost:8000        |
+| `make clean`     | Remove build files and virtual environment             |
+| `make clean-doc` | Remove only build files                                |
+| `make spelling`  | Check spelling in documentation                        |
+| `make linkcheck` | Validate all external links                            |
+| `make woke`      | Check for inclusive language                           |
 
 ## Development Workflow
 
-### Setting Up Local Environment
-
-Follow the detailed setup instructions in [README.md](README.md#getting-started), including:
-- Prerequisites installation
-- Virtual environment setup  
-- Building and serving documentation locally
-
 ### Making Changes
 
-1. **Edit documentation files** (`.md` or `.rst` format)
-2. **Use live reload** with `make run` for immediate feedback
-3. **Test your changes** locally before submitting
+1. Edit documentation files (`.md` format)
+2. If using `make run`, changes will automatically rebuild and refresh your browser
+3. If not using auto-reload, run `make html` to rebuild
 
-### Adding New Content
+### Adding New Pages
 
-1. **Create new `.md` files** in the appropriate directory
-2. **Follow existing structure** and naming conventions
-3. **Update table of contents** (`toctree`) as needed
-4. **Add references** in `index.md` or relevant index files
+1. Create new `.md` files in the appropriate directory
+2. Add references to new pages in `index.md` or relevant index files
+3. Update the table of contents (`toctree`) as needed
 
-## Quality Standards
+## Troubleshooting
 
-### Before Submitting
+### Common Issues
 
-Run these quality checks:
+1. **Python virtual environment issues**
 
-```bash
-# Check spelling
-make spelling
+   ```bash
+   make clean
+   make install
+   ```
 
-# Validate external links  
-make linkcheck
+2. **Build failures**
 
-# Check inclusive language
-make woke
+   ```bash
+   make clean-doc
+   make html
+   ```
 
-# Build documentation
-make html
-```
+3. **Port already in use (8000)**
+   - Check if another process is using port `8000` (`lsof -i :8000`)
+   - Kill the process (`kill -9 <PID>`) or use a different port
 
-### Content Guidelines
+### Build Warnings
 
-- **Use clear, concise language**
-- **Include relevant examples and code snippets**
-- **Ensure all links are valid**
-- **Reference images properly**
-- **Follow existing file structure and naming conventions**
-
-### Code Style
-
-- **Python code**: Follow PEP 8 standards
-- **Markdown**: Use consistent formatting
-- **File naming**: Use lowercase with hyphens (`my-new-doc.md`)
-
-## Repository Structure
-
-```
-docs/
-├── 5g-core/          # 5G core network documentation
-├── ebpf/             # eBPF technology guides
-├── security/         # Network security topics
-├── pqc/              # Post-quantum cryptography
-├── oran/             # O-RAN specifications
-├── ntn/              # Non-terrestrial networks
-├── ai-ml/            # AI/ML integration
-├── kernel-bypass/    # Kernel bypass technologies
-├── l3af/             # L3AF orchestration
-├── .github/          # GitHub workflows and templates
-├── _static/          # Static assets (CSS, JS, images)
-└── _templates/       # Sphinx templates
-```
-
-## Pull Request Process
-
-### 1. Prepare Your Contribution
-- Ensure your branch is up to date with `main`
-- Run all quality checks
-- Test documentation builds successfully
-
-### 2. Submit Pull Request
-- **Use a descriptive title**
-- **Fill out the PR template** completely
-- **Add appropriate labels** 
-- **Request review** from relevant code owners
-
-### 3. Review Process
-- **Maintainers will review** your contribution
-- **Address feedback** promptly and professionally
-- **Make requested changes** in additional commits
-
-### 4. Merge Requirements
-- All CI/CD checks must pass
-- At least one maintainer approval required
-- All review comments resolved
-- Documentation builds successfully
-
-## Community Guidelines
-
-### Code of Conduct
-
-We are committed to providing a welcoming and inclusive environment. Please:
-
-- **Be respectful** and professional in all interactions
-- **Be supportive** of other contributors
-- **Be open** to constructive feedback
-- **Focus on** what's best for the community
-
-### Communication Channels
-
-- **GitHub Issues**: Technical discussions and bug reports
-- **Pull Requests**: Code review and collaboration  
-- **Email**: contact@ngkore.org for general inquiries
-
-## Contribution Types
-
-We welcome various types of contributions:
-
-### Documentation
-- **New guides** and tutorials
-- **Improvements** to existing content
-- **Translation** efforts
-- **Accessibility** enhancements
-
-### Technical
-- **Bug fixes** in documentation tooling
-- **New features** for the documentation site
-- **Performance improvements**
-- **CI/CD enhancements**
-
-### Design
-- **UI/UX improvements**
-- **Visual design** enhancements
-- **Accessibility** improvements
-- **Mobile responsiveness**
-
-## Getting Help
-
-Need assistance? We're here to help!
-
-- **Email**: contact@ngkore.org
-- **GitHub Issues**: For technical questions
-- **Discussions**: For general questions and ideas
+Build warnings are logged to `.sphinx/warnings.txt` for review.
 
 ## License
 
@@ -180,5 +199,3 @@ We value all contributions and maintain a record of contributors. Significant co
 ---
 
 **Thank you for contributing to NgKore!**
-
-Your contributions help advance 5G Advanced and 6G technologies for the entire community.
