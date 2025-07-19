@@ -10,3 +10,4 @@ sphinx-reredirects
 sphinx-notfound-page
 requests
 beautifulsoup4
+linkify-it-py
