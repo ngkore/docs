@@ -4,7 +4,7 @@
 
 **Published:** July 3, 2025
 
-> *Part 2 of 2: HEXAeBPF Series*
+> _Part 2 of 2: HEXAeBPF Series_
 
 eBPF enhances the Linux kernel by allowing developers to add features without changing kernel code. It is vital for cloud-native environments, especially 5G networks, where it improves the User Plane Function (UPF) by enabling faster packet processing within the kernel. This eliminates latency issues caused by traditional UPF operations.
 
@@ -21,21 +21,20 @@ The above projects seem interesting and promising to open source, even though th
 
 ![alt text](./images/ebpf-upf-compare.png)
 
-
 ## From Challenges to Solutions: Transforming 5G Core with eBPF
 
 To address these limitations, the following two eBPF-powered projects effectively bridge the gaps, offering tailored solutions, interoperability, and addressing key challenges in the 5G Core ecosystem.
 
 1. **HEXAeBPF**
 
-    HEXAeBPF brings interoperability and simplifies the integration and deployment process, offering one-click deployment capabilities.  
-    It bridges the gap between complexity and accessibility, making it an ideal choice for developers for eBPF & 5G Core integrations.
+   HEXAeBPF brings interoperability and simplifies the integration and deployment process, offering one-click deployment capabilities.  
+   It bridges the gap between complexity and accessibility, making it an ideal choice for developers for eBPF & 5G Core integrations.
 
 2. **e3-UPF**
 
-    e3-UPF (e3 stands for eBPF) addresses the limitations of existing projects while maintaining full 3GPP compliance.
+   e3-UPF (e3 stands for eBPF) addresses the limitations of existing projects while maintaining full 3GPP compliance.
 
-### HEXAeBPF
+## HEXAeBPF
 
 HEXAeBPF provides openness and interoperability to the open source community.
 
@@ -46,12 +45,12 @@ Whether as a telecommunications researcher, developer, or network operator, HEXA
 ![alt text](./images/hexaebpf-interoperablity.png)  
 Figure1: Control Plane & eBPF User Plane Interoperability using HEXAeBPF
 
-### HEXAeBPF Operator
+## HEXAeBPF Operator
 
 HEXAeBPF Operator is a Kubernetes Operator that continuously monitors Custom Resources (CRs) that define the desired state of an application or component. When a user creates or updates a CR, the Operator detects the change through its watch loop. This triggers a reconciliation event. The Operator’s controller then evaluates the current cluster state against the desired state defined in the CR. Based on this comparison and the Operator’s reconciliation logic, it performs the necessary actions—such as creating, updating, or deleting Kubernetes resources—via the Kubernetes API to bring the system into the desired state.
 
 ![alt text](./images/hexaebpf-operator.jpeg)  
-Figure2:  HEXAeBPF Operator
+Figure2: HEXAeBPF Operator
 
 ### Key Features
 
@@ -69,12 +68,11 @@ Figure2:  HEXAeBPF Operator
 - **Future-Ready:** Aligns with the dynamic nature of 5G, ensuring adaptability to modern network demands.
 - **Open Source Collaboration:** A community-driven approach fosters continuous innovation in 5G core solutions.
 
-### Current HEXAeBPF Supported Topologies
+## Current HEXAeBPF Supported Topologies
 
 ![alt text](./images/hexaebpf-supported-topologies.png)
 
-
-### Get Involved
+## Get Involved
 
 HEXAeBPF is free and open source. Contribution is welcomed from anyone interested in advancing the open source telecom community.
 

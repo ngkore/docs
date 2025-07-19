@@ -59,15 +59,15 @@ To maximize results:
 
 ## Real-World Industry Impact
 
-- **Cost Savings:** Enterprises saving $100,000+ per year by trimming unused GPU cycles[2].
-- **Innovation Adoption:** Firms like Netflix lead with open-sourced tools (e.g., bpftop) to provide transparent visualization of system and GPU load[1][3].
-- **Competitive Edge:** Early adopters leverage these telemetry gains for faster AI iteration, lower operating budgets, and better infrastructure ROI[2].
+- **Cost Savings:** Enterprises saving $100,000+ per year by trimming unused GPU cycles.
+- **Innovation Adoption:** Firms like Netflix lead with open-sourced tools (e.g., bpftop) to provide transparent visualization of system and GPU load.
+- **Competitive Edge:** Early adopters leverage these telemetry gains for faster AI iteration, lower operating budgets, and better infrastructure ROI.
 
 ## The eBPF Ecosystem and AI
 
 The eBPF ecosystem is growing rapidly. By 2025:
 
-- Dozens of eBPF-based GPU and AI observability tools have emerged[2].
+- Dozens of eBPF-based GPU and AI observability tools have emerged.
 - Open-source projects are making advanced monitoring accessible far beyond big tech.
 
 Instead of simply scaling hardware, forward-thinking teams are using eBPF-based monitoring to maximize what's already in their racks, cloud VMs, and supercomputing clusters.

@@ -4,19 +4,25 @@
 
 **Published:** August 25, 2024
 
-> *Part 2 of 3: xFAPI Series*
-
+> _Part 2 of 3: xFAPI Series_
 
 In our previous blog, we explored the gaps in the MAC-PHY layer of the O-RAN interface. In this blog, we will discuss how xFAPI addresses and resolves these issues.
 
-![alt text](./images/xfapi-bridging-l1-l2-gap/l1-l2-interoperability.png)
+## Challenges in L1-L2 Integration
 
+![alt text](./images/xfapi-bridging-l1-l2-gap/l1-l2-interoperability.png)
 
 Integrating the L1 and L2 layers of O-RAN from different vendors poses significant challenges due to incompatibilities in two key areas: vendor-specific APIs and inter-process communication (IPC) methods. For L1 and L2 components to communicate effectively, they must be compatible in both aspects.
 
+### Vendor-Specific APIs
+
 Vendor-specific API protocols are sets of rules that define the implementation of FAPI interface messages. Although standardized protocols like FAPI and nFAPI exist, many vendors either use proprietary protocols or introduce variations in their implementation of these standards. For instance, Intel’s FlexRAN utilizes a proprietary API mechanism, known as Intel APIs, for message exchange at the FAPI interface and incorporates modifications to the standard FAPI protocol.
 
+### IPC Variations
+
 IPC is the underlying layer that facilitates communication between components, using methods such as SCTP client sockets, Linux POSIX queues, shared memory, and more. Different vendors often adopt varying IPC mechanisms for establishing connections between L1 and L2. For example, Intel FlexRAN uses WLS, Nvidia Aerial employs nvIPC as their shared memory IPC mechanism, and OpenAirInterface (OAI) relies on nFAPI, which utilizes SCTP sockets.
+
+## xFAPI: A Comprehensive Solution
 
 To address these critical issues, xFAPI offers a comprehensive solution comprising two major components: the **API Translator** and the **IPC Integrator**.
 
@@ -26,12 +32,14 @@ To address these critical issues, xFAPI offers a comprehensive solution comprisi
 
 ![alt text](./images/xfapi-bridging-l1-l2-gap/xfapi.png)
 
-xSM
+## xSM: Unifying Shared Memory Implementations
+
 The "x" in xSM signifies "any," while "SM" stands for "Shared Memory." xSM is an advanced shared memory library designed to standardize IPC through shared memory. It simplifies communication between L1 and L2 components, which often rely on different shared memory libraries. By unifying these diverse implementations into a single, unified package, xSM ensures a seamless and efficient shared memory IPC mechanism.
 
 ![alt text](./images/xfapi-bridging-l1-l2-gap/xsm.png)
 
-Features
+## Advanced Features of xFAPI
+
 xFAPI includes an integrated feature that can be activated at runtime via a compilation flag. This feature checks interoperability between L1 and L2 and offers the option to use xFAPI if needed.
 
 In addition to its core functions, xFAPI provides advanced features such as detailed PDU statistics generation at both interfaces, robust debugging tools like a memory logger, state manager, multi-level logging, and a comprehensive dashboard for monitoring and analysis.
@@ -47,5 +55,3 @@ In addition to its core functions, xFAPI provides advanced features such as deta
 **Dashboard:** The xFAPI Dashboard offers a comprehensive solution for monitoring and analyzing xFAPI’s performance. It supports remote log analysis with high flexibility, assists in status checks, and enhances the overall user experience.
 
 In the following blog, we will examine how xFAPI fosters an interoperable environment for industrial L1-L2 solutions.
-
-

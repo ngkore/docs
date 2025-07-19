@@ -1,6 +1,6 @@
 # AI-Driven Call Routing: Transforming Telecom with Intelligent Real-Time Traffic Management
 
-**Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)  
+**Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
 **Published:** June 24, 2025
 
@@ -44,7 +44,7 @@ AI platforms increasingly incorporate NLP to process and understand spoken input
 
 ## Real-World Applications
 
-### Call Centers
+**Call Centers**
 
 Studies, including Nvidia's 2024 industry report, indicate 90% of telecom companies now deploy AI for customer service optimization, resulting in:
 
@@ -52,7 +52,7 @@ Studies, including Nvidia's 2024 industry report, indicate 90% of telecom compan
 - Shortened customer wait times through predictive traffic management and proactive staffing adjustment
 - High rates of first-call resolution and overall customer satisfaction improvement
 
-### Network Infrastructure
+**Network Infrastructure**
 
 AI ensures network robustness by:
 
@@ -62,13 +62,13 @@ AI ensures network robustness by:
 
 ## Business Impact
 
-### Cost Reduction
+**Cost Reduction**
 
 - **Staff Optimization:** Efficient call distribution allows for leaner staffing without quality compromise
 - **Infrastructure Efficiency:** Smarter load balancing maximizes existing resource utilization
 - **Network Reliability:** Proactive issue detection minimizes downtime and protects revenue streams
 
-### Enhanced Customer Experience
+**Enhanced Customer Experience**
 
 - **Minimized Hold Times:** Speedy connections to the appropriate specialists
 - **First-Contact Resolution:** Increased problem resolution rates on initial customer interaction
@@ -76,13 +76,13 @@ AI ensures network robustness by:
 
 ## Implementation Challenges
 
-### Technical Barriers
+**Technical Barriers**
 
 - **Data Privacy:** Robust data governance is required to balance AI's demand for customer and usage data with privacy standards and regulations.
 - **System Complexity:** Increased system sophistication introduces new troubleshooting requirements and a need for highly specialized technical support.
 - **Integration with Legacy Systems:** Existing telephony platforms may not natively support full AI feature integration, necessitating costly and complex upgrade paths.
 
-### Human Factors
+**Human Factors**
 
 - **Agent Training:** Staff must adapt to collaboration with AI-driven workflows, sometimes requiring significant cultural and procedural adjustment.
 - **Oversight Needs:** Despite automation, human intervention remains essential for error correction, escalation, and quality assurance.

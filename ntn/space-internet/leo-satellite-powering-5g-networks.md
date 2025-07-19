@@ -4,7 +4,7 @@
 
 **Published:** June 19, 2025
 
-> *Part 1 of 5: Space Internet Series*
+> _Part 1 of 5: Space Internet Series_
 
 ## Overview
 
@@ -26,15 +26,15 @@ A key advancement is the adoption of **Low Earth Orbit (LEO) satellite technolog
 
 ## What Makes LEO Satellites Game-Changers?
 
-### Altitude Advantage
+**Altitude Advantage**
 
 Conventional satellite services utilize geostationary satellites positioned 35,786 kilometers above Earth, resulting in high latency and weaker signals. LEO satellites, by operating at distances of 550 to 1,200 kilometers, dramatically reduce communication latency and increase signal strength due to proximity.
 
-### Network Coverage Revolution
+**Network Coverage Revolution**
 
 Operating as a constellation, LEO satellites enable global network coverage by maintaining continuous revolutions around Earth. This creates a “moving mesh” of connectivity — with multiple satellites available at all times to any given location, including over oceans and during flights.
 
-### Direct Device Connection
+**Direct Device Connection**
 
 LEO satellites are capable of enabling direct communication with standard mobile devices. This direct-to-device feature eliminates dependence on terrestrial towers in hard-to-reach locations, significantly enhancing accessibility for unserved and underserved populations.
 
@@ -42,16 +42,16 @@ LEO satellites are capable of enabling direct communication with standard mobile
 
 Satellite-based 5G is distinct from conventional implementations in three main aspects:
 
-### 1. The Signal Path
+1. **The Signal Path**
 
-- **Traditional 5G**: Phone → Cell tower → Fiber network → Internet  
+- **Traditional 5G**: Phone → Cell tower → Fiber network → Internet
 - **Satellite 5G**: Phone → LEO satellite → Ground station → Internet
 
-### 2. The Technology Stack
+2. **The Technology Stack**
 
 Satellite 5G leverages 5G New Radio (NR) standards. However, satellites use adaptive beamforming antennas that scan dynamically across the Earth’s surface, adapting resource allocation in real-time based on demand.
 
-### 3. The Coverage Model
+3. **The Coverage Model**
 
 LEO constellations form global “edge” locations, positioning computation and connectivity within a millisecond hop of any user, creating dynamic and wide-ranging coverage maps rather than static terrestrial cells.
 
@@ -87,9 +87,9 @@ The application scope of satellite 5G spans many industries, such as:
 
 Upcoming parts of this series will cover:
 
-- **Part 2:** Key industry players — SpaceX Starlink, Amazon’s Project Kuiper, and others pioneering the space internet race  
-- **Part 3:** Performance, economics, and deployment: satellite 5G vs. terrestrial internet  
-- **Part 4:** Technology and policy challenges of space-based internet  
+- **Part 2:** Key industry players — SpaceX Starlink, Amazon’s Project Kuiper, and others pioneering the space internet race
+- **Part 3:** Performance, economics, and deployment: satellite 5G vs. terrestrial internet
+- **Part 4:** Technology and policy challenges of space-based internet
 - **Part 5:** User adoption and preparing for the age of satellite broadband
 
 ## The Revolution Has Already Begun
