@@ -8,3 +8,5 @@ sphinx-copybutton
 sphinxcontrib-jquery
 sphinx-reredirects
 sphinx-notfound-page
+requests
+beautifulsoup4

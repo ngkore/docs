@@ -46,3 +46,9 @@ Thumbs.db
 
 # Claude Code session files
 .claude/
+
+# Keep custom extensions (don't ignore)
+!youtube-links/
+!related-links/
+!custom-rst-roles/
+!terminal-output/
