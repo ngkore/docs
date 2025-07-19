@@ -1,10 +1,10 @@
-# Satellite Internet Leaders: Who’s Building the Next Generation Network
+# The Companies Leading the Way in the Next-Gen Satellite Internet
 
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
 **Published:** May 16, 2025
 
-> *Part 2 of 5: Space Internet Series*
+> _Part 2 of 5: Space Internet Series_
 
 The ongoing race to control space-based internet infrastructure represents one of the most ambitious and capital-intensive technological contests of the modern age. With a global market at stake, leading technology firms, established aerospace companies, and a new wave of disruptors are launching thousands of satellites to seize a share of the emerging orbital internet.
 
@@ -111,7 +111,7 @@ Key markers to follow over the coming year:
 - Growing role of direct-to-device providers like AST SpaceMobile and Lynk Global in developing markets
 - IRIS² implementation for sovereign European coverage
 
-**Next in the Series:** “The Great Comparison: Satellite 5G vs. Everything Else” — A deep dive into how space-based internet stacks up against terrestrial and fiber networks.
+**Next in the Series:** A deep dive into how space-based internet stacks up against terrestrial and fiber networks.
 
 ## References
 

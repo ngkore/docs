@@ -1,6 +1,6 @@
 # Shared Socket: Enhancing Kubernetes Pod Communication with eBPF
 
-**Author:** [Satyam Dubey](https://www.linkedin.com/in/satyam-dubey-142598258/) [Nikhil Jangid](https://www.linkedin.com/in/nikhil-jangid-ab6625269/)
+**Author:** [Satyam Dubey](https://www.linkedin.com/in/satyam-dubey-142598258/) & [Nikhil Jangid](https://www.linkedin.com/in/nikhil-jangid-ab6625269/)
 
 **Published:** July 19, 2025
 
@@ -80,10 +80,10 @@ Network latency and throughput were measured using [Sockperf](https://github.com
 
 **Benchmark Results:**
 
-- ![alt text](./images/shared-socket-for-k8s-pods/ebpf-shared-socket-performance.png)
-- ![alt text](./images/shared-socket-for-k8s-pods/ebpf-shared-socket-latency.png)
+- ![alt text](./images/shared-socket-for-k8s-pods/performance-comparison.png)
+- ![alt text](./images/shared-socket-for-k8s-pods/metrics-comparison.png)
 
-### Key Insights:
+**Key Insights**
 
 - Message throughput increased by ~60% using Shared Socket.
 - Average latency was reduced by ~38% (from 26.002 µs to 16.110 µs).

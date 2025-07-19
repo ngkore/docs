@@ -1,4 +1,4 @@
-# Delay-Tolerant Networking 
+# Delay-Tolerant Networking
 
 **Author:** [Satyam Dubey](https://www.linkedin.com/in/satyam-dubey-142598258/)
 
@@ -35,7 +35,7 @@ Unlike the Internet's presumption of a real-time route from sender to receiver, 
 
 ### 2. Deferred and Custodial Reliability
 
-DTN leverages *custody transfer,* transferring responsibility for delivery to each node in the path, ensuring reliable storage and future forwarding. Unlike TCP's reliance on immediate acknowledgments, DTN circumvents the infeasibility of rapid feedback in high-delay environments.
+DTN leverages _custody transfer,_ transferring responsibility for delivery to each node in the path, ensuring reliable storage and future forwarding. Unlike TCP's reliance on immediate acknowledgments, DTN circumvents the infeasibility of rapid feedback in high-delay environments.
 
 ### 3. Robustness to Persistent Loss
 
@@ -43,7 +43,7 @@ Designing for environments where communication loss and disruptions are routine,
 
 ### 4. Protocol and Naming Flexibility
 
-DTN introduces protocol-agnostic *endpoint identifiers (EIDs),* decoupling naming and delivery from the constraints of existing IP addressing schemes. This enables interoperability across heterogeneous networks and supports scenarios where nodes may not always participate in TCP/IP or remain continuously addressable.
+DTN introduces protocol-agnostic _endpoint identifiers (EIDs),_ decoupling naming and delivery from the constraints of existing IP addressing schemes. This enables interoperability across heterogeneous networks and supports scenarios where nodes may not always participate in TCP/IP or remain continuously addressable.
 
 ### 5. Explicit Application Awareness
 
@@ -65,16 +65,16 @@ DTN supports dynamic route selection over multiple potential paths, leveraging t
 
 ## The Bundle Protocol
 
-At the core of DTN is the Bundle Protocol (BP), implemented as a store-and-forward overlay. This protocol sits above the transport (or directly above lower network layers) and manages end-to-end message reliability and custody transfers, regardless of underlying network disruptions.
+At the core of DTN is the Bundle Protocol (BP), implemented as a store-and-forward overlay. This protocol sits above the transport (or directly above lower network layers) and manages end-to-end message reliability and custody transfers, regardless of underlying network disruptions. <br><br>
 
-### Essential Components
+**Essential Components**
 
 - **Bundle Agents:** Nodes responsible for processing, storing, and forwarding message bundles, analogous to logistical hubs in space or disrupted networks.
 - **Custody Transfer:** Explicit delegation of delivery responsibility at each hop, enabling robust delivery in the absence of a real-time path.
 - **Contact Graph Routing (CGR):** Routing decisions are made using a time-evolving contact plan, supporting scheduled or predicted network dynamics.
 - **Endpoint Identifiers (EIDs):** Abstract, URI-based identifiers allowing flexible addressing decoupled from immediate network presence.
 
-### Operational Workflow
+**Operational Workflow**
 
 1. **Discovery:** Nodes determine future or potential communication contacts using orbit predictions, schedules, or mobility patterns.
 2. **Negotiation:** Nodes may establish contact parameters (timing, bandwidth, duration) to optimize use of limited communication windows.
@@ -93,4 +93,4 @@ At the core of DTN is the Bundle Protocol (BP), implemented as a store-and-forwa
 
 Delay-Tolerant Networking represents a comprehensive rethinking of network protocol architecture to support resilient, reliable communication in unpredictable and high-delay environments where traditional Internet approaches are insufficient. By redefining fundamental assumptions, introducing opportunistic and persistent forwarding, and enforcing holistic security, DTN enables robust networking across domains as disparate as deep space, disaster relief, and remote terrestrial locations.
 
-> *Note: For foundational technical specifications and further technical information on DTN and the Bundle Protocol, refer to RFC 4838 (Delay-Tolerant Networking Architecture) and RFC 5050 (Bundle Protocol Specification).*
+> _Note: For foundational technical specifications and further technical information on DTN and the Bundle Protocol, refer to RFC 4838 (Delay-Tolerant Networking Architecture) and RFC 5050 (Bundle Protocol Specification)._

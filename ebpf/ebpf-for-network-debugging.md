@@ -4,25 +4,23 @@
 
 **Published:** June 27, 2025
 
-**How I Used eBPF to Solve a Mysterious 2AM Production Outage**
+## How I Used eBPF to Solve a Mysterious 2AM Production Outage
 
 It was 2:03 AM when a PagerDuty alert indicated API response time degradation. Standard metrics (CPU, memory, database, load balancer, logs) appeared normal, but latency and timeout errors increased for end users.
 
-## The Symptoms: When Everything Looks Normal
-
 Despite healthy dashboard visuals, actual API latency was climbing, and error rates increased, with normal resource consumption across the stack.
 
-## The False Leads: When Traditional Tools Hit Their Limits
+## When Traditional Tools Hit Their Limits
 
-### Application Layer Investigation
+**Application Layer Investigation**
 
 Scaling API instances and reviewing recent deployments produced no benefit or actionable insights.
 
-### Database Analysis
+**Database Analysis**
 
 Database health and connection pooling were confirmed to be normal; increasing pool sizes did not solve the issue.
 
-### Infrastructure Evaluation
+**Infrastructure Evaluation**
 
 Cloud provider status, load balancer metrics, and system logs failed to reveal root causes.
 
@@ -33,17 +31,17 @@ kubectl describe pods api-service-xyz
 curl -v https://api.example.com/health
 ```
 
-## The Breakthrough: Network-Layer Focus
+## Network-Layer Analysis and Fix
 
 Traditional monitoring did not reveal network-specific symptoms. Hypothesizing the issue was related to packet transmission or kernel networking, the investigation turned to eBPF observability for lower-layer visibility.
 
-## Enter eBPF: The Network Microscope
+## Using eBPF for Network Debugging
 
 eBPF (Extended Berkeley Packet Filter) facilitates dynamic, sandboxed measurements of kernel events and network behavior. It allows on-the-fly instrumentation for detailed, real-time network analysis without custom kernel changes or service disruption.
 
-## The Investigation: Tracing the Invisible
+### Tracing the Invisible
 
-### Step 1: Packet Capture – Establishing a Baseline
+**Step 1: Packet Capture – Establishing a Baseline**
 
 ```bash
 # Capture packets on the primary network interface
@@ -56,7 +54,7 @@ sudo tcpdump -i eth0 -n -c 1000 host api.example.com
 
 The initial three-way handshake appeared normal; however, deeper visibility was required into the events occurring after the connection was established.
 
-### Step 2: eBPF-powered TCP Analysis
+**Step 2: eBPF-powered TCP Analysis**
 
 Using `bpftrace`, created a custom probe to monitor TCP window sizes and scaling factors throughout the session.
 
@@ -64,7 +62,7 @@ Using `bpftrace`, created a custom probe to monitor TCP window sizes and scaling
 # Monitor TCP window scaling events
 sudo bpftrace -e '
 kprobe:tcp_select_window {
-    printf("PID: %d, Window: %d, Scale: %d\n", 
+    printf("PID: %d, Window: %d, Scale: %d\n",
            pid, arg1, arg2);
 }
 
@@ -72,7 +70,6 @@ kprobe:tcp_window_scaling {
     printf("Window scaling negotiation: %d\n", arg0);
 }'
 ```
-
 
 Observed output:
 
@@ -84,7 +81,7 @@ Window scaling negotiation: 0
 PID: 12851, Window: 1024, Scale: 7
 ```
 
-### Step 3: Advanced eBPF with BCC Python
+**Step 3: Advanced eBPF with BCC Python**
 
 The inconsistent window scaling required further investigation. Created a more advanced eBPF program using the `BCC` toolkit to analyze the behavior in greater detail.
 
@@ -102,12 +99,12 @@ BPF_HASH(tcp_windows, u32, u32);
 int trace_tcp_window(struct pt_regs *ctx) {
     struct sock *sk = (struct sock *)PT_REGS_PARM1(ctx);
     struct tcp_sock *tp = tcp_sk(sk);
-    
+
     u32 pid = bpf_get_current_pid_tgid() >> 32;
     u32 window = tp->rcv_wnd;
     tcp_windows.update(&pid, &window);
-    
-    bpf_trace_printk("PID: %d, RCV_WND: %d, SND_WND: %d\\n", 
+
+    bpf_trace_printk("PID: %d, RCV_WND: %d, SND_WND: %d\\n",
                      pid, tp->rcv_wnd, tp->snd_wnd);
     return 0;
 }
@@ -129,7 +126,7 @@ PID: 12851, RCV_WND: 32768, SND_WND: 16384
 PID: 12851, RCV_WND: 32768, SND_WND: 16384
 ```
 
-## The Smoking Gun: TCP Window Scaling Misconfiguration
+## TCP Window Scaling Misconfiguration
 
 The eBPF traces revealed that some connections were negotiating window scaling correctly while others were not. More critically, failing connections consistently displayed a sender window (SND_WND) of zero, indicating that the receiver had advertised a zero-byte receive window.
 
@@ -160,7 +157,7 @@ A mismatch occurred because window scaling was disabled on the load balancer but
 4. The effective window size decreases to approximately 1KB instead of the expected 64KB or greater.
 5. High-throughput requests stall, pending tiny window advertisements.
 
-## The Resolution: A Simple Fix with Profound Impact
+## Root Cause & Prevention Lessons
 
 The issue was resolved with a straightforward kernel parameter update on all load balancer nodes:
 
@@ -175,13 +172,13 @@ sysctl net.ipv4.tcp_window_scaling
 
 Within minutes, API response times returned to normal; the 95th percentile dropped from over 30 seconds to under 300ms.
 
-## Lessons Learned: Root Cause and Prevention
+## Resolution and Impact
 
-### The Configuration Drift
+**The Configuration Drift**
 
 Investigation revealed that the cause was a security hardening script that disabled TCP window scaling infrastructure-wide. While this might be appropriate for certain restricted environments, it is typically detrimental in high-throughput scenarios.
 
-### Why Traditional Monitoring Missed It
+**Why Traditional Monitoring Missed It**
 
 Standard observability stacks failed to expose the problem because:
 
@@ -191,7 +188,7 @@ Standard observability stacks failed to expose the problem because:
 
 The bottleneck was hidden within the kernel’s networking stack, beyond the reach of application-layer and traditional system metrics.
 
-### eBPF: The Missing Piece
+**eBPF: The Missing Piece**
 
 eBPF provided the necessary observability by enabling:
 
@@ -200,9 +197,9 @@ eBPF provided the necessary observability by enabling:
 - Programmable, targeted probes for custom debugging.
 - Minimal performance overhead compared to full packet capture.
 
-## Best Practices: Building Better Network Observability
+## Best Practices for Building Better Network Observability
 
-### 1. Layered Monitoring
+1. **Layered Monitoring**
 
 Effective observability requires multiple layers:
 
@@ -217,7 +214,7 @@ bpftrace -e 'kprobe:tcp_sendmsg { @bytes = hist(arg2); }'
 ss -i  # Show TCP socket details including window scaling
 ```
 
-### 2. Proactive TCP Health Monitoring
+2. **Proactive TCP Health Monitoring**
 
 Regularly track these key network metrics:
 
@@ -232,7 +229,7 @@ nstat | grep -i retrans
 bpftrace -e 'kprobe:tcp_recvmsg { @recv_buffer = hist(arg2); }'
 ```
 
-### 3. Configuration Management
+3. **Configuration Management**
 
 Manage tunables like TCP window scaling as infrastructure-as-code using configuration management systems:
 
@@ -241,12 +238,12 @@ Manage tunables like TCP window scaling as infrastructure-as-code using configur
 - name: Enable TCP window scaling
   sysctl:
     name: net.ipv4.tcp_window_scaling
-    value: '1'
+    value: "1"
     state: present
     reload: yes
 ```
 
-### 4. Prepare an eBPF Toolkit
+4. **Prepare an eBPF Toolkit**
 
 Maintain core eBPF tools for rapid debugging and kernel observability:
 
@@ -261,18 +258,18 @@ tcpretrans    # Trace TCP retransmissions
 tcplife       # Summarize TCP session lifespans
 ```
 
-## The Bigger Picture: Why eBPF Matters for Modern Infrastructure
+## Why eBPF Matters for Modern Infrastructure
 
 This incident demonstrates the evolving requirements for observability in distributed, dynamic infrastructure. As system complexity increases, the divide between application-level metrics and true system behavior widens.
 
 ### Traditional Observability vs. eBPF-Enhanced Observability
 
-| Traditional                | eBPF-Enhanced                      |
-|----------------------------|------------------------------------|
-| Application metrics        | Kernel-level visibility            |
-| Sampling-based             | Real-time, full-fidelity tracing   |
-| Post-mortem debugging      | Live system introspection          |
-| Limited network diagnostics| Deep packet/protocol analysis      |
+| Traditional                 | eBPF-Enhanced                    |
+| --------------------------- | -------------------------------- |
+| Application metrics         | Kernel-level visibility          |
+| Sampling-based              | Real-time, full-fidelity tracing |
+| Post-mortem debugging       | Live system introspection        |
+| Limited network diagnostics | Deep packet/protocol analysis    |
 
 ### The Future of Network Debugging
 
@@ -283,13 +280,13 @@ eBPF enables **programmable observability**. Instead of depending on generic met
 bpftrace -e '
 kprobe:tcp_select_window {
     if (arg1 == 0) {
-        printf("Zero window detected! PID: %d, Comm: %s\n", 
+        printf("Zero window detected! PID: %d, Comm: %s\n",
                pid, comm);
     }
 }'
 ```
 
-## Conclusion: The Detective's New Tools
+## Conclusion
 
 A mysterious production outage that would have confounded traditional monitoring tools was resolved through eBPF-powered introspection. The real problem—a kernel-level TCP configuration mismatch—was invisible at the application layer.
 

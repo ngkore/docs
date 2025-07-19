@@ -1,4 +1,4 @@
-# Your SSD Is About to Get Superpowers
+# Redefining Data Processing with eBPF in NVMe SSDs
 
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
@@ -50,7 +50,7 @@ This implementation provides the following operational capabilities:
 - Basic analytical functions including counting, sorting, and metadata tagging
 - Reduced latency, memory utilization, and power consumption
 
-## Implementation Case Study: Photo Search Optimization
+## Case Study: Photo Search Optimization
 
 **Traditional Approach:**
 
@@ -86,7 +86,7 @@ This approach demonstrates significant improvements in processing speed, resourc
 - Real-time review processing and filtering
 - Enhanced data update mechanisms
 
-## Research Implementation: Delilah Project
+## Delilah Project
 
 Researchers at the IT University of Copenhagen developed the first functional prototype of eBPF computational storage, designated as the Delilah system. This implementation demonstrates the practical viability of secure eBPF execution within NVMe SSD controllers.
 

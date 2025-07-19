@@ -1,4 +1,4 @@
-# eBPF: Unveiling the Future of Computing
+# Understanding eBPF in the Linux Kernel
 
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
@@ -15,7 +15,7 @@ eBPF (Extended Berkeley Packet Filter) is a framework that allows users to execu
 ## Key Features of eBPF
 
 1. **Safe and Sandboxed Execution Environment**: Provides secure execution context with verification mechanisms
-2. **Low Overhead and High Performance**: Optimized execution with minimal impact on system performance  
+2. **Low Overhead and High Performance**: Optimized execution with minimal impact on system performance
 3. **Dynamic Code Injection and Tracing Capabilities**: Enables runtime program loading and system observation
 4. **Efficient Data Collection and Analysis**: Supports in-kernel data aggregation and processing
 5. **Cross-Platform Support**: Available across multiple operating systems and architectures
@@ -42,9 +42,7 @@ Following successful verification, eBPF bytecode undergoes just-in-time (JIT) co
 
 Compiled eBPF programs attach to hooks within the Linux kernel. These hooks represent specific entry points in the kernel's execution flow, enabling eBPF programs to intercept and modify kernel or subsystem behavior at precise execution points.
 
-
 ![alt text](./images/ebpf/ebpf-02.webp)
-
 
 ### eBPF Maps
 
@@ -56,7 +54,7 @@ eBPF utilizes maps for data storage and sharing between programs and kernel or u
 
 eBPF enhances security capabilities by providing comprehensive visibility into system calls and network operations. Traditional security systems typically handle system call filtering, process context tracing, and network-level filtering as separate, independent systems. eBPF enables unified control and visibility across all security aspects, allowing development of context-aware security systems with enhanced control mechanisms.
 
-### Observability  
+### Observability
 
 eBPF enables dynamic visibility event generation and custom metric collection with in-kernel aggregation from diverse sources. This approach surpasses traditional reliance on static counters and operating system gauges. The technology increases visibility depth while dramatically reducing system overhead by collecting only necessary data and producing histograms and data structures at event sources rather than exporting raw samples.
 
@@ -71,4 +69,3 @@ eBPF programs can attach to trace points, kernel probes, and user application pr
 ## Conclusion
 
 eBPF represents a significant advancement in kernel programming technology with transformative potential for computing systems. The capability to dynamically inject and execute verified code within the kernel enables new approaches to system security, observability, networking, and performance analysis across diverse application domains.
-

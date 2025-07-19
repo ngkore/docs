@@ -1,4 +1,4 @@
-# Building an eBPF Process Monitor with Go: A Step-by-Step Guide
+# Building an eBPF Process Monitor with Go
 
 **Author:** [Satyam Dubey](https://www.linkedin.com/in/satyam-dubey-142598258/)
 
@@ -25,21 +25,19 @@ sudo apt install clang llvm libbpf-dev libelf-dev linux-headers-$(uname -r) bpft
 go install github.com/cilium/ebpf/cmd/bpf2go@latest
 ```
 
-*Reference code/build guide repo: [GitHub - eBPF Process Monitor](https://github.com/Satyam-git-hub/eBPF_process_monitor.git)*
+_Reference code/build guide repo: [GitHub - eBPF Process Monitor](https://github.com/Satyam-git-hub/eBPF_process_monitor.git)_
 
 ---
 
-## Step 1: Writing the eBPF Program
+## 1. Writing the eBPF Program
 
 Create a project directory and source file:
-
 
 ```console
 mkdir ebpf_monitor && cd ebpf_monitor
 mkdir ebpf
 nano ebpf/ebpf_monitor.c
 ```
-
 
 **ebpf/ebpf_monitor.c:**
 
@@ -73,11 +71,12 @@ char _license[] SEC("license") = "GPL";
 ```
 
 This program:
+
 - Hooks into the `sys_enter_execve` tracepoint
 - Captures PID and process name (`comm`)
 - Sends events to a perf buffer
 
-## Step 2: Generating eBPF Bytecode Using bpf2go
+## 2. Generating eBPF Bytecode Using bpf2go
 
 Instead of invoking clang manually, bpf2go (from Cilium eBPF) auto-generates Go bindings and object files:
 
@@ -94,6 +93,7 @@ go generate
 ```
 
 This creates:
+
 - Compiled BPF object file
 - Corresponding Go bindings (e.g., `ebpfmonitoring_bpf.go`)
 
@@ -103,7 +103,7 @@ Stripped /home/ubuntu/ebpf_project/ebpfmonitoring_bpf.o
 Wrote /home/ubuntu/ebpf_project/ebpfmonitoring_bpf.go
 ```
 
-## Step 3: Writing the Go Program
+## 3. Writing the Go Program
 
 Create a Go file to load and run the eBPF program (Go Loader):
 
@@ -174,20 +174,20 @@ func main() {
 ```
 
 **Key points:**
+
 - Loads eBPF program and object files using generated Go code
 - Attaches to the execve syscall tracepoint
 - Reads `Event` objects (PID, command) from the perf buffer and prints them
 
-
-## Step 4: Compiling and Running the Program
+## 4. Compiling and Running the Program
 
 1. Generate the eBPF Bytecode
 
-```go generate```
+`go generate`
 
 2. Build the Go Loader
 
-```go build -o monitor ./go_monitor_objects.go ./ebpfmonitoring_bpf.go```
+`go build -o monitor ./go_monitor_objects.go ./ebpfmonitoring_bpf.go`
 
 3. Run the eBPF Process Monitor
 

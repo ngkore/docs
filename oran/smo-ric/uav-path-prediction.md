@@ -18,7 +18,7 @@ This blog explores how UAV path prediction fits within the O-RAN architecture, w
 
 UAVs depend on a continuous, reliable connection to fulfill their tasks effectively, which can be challenging to maintain due to their mobility and unpredictable flight paths. Path prediction for UAVs offers a valuable solution by enabling the Radio Access Network (RAN) to dynamically adjust critical parameters like beamforming, frequency allocation, and handovers. These adjustments ensure that UAVs maintain stable, high-quality communication links even as they traverse various airspaces and encounter potential network disruptions.
 
-Within the O-RAN architecture, we first need a host to train our model, in our case we have used the Near-Real-Time RAN Intelligent Controller (Near-RT RIC). 
+Within the O-RAN architecture, we first need a host to train our model, in our case we have used the Near-Real-Time RAN Intelligent Controller (Near-RT RIC).
 
 By using path prediction models, the Near-RT RIC can make proactive adjustments based on the anticipated location of the UAV. This foresight allows the RAN to allocate resources more effectively and respond to connectivity needs in advance, reducing latency and improving overall network performance. As a result, UAVs can maintain consistent communication and mission reliability, whether they’re conducting surveillance, performing deliveries, or assisting in search and rescue operations.
 
@@ -54,7 +54,7 @@ The UAV path prediction in the next generation networks, offer a myriad of use c
 
 Path prediction for UAVs within the O-RAN framework opens up powerful military applications, enhancing mission effectiveness and connectivity in complex environments.
 
-### Key Military Use Cases:
+### Key Military Use Cases
 
 1. **Surveillance & Reconnaissance:** Path prediction helps UAVs maintain low-latency connectivity and avoid detection in hostile areas. Predictive adjustments ensure continuous data relay for real-time insights in high-stakes missions.
 2. **Tactical Coordination:** Predicting UAV paths enables coordination among multiple UAVs, reducing communication interference and optimizing coverage for efficient resource allocation across vast areas.

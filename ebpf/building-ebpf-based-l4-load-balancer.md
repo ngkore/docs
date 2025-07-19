@@ -1,14 +1,12 @@
-# Load Balancing at Light Speed
+# Building a Custom L4 Load Balancer with XDP
 
 **Author:** [Shankar Malik](https://www.linkedin.com/in/evershalik/)
 
 **Published:** March 14, 2023
 
-## Building a Custom L4 Load Balancer with XDP
-
 _When milliseconds matter and millions of packets per second are just the starting line_
 
-## The Performance Wall: Why Traditional Load Balancers Hit Their Limits
+## Why Traditional Load Balancers Hit Their Limits
 
 Picture this scenario: during a traffic surge such as Black Friday, an e-commerce platform experiences overwhelming demand. The traditional Layer 4 load balancer—such as NGINX or HAProxy—that has reliably served for years becomes the system bottleneck. The CPU usage spikes, latency increases, and packet drops occur at an alarming rate.
 
@@ -16,7 +14,7 @@ Traditional Layer 4 load balancers operate in userspace, incurring overhead wher
 
 This is precisely where eBPF’s **XDP (eXpress Data Path)** technology is uniquely suited, offering a programmable, high-speed load balancing mechanism that significantly alleviates these issues.
 
-## Enter XDP: The NIC's Personal Bouncer
+## XDP Serving as the NIC’s Personal Bouncer
 
 XDP functions as an intelligent gatekeeper, intercepting incoming packets immediately after reception by the Network Interface Card (NIC) driver. This early intervention prevents packets from traversing the entire kernel network stack and allows for instantaneous forwarding decisions.
 
@@ -47,19 +45,19 @@ The load balancer to be built in this tutorial will:
 4. Forward the packet out.
 5. Handle returning packets by undoing those changes as necessary.
 
-## Architecture: The XDP Load Balancer Design
+## XDP Load Balancer Architecture Design
 
 The load balancer consists of three principal components:
 
-### 1. XDP Program (Kernel Space)
+1. **XDP Program (Kernel Space)**
 
 An eBPF program running inside the kernel, responsible for performing high-speed packet inspection, hashing, backend selection, header modification, and forwarding.
 
-### 2. Backend Pool Management (User Space)
+2. **Backend Pool Management (User Space)**
 
 A user-space controller manages the set of backend servers and populates kernel eBPF maps with relevant data such as backend IP/MAC addresses and configured weights.
 
-### 3. Configuration Interface
+3. **Configuration Interface**
 
 User interfaces and command-line tools to add, remove, or alter backend configurations and to monitor load balancer statistics.
 
@@ -237,7 +235,7 @@ The XDP program includes:
 - Proper bounds checking on packet data to avoid kernel panics.
 - Application of the GPL license as required by the kernel.
 
-### User-Space Backend Controller
+**User-Space Backend Controller**
 
 Create a simple user-space controller to manage the backend pool:
 
@@ -350,7 +348,7 @@ The user-space program accomplishes:
 - Simple health check and network interface management functionality.
 - A loop to maintain persistent operation and facilitate live backend updates.
 
-### Build Script
+**Build Script**
 
 Makefile to compile everything:
 
@@ -374,11 +372,11 @@ clean:
 .PHONY: all clean
 ```
 
-## Performance Testing: Speed of Light Networking
+## Performance Benchmarking
 
-An extensive benchmarking setup evaluates the XDP load balancer’s performance on metrics such as throughput, CPU load, and latency versus traditional software load balancers.
+An extensive benchmarking setup evaluates the XDP load balancer’s performance on metrics such as throughput, CPU load, and latency versus traditional software load balancers. <br><br>
 
-### Test Setup Instructions
+**Test Setup Instructions**
 
 - Use packet generation utilities like pktgen-dpdk to simulate millions of packets per second.
 - Measure latency with tools such as sockperf.
@@ -400,7 +398,7 @@ set 0 src ip 192.168.1.1
 start 0
 ```
 
-### Sample Benchmark Results
+**Sample Benchmark Results**
 
 | Load Balancer | Max PPS     | CPU Usage (%) | Latency (μs) | Memory (MB) |
 | ------------- | ----------- | ------------- | ------------ | ----------- |
@@ -408,7 +406,7 @@ start 0
 | HAProxy       | 750,000     | 80            | 100 – 250    | 30          |
 | XDP LB        | 12,000,000+ | 25            | 5 – 15       | 10          |
 
-### Real-World Test Script
+**Real-World Test Script**
 
 ```bash
 #!/bin/bash
@@ -449,9 +447,9 @@ This script automates:
 - Measuring latency.
 - Monitoring CPU usage.
 
-## Advanced Features: Beyond Basic Load Balancing
+## Advanced Features
 
-### Sticky Sessions
+**Sticky Sessions**
 
 Support session persistence by modifying the hash function to use only source IP for the backend selection when enabled.
 
@@ -468,7 +466,7 @@ static __always_inline __u64 hash_flow_sticky(__u32 src_ip, __u16 src_port,
 }
 ```
 
-### Health Checking
+**Health Checking**
 
 Implement basic TCP socket-based health checks in the user-space controller to detect backend failures.
 
@@ -492,7 +490,7 @@ int check_backend_health(struct backend *backend) {
 }
 ```
 
-### Multi-Queue Support
+**Multi-Queue Support**
 
 For NICs with multiple receive queues, attach XDP programs and manage CPU affinity per queue to maximize parallelism.
 
@@ -511,22 +509,21 @@ int attach_xdp_multi_queue(const char *ifname, int num_queues) {
 }
 ```
 
-## Pitfalls & Limitations: Practical Considerations
+## Practical Considerations
 
 While XDP enables unprecedented packet processing performance, it is not without important constraints that must be carefully evaluated for production environments.
 
-### 1. Protocol and Feature Limitations
+1. **Protocol and Feature Limitations**
 
 - **Lack of TLS Termination:** XDP operates at Layer 2/3/4; it cannot decrypt or route based on encrypted HTTP(S).
 - **No Application-Layer (L7) Routing:** XDP does not parse or act on application data; application-aware rules (HTTP routing, WebSocket state tracking) are not feasible.
 - **No Deep Protocol State Tracking:** Stateful operations for protocols with complex handshakes (e.g., WebSockets) are difficult to implement at this layer.
 
-### 2. Debugging and Development Complexity
+2. **Debugging and Development Complexity**
 
 Debugging XDP programs is inherently more challenging compared to userspace load balancers due to limited tooling, traceability, and BPF instruction restrictions.
 
 **Code Example: Debugging Limitations**
-
 
 ```bash
 # dmesg/bpf_trace_printk can be used, but severely impacts performance.
@@ -536,13 +533,13 @@ sudo cat /sys/kernel/debug/tracing/trace_pipe
 # Complex programs may reach eBPF instruction count limits or hit verifier constraints.
 ```
 
-### 3. Kernel and Platform Dependencies
+3. **Kernel and Platform Dependencies**
 
 - **Kernel Version:** XDP requires Linux kernel 4.8+ (kernel 5.x or later is recommended for advanced features).
 - **BPF Compatibility:** Certain eBPF features may not be available in all environments; cloud providers or vendors may restrict eBPF/XDP usage due to kernel policy or tenant safety.
 - **Interface & Driver Support:** Not all network interfaces or drivers support XDP in native mode.
 
-### 4. Resource and Memory Constraints
+4. **Resource and Memory Constraints**
 
 - **Limited eBPF Stack:** Stack size is limited (512 bytes). Large, complex operations in eBPF/XDP are not feasible.
 - **Static eBPF Map Sizes:** Map capacities must be declared at load-time; resizing requires redeployment.
@@ -622,8 +619,7 @@ else
 fi
 ```
 
-
-## Conclusion: When Speed Is Everything
+## Conclusion
 
 XDP-based load balancing is revolutionizing packet processing for extreme performance use cases. By running in-kernel with minimal overhead, it achieves performance metrics such as:
 
@@ -640,11 +636,13 @@ However, these advantages come at the cost of greater complexity and operational
 ### Best Practices Summary
 
 **Deploy XDP load balancing when:**
+
 - Network throughput and latency are mission-critical and measured in microseconds
 - Layer 4 load balancing suffices
 - Sufficient in-house expertise exists for kernel/eBPF development
 
 **Opt for traditional load balancers when:**
+
 - Application-layer processing, extensive logic, or deep protocol support is needed
 - Rapid operational troubleshooting, detailed monitoring, or compliance is required
 - Team training and system integration timelines are considerations

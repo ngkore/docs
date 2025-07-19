@@ -4,5 +4,5 @@
 :maxdepth: 1
 
 leo-satellite-powering-5g-networks
-satellite-internet-leaders
+companies-leading-in-satellite-internet
 ```

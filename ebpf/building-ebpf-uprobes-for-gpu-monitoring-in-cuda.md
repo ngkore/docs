@@ -3,14 +3,14 @@
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)  
 **Published:** July 15, 2025
 
-> *Visibility is performance.*  
+> _Visibility is performance._  
 > Use the GPU you paid for — fully.
 
 ## Introduction
 
 Despite high-dollar investments in top-tier GPUs such as NVIDIA's H100, suboptimal performance is common in AI training workloads. Traditional tools like `nvidia-smi` provide surface metrics (e.g., utilization percentage) but fail to uncover root causes such as inefficient CUDA API usage or silent errors. By instrumenting the actual CUDA Runtime API calls via modern observability techniques, engineers can diagnose and resolve performance bottlenecks otherwise invisible to standard GPU monitoring.
 
-## The Hidden Layer: CUDA Runtime API
+## CUDA Runtime API
 
 When developing with frameworks like PyTorch and TensorFlow, thousands of CUDA runtime API calls are made under the hood, including:
 
@@ -27,6 +27,7 @@ These functions live inside user-space shared libraries (libcuda.so, libcudart.s
 Traditional GPU monitoring is limited at the kernel or driver boundary, capturing only high-level symptoms (CPU/GPU utilization, basic memory stats) but not application-level behaviors. This means the “why” behind slow or erratic GPU performance often remains hidden.
 
 **Common Real-World Issues Uncovered in Practice:**
+
 - Memory leaks from unmatched allocations
 - Launch overhead due to frequent, unbatched kernel executions
 - Synchronization bottlenecks from excessive stream synchronization
@@ -67,7 +68,6 @@ int trace_cu_mem_alloc_exit(struct pt_regs ctx) { / capture return values, timin
   - `cuStreamCreate` / `cuStreamDestroy`
   - `cuStreamSynchronize`
 
-
 ## Technical Challenges
 
 1. **Complex Function Signatures:**  
@@ -105,7 +105,7 @@ int trace_cu_mem_alloc_exit(struct pt_regs ctx) { / capture return values, timin
 
 ## Case Study: Diagnosing Memory Allocation Inefficiency
 
-### The Scenario
+**The Scenario**
 
 A machine learning team observed unexpected training slowness during model development. Analysis revealed that the training loop allocated and freed a 1GB buffer on every batch iteration. This practice led to significant hidden performance costs.
 
@@ -116,17 +116,16 @@ for epoch in range(100):
     for batch in dataloader:
         # The following line creates a new 1GB CUDA buffer on every batch
         temp_buffer = torch.cuda.FloatTensor(batch_size, hidden_size)  # 1GB allocation
-        
+
         # Model computation
         output = model(batch, temp_buffer)
         loss = criterion(output, targets)
-        
+
         # temp_buffer falls out of scope for GC
         # PyTorch invokes cuMemFree() when cleaning up
 ```
 
 **What occurred behind the scenes:**
-
 
 ```
 // For each batch iteration, these CUDA API calls were issued:
@@ -135,7 +134,7 @@ cuMemAlloc(&device_ptr, 1073741824); // Allocate 1 GB on the device
 cuMemFree(device_ptr); // Free the 1 GB allocation
 ```
 
-### The Hidden Cost
+**The Hidden Cost**
 
 - `cuMemAlloc()` is a non-trivial, heavyweight operation — not just a pointer assignment.
 - The GPU memory manager must locate a contiguous 1GB block for each allocation.
@@ -143,7 +142,7 @@ cuMemFree(device_ptr); // Free the 1 GB allocation
 - Each allocation takes roughly 100–500 microseconds.
 - 1,000 batches × 500μs = 500ms wasted in memory allocation alone per epoch.
 
-### eBPF Trace Output Diagnosis
+**eBPF Trace Output Diagnosis**
 
 With eBPF uprobes attached to the CUDA runtime API, the following pattern was observed in live API call monitoring:
 
@@ -151,15 +150,14 @@ With eBPF uprobes attached to the CUDA runtime API, the following pattern was ob
 PID    FUNCTION       SIZE        DURATION    RESULT
 1234   cuMemAlloc     1073741824  412μs       SUCCESS
 1234   cuMemFree      1073741824  23μs        SUCCESS
-1234   cuMemAlloc     1073741824  438μs       SUCCESS  
+1234   cuMemAlloc     1073741824  438μs       SUCCESS
 1234   cuMemFree      1073741824  25μs        SUCCESS
 #... repeated hundreds/thousands of times per epoch
 ```
 
-
 This confirmed a repetitive cycle of high-latency memory allocations and deallocations for each batch.
 
-### Solution: Buffer Pre-Allocation
+**Solution: Buffer Pre-Allocation**
 
 The optimal approach involved allocating the buffer once and reusing it across all batches, rather than allocating and freeing each time.
 
@@ -175,7 +173,7 @@ for epoch in range(100):
         loss = criterion(output, targets)
 ```
 
-#### Outcome
+**Outcome**
 
 - Eliminated 999 unnecessary cuMemAlloc() and cuMemFree() calls per epoch.
 - Substantially reduced GPU memory fragmentation.

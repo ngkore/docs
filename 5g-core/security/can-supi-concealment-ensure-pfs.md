@@ -4,11 +4,11 @@
 
 **Published:** June 11, 2025
 
-> *Part 1 of 2: SUPI Concealment ensures PFS Series*
+> _Part 1 of 2: SUPI Concealment ensures PFS Series_
 
 ## Introduction
 
-In recent months, significant attention has focused on how 5G SUPI Concealment could potentially deliver forward secrecy. However, after studying published research and critically analyzing the details, an open question remains: can SUPI Concealment genuinely ensure forward secrecy—or even offer it at all?
+Significant attention has focused on how 5G SUPI Concealment could potentially deliver forward secrecy. However, after studying published research and critically analyzing the details, an open question remains: can SUPI Concealment genuinely ensure forward secrecy—or even offer it at all? <br><br>
 
 This article comprehensively covers essential definitions, 5G cryptographic procedures, and a step-by-step evaluation of the SUPI concealment implementation, enabling any reader to critically assess the strength of forward secrecy in 5G networks.
 
@@ -35,29 +35,34 @@ Unlike 4G, which sends the IMSI (International Mobile Subscriber Identity) as pl
 **Operation Steps:**
 
 1. **Key Generation:**
-    - The Home Network (HN) generates an ECC key pair: public key (PKhn) and private key (SKhn).
-    - PKhn is stored on the SIM (USIM or UE), and SKhn securely within the UDM’s SIDF.
+
+   - The Home Network (HN) generates an ECC key pair: public key (PKhn) and private key (SKhn).
+   - PKhn is stored on the SIM (USIM or UE), and SKhn securely within the UDM’s SIDF.
 
 2. **Session Initialization:**
-    - The UE generates an ephemeral ECC key pair [PKe, SKe] for a single session.
-    - The UE uses its SKe and the HN’s PKhn to generate a shared secret (ss) via ECDH.
+
+   - The UE generates an ephemeral ECC key pair [PKe, SKe] for a single session.
+   - The UE uses its SKe and the HN’s PKhn to generate a shared secret (ss) via ECDH.
 
 3. **Key Derivation:**
-    - The shared secret (ss) feeds into the ANSI-X9.63 KDF, producing:
-        - AES key: used to encrypt the SUPI (MSIN portion) as ciphertext (SUCI).
-        - MAC key: for message authentication.
+
+   - The shared secret (ss) feeds into the ANSI-X9.63 KDF, producing:
+     - AES key: used to encrypt the SUPI (MSIN portion) as ciphertext (SUCI).
+     - MAC key: for message authentication.
 
 4. **Encryption & Authentication:**
-    - SUPI is encrypted with the AES key to produce the SUCI.
-    - The MAC key generates UE_MAC for integrity assurance.
+
+   - SUPI is encrypted with the AES key to produce the SUCI.
+   - The MAC key generates UE_MAC for integrity assurance.
 
 5. **Transmission:**
-    - The UE transmits [PKe (ephemeral public), SUCI (ciphertext), UE_MAC] to the network.
+
+   - The UE transmits [PKe (ephemeral public), SUCI (ciphertext), UE_MAC] to the network.
 
 6. **Decryption by Home Network:**
-    - The UDM uses its SKhn and the received PKe to regenerate the shared secret (ss) and derive identical AES and MAC keys.
-    - The MAC is verified; if valid, the SUCI is decrypted to obtain the original SUPI.
-    - Successful verification and decryption authenticates the UE.
+   - The UDM uses its SKhn and the received PKe to regenerate the shared secret (ss) and derive identical AES and MAC keys.
+   - The MAC is verified; if valid, the SUCI is decrypted to obtain the original SUPI.
+   - Successful verification and decryption authenticates the UE.
 
 ## Is Ephemeral Key Usage Alone Sufficient for Forward Secrecy?
 
@@ -68,7 +73,6 @@ A common misconception is that simply using ephemeral keys guarantees forward se
 The following call flow diagram illustrates the cryptographic process implementation:
 
 ![alt text](./images/supi-concealment-pfs/call-flow.webp)
-
 
 **Step Flow:**
 
@@ -98,6 +102,7 @@ A proposed enhancement is to extend ephemeral key usage to both participating en
 Now, if an attacker obtains the long-term SKhn, combining it with stored PKes and ct (ciphertext) is insufficient for reconstructing past session secrets, as no single party holds both components simultaneously. This pattern achieves forward secrecy at the cryptographic handshake level.
 
 > **Implementation Caveat:**
+>
 > - ECIES does not naturally support key encapsulation/decapsulation (like RSA); Hybrid Public Key Encryption (HPKE) is necessary to realize this dual-ephemeral scheme.
 >
 > - There is also a practical challenge: PKes in this model must be distributed to the UE before registration, which may require additional protocol modifications.
