@@ -35,7 +35,7 @@ infrastructure.
 
 ---
 
-[**How to Contribute**](how-to-contribute.md)
+[**How to Contribute**](CONTRIBUTING.md)
 
 ```{toctree}
 :hidden:
@@ -49,5 +49,5 @@ security/index
 kernel-bypass/index
 ntn/index
 l3af/index
-how-to-contribute
+CONTRIBUTING
 ```

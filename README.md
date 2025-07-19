@@ -251,8 +251,36 @@ When contributing to the documentation:
 
 For any queries, feel free to raise an issue.
 
+## Contributing
+
+We welcome contributions from the community! Please see our [Contributing Guide](CONTRIBUTING.md) for detailed information on:
+
+- [Quick Start Guide](CONTRIBUTING.md#quick-start)
+- [Before You Start](CONTRIBUTING.md#before-you-start)  
+- [Development Workflow](CONTRIBUTING.md#development-workflow)
+- [Quality Standards](CONTRIBUTING.md#quality-standards)
+- [Pull Request Process](CONTRIBUTING.md#pull-request-process)
+
+## Additional Resources
+
+- **[Contributing Guidelines](CONTRIBUTING.md)** - Comprehensive contribution guide
+- **[Code Owners](.github/CODEOWNERS)** - Repository maintainers and subject matter experts
+- **[GitHub Issues](https://github.com/ngkore/docs/issues)** - Report bugs or request features
+- **[Live Documentation](https://docs.ngkore.org)** - Published documentation site
+
+## Support & Contact
+
+For questions or support:
+- **Email**: contact@ngkore.org
+- **GitHub Issues**: [Create an issue](https://github.com/ngkore/docs/issues/new)
+- **Website**: [ngkore.org](https://ngkore.org)
+
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-This documentation is maintained by the NgKore Community.
+Copyright 2024 NgKore Community
+
+## Acknowledgments
+
+This documentation is maintained by the NgKore Community with contributions from researchers, engineers, and professionals advancing 5G Advanced and 6G technologies.
