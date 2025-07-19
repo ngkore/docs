@@ -11,3 +11,6 @@ sphinx-notfound-page
 requests
 beautifulsoup4
 linkify-it-py
+markdown-it-py
+mdit-py-plugins
+docutils

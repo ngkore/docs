@@ -35,7 +35,7 @@ jobs:
         
     - name: Build documentation
       run: |
-        sphinx-build -b html . _build/html
+        sphinx-build -b html . _build/html --keep-going
         
     - name: Setup Pages
       uses: actions/configure-pages@v3

@@ -48,7 +48,7 @@ Thumbs.db
 .claude/
 
 # Keep custom extensions (don't ignore)
-!youtube-links/
-!related-links/
-!custom-rst-roles/
-!terminal-output/
+!youtube_links/
+!related_links/
+!custom_rst_roles/
+!terminal_output/
