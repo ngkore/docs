@@ -1,0 +1,15 @@
+spelling_word_list_filename: spelling_wordlist.txt
+spelling_lang: en_US
+spelling_ignore_pypi_package_names: true
+spelling_ignore_wiki_words: true
+spelling_ignore_acronyms: true
+spelling_ignore_python_builtins: true
+spelling_ignore_importable_modules: true
+spelling_ignore_contributor_names: true
+spelling_show_suggestions: true
+spelling_suggestion_limit: 5
+spelling_filters:
+  - enchant.tokenize.URLFilter
+  - enchant.tokenize.EmailFilter
+  - enchant.tokenize.MentionFilter
+  - enchant.tokenize.WikiWordFilter

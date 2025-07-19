@@ -1,0 +1,28 @@
+/* Footer social media icons styling */
+.icons a.muted-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 6px;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 100%;
+  background: white;
+  color: #125baf !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.icons a.muted-link:hover {
+  background:  #125baf;
+  color: white !important;
+  transform: translateY(-2px);
+}
+
+.icons a.muted-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}

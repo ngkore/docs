@@ -1,0 +1,19 @@
+{% extends "!page.html" %}
+
+{% block extrahead %}
+{{ super() }}
+<!-- Additional favicon links -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('_static', 1) }}/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ pathto('_static', 1) }}/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ pathto('_static', 1) }}/favicon-16x16.png">
+<link rel="manifest" href="{{ pathto('_static', 1) }}/site.webmanifest">
+{% endblock %}
+
+{% block body -%}
+{{ super() }}
+<div class="bottom-logo">
+  <a href="https://ngkore.org" class="bottom-logo-link" target="_blank" rel="noopener noreferrer">
+    <img class="bottom-logo-image" src="{{ pathto('_static', 1) }}/ngkore-logo.png" alt="NgKore Logo" />
+  </a>
+</div>
+{%- endblock %}

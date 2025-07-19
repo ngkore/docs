@@ -1,0 +1,84 @@
+.bottom-logo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.bottom-logo-link {
+  display: flex;
+  text-decoration: none;
+  border-bottom: none !important;
+}
+
+.bottom-logo-link:hover {
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+.bottom-logo-image {
+  height: 60px;
+  width: auto;
+  border-radius: 0;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  margin: 0rem;
+  margin-right: 2rem;
+  filter: none; /* Default - original colors for light theme */
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.bottom-logo-link:hover .bottom-logo-image {
+  transform: scale(1.05);
+  /* border-bottom: 1px solid blueviolet; */
+  /* transform: translateY(1); */
+}
+
+/* Light theme support - ensure original colors */
+body[data-theme="light"] .bottom-logo-image {
+  filter: none !important;
+}
+
+@media (prefers-color-scheme: light) {
+  .bottom-logo-image {
+    filter: none !important;
+  }
+}
+
+/* Dark mode support - make logo white */
+@media (prefers-color-scheme: dark) {
+  .bottom-logo-image {
+    filter: brightness(0) saturate(100%) invert(100%);
+  }
+}
+
+/* Dark theme support when explicitly set */
+body[data-theme="dark"] .bottom-logo-image {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bottom-logo {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .bottom-logo-image {
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bottom-logo {
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .bottom-logo-image {
+    height: 28px;
+  }
+}

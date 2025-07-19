@@ -1,3 +1,48 @@
-build
-.vscode
+# Build directories
+build/
+_build/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+env/
+.env
+.venv
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Sphinx specific
+.sphinx/venv/
+.sphinx/warnings.txt
+.sphinx/.wordlist.dic
+.doctrees/
+.buildinfo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Claude Code session files
+.claude/

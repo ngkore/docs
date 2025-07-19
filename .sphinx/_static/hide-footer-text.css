@@ -1,0 +1,23 @@
+/* Hide everything in left-details except copyright */
+.bottom-of-page .left-details {
+    font-size: 0 !important; /* Hide all text nodes */
+}
+
+.bottom-of-page .left-details > * {
+    display: none !important;
+}
+
+.bottom-of-page .left-details .copyright {
+    display: block !important;
+    font-size: 14px !important; /* Restore font size for copyright */
+}
+
+/* Additional specific hiding for text nodes and elements */
+.bottom-of-page .left-details .last-updated {
+    display: none !important;
+}
+
+/* Hide "Made with" text and Furo link */
+.bottom-of-page .left-details a[href*="furo"] {
+    display: none !important;
+}

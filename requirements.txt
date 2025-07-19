@@ -1,0 +1,8 @@
+sphinx>=7.0.0
+sphinx-design
+sphinx-tabs
+myst-parser
+furo
+sphinxext-opengraph
+sphinx-copybutton
+sphinxcontrib-jquery
