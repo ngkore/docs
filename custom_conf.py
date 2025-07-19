@@ -92,7 +92,12 @@ slug = ""
 # Set up redirects (https://documatt.gitlab.io/sphinx-reredirects/usage.html)
 # For example: 'explanation/old-name.html': '../how-to/prettify.html',
 
-redirects = {}
+redirects = {
+    'ebpf/introduction-to-ebpf/': '../understanding-ebpf-in-kernel/',
+    'ebpf/ebpf-based-l4-load-balancer/': '../building-ebpf-based-l4-load-balancer/',
+    'ebpf/ebpf-in-ssd/': '../data-processing-with-ebpf-in-ssd/',
+    'ebpf/ebpf-in-gpu-acceleration/': '../ebpf-for-gpu-acceleration/',
+}
 
 ############################################################
 ### Link checker exceptions
