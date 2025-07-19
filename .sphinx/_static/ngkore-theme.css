@@ -1,129 +1,170 @@
 /* NgKore Theme Colors and Styling */
 :root {
-    /* NgKore Color Palette */
-    --ngkore-primary: #6B9BD1;
-    --ngkore-primary-dark: #5A8BC0;
-    --ngkore-primary-light: #7CADA5;
-    --ngkore-secondary: #4A90E2;
-    --ngkore-accent: #00D4FF;
-    --ngkore-text-primary: #1A1A1A;
-    --ngkore-text-secondary: #6B7280;
-    --ngkore-text-light: #9CA3AF;
-    --ngkore-bg-primary: #FFFFFF;
-    --ngkore-bg-secondary: #F8FAFC;
-    --ngkore-bg-tertiary: #F1F5F9;
-    --ngkore-border: #E2E8F0;
-    
-    /* Override Furo theme colors with NgKore palette */
-    --color-brand-primary: var(--ngkore-primary);
-    --color-brand-content: var(--ngkore-secondary);
-    --color-sidebar-link-text--top-level: var(--ngkore-primary);
-    --color-api-name: var(--ngkore-secondary);
-    --color-api-pre-name: var(--ngkore-secondary);
+  /* NgKore Color Palette */
+  --ngkore-primary: #6b9bd1;
+  --ngkore-primary-dark: #5a8bc0;
+  --ngkore-primary-light: #7cada5;
+  --ngkore-secondary: #4a90e2;
+  --ngkore-accent: #00d4ff;
+  --ngkore-text-primary: #1a1a1a;
+  --ngkore-text-secondary: #6b7280;
+  --ngkore-text-light: #9ca3af;
+  --ngkore-bg-primary: #ffffff;
+  --ngkore-bg-secondary: #f8fafc;
+  --ngkore-bg-tertiary: #f1f5f9;
+  --ngkore-border: #e2e8f0;
+
+  /* Override Furo theme colors with NgKore palette */
+  --color-brand-primary: var(--ngkore-primary);
+  --color-brand-content: var(--ngkore-secondary);
+  --color-sidebar-link-text--top-level: var(--ngkore-primary);
+  --color-api-name: var(--ngkore-secondary);
+  --color-api-pre-name: var(--ngkore-secondary);
 }
 
 /* Keep original text colors and sidebar styling */
 
 /* Style admonitions with NgKore colors */
 .admonition {
-    border-left: 4px solid var(--ngkore-primary);
+  border-left: 4px solid var(--ngkore-primary);
 }
 
 .admonition.tip {
-    border-left-color: var(--ngkore-accent);
+  border-left-color: var(--ngkore-accent);
 }
 
 .admonition-title {
-    background: linear-gradient(135deg, var(--ngkore-primary), var(--ngkore-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    var(--ngkore-primary),
+    var(--ngkore-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
 }
 
 /* Style buttons and interactive elements */
-.btn, button, input[type="submit"] {
-    background: linear-gradient(135deg, var(--ngkore-primary), var(--ngkore-secondary));
-    border: none;
-    color: white;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+.btn,
+button,
+input[type="submit"] {
+  background: linear-gradient(
+    135deg,
+    var(--ngkore-primary),
+    var(--ngkore-secondary)
+  );
+  border: none;
+  color: white;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }
 
-.btn:hover, button:hover, input[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(107, 155, 209, 0.3);
+.btn:hover,
+button:hover,
+input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(107, 155, 209, 0.3);
 }
 
 /* Style search box */
 .sidebar-search {
-    border: 2px solid var(--ngkore-border);
-    border-radius: 6px;
-    transition: border-color 0.3s ease;
+  border: 2px solid var(--ngkore-border);
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
 }
 
 .sidebar-search:focus {
-    border-color: var(--ngkore-primary);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(107, 155, 209, 0.1);
+  border-color: var(--ngkore-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(107, 155, 209, 0.1);
 }
 
 /* Keep original table of contents styling */
 
 /* Style code blocks */
 .highlight {
-    border-left: 4px solid var(--ngkore-primary);
-    border-radius: 6px;
+  border-left: 4px solid var(--ngkore-primary);
+  border-radius: 6px;
 }
 
 /* Style tables */
 table.docutils {
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 table.docutils th {
-    background: linear-gradient(135deg, var(--ngkore-primary), var(--ngkore-secondary));
-    color: white;
+  background: linear-gradient(
+    135deg,
+    var(--ngkore-primary),
+    var(--ngkore-secondary)
+  );
+  color: white;
 }
 
 /* Keep original navigation breadcrumbs styling */
 
 /* Style back to top button */
 .back-to-top {
-    background: white;
-    color: white;
-    border-radius: 40%;
-    transition: all 0.3s ease;
+  background: white;
+  color: var(--ngkore-bg-primary);
+  border-radius: 40%;
+  transition: all 0.3s ease;
+  /* align-items: center; */
 }
 
 .back-to-top:hover {
-    background: white;
-    color: var(--ngkore-primary);
-    /* transform: translateY(-2px); */
+  background: white;
+  color: var(--ngkore-bg-primary);
+  /* transform: scale(1.05); */
+}
+
+/* Dark theme support for back to top button */
+body[data-theme="dark"] .back-to-top {
+  background: linear-gradient(
+    135deg,
+    var(--ngkore-primary),
+    var(--ngkore-secondary)
+  );
+  color: white;
+}
+
+body[data-theme="dark"] .back-to-top:hover {
+  background: linear-gradient(
+    135deg,
+    var(--ngkore-secondary),
+    var(--ngkore-primary)
+  );
+  color: white;
+  /* transform: scale(1.05); */
 }
 
 /* Style theme toggle button */
 .theme-toggle {
-    /* border: 2px solid var(--ngkore-border); */
-    border-radius: 6px;
-    /* transition: border-color 0.3s ease; */
+  /* border: 2px solid var(--ngkore-border); */
+  border-radius: 6px;
+  /* transition: border-color 0.3s ease; */
 }
 
 .theme-toggle:hover {
-    border-color: none;
-    box-shadow: none;
+  border-color: none;
+  box-shadow: none;
 }
 
 /* Keep original sidebar brand styling */
 
 /* Enhance mobile header */
 .mobile-header {
-    background: linear-gradient(135deg, var(--ngkore-primary), var(--ngkore-secondary));
+  background: linear-gradient(
+    135deg,
+    var(--ngkore-primary),
+    var(--ngkore-secondary)
+  );
 }
 
 .mobile-header .brand {
-    color: white;
-    font-weight: 600;
+  color: white;
+  font-weight: 600;
 }

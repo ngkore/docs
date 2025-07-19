@@ -6,7 +6,8 @@
   width: 28px;
   height: 28px;
   margin: 0 6px;
-  border-color: var(--primary-color);
+  border: 1px solid var(--ngkore-primary);
+  /* border-color: var(--primary-color); */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-radius: 100%;
   background: white;
@@ -16,7 +17,7 @@
 }
 
 .icons a.muted-link:hover {
-  background:  #125baf;
+  background: #125baf;
   color: white !important;
   transform: translateY(-2px);
 }
@@ -25,4 +26,19 @@
   width: 14px;
   height: 14px;
   fill: currentColor;
+}
+
+/* Dark theme support for social icons */
+body[data-theme="dark"] .icons a.muted-link {
+  background: var(--color-background-secondary);
+  color: white !important;
+  /* border-color: white; */
+  border: 1px solid white;
+}
+
+body[data-theme="dark"] .icons a.muted-link:hover {
+  background: var(--ngkore-primary);
+  color: white !important;
+  transform: translateY(-2px);
+  border: 0px;
 }
