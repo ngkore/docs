@@ -6,3 +6,5 @@ furo
 sphinxext-opengraph
 sphinx-copybutton
 sphinxcontrib-jquery
+sphinx-reredirects
+sphinx-notfound-page
