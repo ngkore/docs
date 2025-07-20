@@ -92,7 +92,7 @@ import os
 is_production = os.environ.get('GITHUB_ACTIONS', False) or os.environ.get('READTHEDOCS', False)
 
 if is_production:
-    html_baseurl = 'https://docs.ngkore.org/'
+    html_baseurl = '/'  # For custom domain GitHub Pages
     # Ensure absolute URLs for production
     html_theme_options_extra = {}
 else:
@@ -157,6 +157,8 @@ if is_production:
     html_use_index = True
     html_file_suffix = ''
     html_link_suffix = '/'
+    
+    # Static files already configured in main conf.py
 
 ## The following settings override the default configuration.
 

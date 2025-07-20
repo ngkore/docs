@@ -60,19 +60,23 @@ jobs:
           echo "No warnings file found"
         fi
         
-    - name: Add .nojekyll file
+    - name: Add .nojekyll file and create index.html
       run: |
         touch _build/html/.nojekyll
+        # Create index.html from the main index file for GitHub Pages
+        if [ -f "_build/html/index" ]; then
+          cp _build/html/index _build/html/index.html
+        fi
         
     - name: Verify build output
       run: |
         echo "Build directory structure:"
-        find _build/html -type f -name "index" | head -20
+        find _build/html -type f -name "index*" | head -20
         echo "HTML directories:"
         find _build/html -type d -maxdepth 2 | head -20
         echo "Static files:"
         find _build/html/_static -type f | head -10
-        echo "Main index exists:" && ls -la _build/html/index
+        echo "Main index exists:" && ls -la _build/html/index.html
         echo "Checking .nojekyll file:" && ls -la _build/html/.nojekyll
         echo "Total files built:" && find _build/html -type f | wc -l
         echo "Build completed successfully"

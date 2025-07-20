@@ -38,6 +38,7 @@ html:
 html-github:
 	. $(VENV); export GITHUB_ACTIONS=true; $(SPHINXBUILD) -c . -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt --keep-going
 	touch "$(BUILDDIR)/.nojekyll"
+	if [ -f "$(BUILDDIR)/index" ]; then cp "$(BUILDDIR)/index" "$(BUILDDIR)/index.html"; fi
 
 epub:
 	. $(VENV); $(SPHINXBUILD) -c . -b epub "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt
