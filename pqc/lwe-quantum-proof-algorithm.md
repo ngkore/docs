@@ -1,8 +1,8 @@
 # Learning with Errors: Quantum-Proof Algorithm
 
-**Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/)  
+**Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/)
 
-**Published:** June 17, 2022
+**Published:** June 27, 2022
 
 ## Introduction
 

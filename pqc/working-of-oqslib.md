@@ -1,8 +1,8 @@
 # Working of Open Quantum Safe Library
 
-**Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/)  
+**Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/)
 
-**Published:** June 12, 2022
+**Published:** June 17, 2022
 
 ## 1. What is LibOQS?
 

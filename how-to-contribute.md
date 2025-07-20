@@ -99,7 +99,7 @@ pip install -r .sphinx/requirements.txt
 | `python3 -m venv .sphinx/venv`            | Create virtual environment manually        |
 | `pip install -r .sphinx/requirements.txt` | Install dependencies manually              |
 | `make clean`                              | Remove build files and virtual environment |
-| `rm -rf .sphinx/venv _build`                     | Remove virtual environment manually        |
+| `rm -rf .sphinx/venv _build`              | Remove virtual environment manually        |
 
 ## Building and Serving Documentation
 
@@ -190,7 +190,7 @@ Build warnings are logged to `.sphinx/warnings.txt` for review.
 
 ## License
 
-By contributing to NgKore documentation, you agree that your contributions will be licensed under the [Apache License 2.0](LICENSE).
+By contributing to NgKore documentation, you agree that your contributions will be licensed under the [Apache License 2.0](https://github.com/ngkore/docs/blob/main/LICENSE).
 
 ## Recognition
 

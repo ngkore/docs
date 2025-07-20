@@ -1,4 +1,4 @@
-# HEXAeBPF: Interoperable eBPF-Defined 5G Core Architecture
+# HEXAeBPF: Interoperable eBPF-Defined 5G Core (eDC) Architecture
 
 **Author:** [Shankar Malik](https://www.linkedin.com/in/evershalik/)
 

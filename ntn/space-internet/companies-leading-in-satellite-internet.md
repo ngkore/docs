@@ -2,7 +2,7 @@
 
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
-**Published:** May 16, 2025
+**Published:** July 26, 2025
 
 > _Part 2 of 5: Space Internet Series_
 

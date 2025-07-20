@@ -1,8 +1,8 @@
 # Introduction to Post-Quantum Cryptography
 
-**Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/)  
+**Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/)
 
-**Published:** June 27, 2022
+**Published:** June 12, 2022
 
 ## 1. Motivation for Post-Quantum Cryptography
 
@@ -54,11 +54,11 @@ Among the 7 finalists, there are 4 key encapsulation mechanisms (KEMs) and 3 sig
 
 **Kyber Key Encapsulation Mechanism Overview:**
 
-1. **Key Generation:** 
+1. **Key Generation:**
    - A public and secret key pair is generated.
-2. **Encapsulation:** 
+2. **Encapsulation:**
    - The sender uses the recipient’s public key to produce a shared secret (`ss1`) and a ciphertext (`ct`).
-3. **Decapsulation:** 
+3. **Decapsulation:**
    - The recipient uses their private key to decapsulate the ciphertext and derive their version of the shared secret (`ss2`).
    - If `ss1 = ss2`, the key exchange is successfully verified.
 

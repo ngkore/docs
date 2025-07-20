@@ -1,6 +1,8 @@
 .. Common link definitions for NgKore Documentation
 
 .. _NgKore: https://ngkore.org/
-.. _GitHub: https://github.com/ngkore/docs
-.. _GitHub Issues: https://github.com/ngkore/docs/issues
-.. _Contributing Guide: https://github.com/ngkore/docs/blob/main/how-to-contribute.md
+.. _GitHub: {{ github_url }}
+.. _GitHub Issues: {{ github_url }}/issues
+.. _Contributing Guide: {{ github_url }}/blob/{{ github_version }}/how-to-contribute.md
+.. _Apache License 2.0: {{ github_url }}/blob/{{ github_version }}/LICENSE
+.. _License: {{ github_url }}/blob/{{ github_version }}/LICENSE
