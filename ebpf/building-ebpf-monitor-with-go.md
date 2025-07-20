@@ -8,6 +8,8 @@
 
 eBPF (Extended Berkeley Packet Filter) enables advanced, safe, and high-performance observability, networking, and security by allowing sandboxed programs to run safely in the Linux kernel. eBPF systems provide real-time monitoring and deep kernel/system introspection, all without kernel modifications.
 
+<br>
+
 This tutorial demonstrates how to build a simple process monitor with eBPF and Go. The monitor tracks each time a process on the system executes via the `execve` syscall, recording process ID (PID) and command name using a Go frontend and the Cilium eBPF library.
 
 ## Prerequisites
@@ -39,7 +41,7 @@ mkdir ebpf
 nano ebpf/ebpf_monitor.c
 ```
 
-**ebpf/ebpf_monitor.c:**
+**`ebpf/ebpf_monitor.c`**
 
 ```c
 #include <linux/bpf.h>
@@ -80,6 +82,8 @@ This program:
 
 Instead of invoking clang manually, bpf2go (from Cilium eBPF) auto-generates Go bindings and object files:
 
+<br>
+
 Add this to your `main.go`:
 
 ```console
@@ -107,7 +111,9 @@ Wrote /home/ubuntu/ebpf_project/ebpfmonitoring_bpf.go
 
 Create a Go file to load and run the eBPF program (Go Loader):
 
-**main.go**
+<br>
+
+**`main.go`**
 
 ```go
 package main

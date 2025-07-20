@@ -42,6 +42,8 @@ High-performance rate limiting is essential for protecting modern networks from 
 
 eBPF maps are lockless, high-speed kernel structures providing atomic accesses for network-scale workloads.
 
+<br>
+
 **Common Map Types and Usage**
 
 **`BPF_MAP_TYPE_HASH`**
@@ -98,6 +100,8 @@ __sync_bool_compare_and_swap(&counter->last_reset, old_time, new_time);
 ## Step-by-Step: Building a Rate Limiter
 
 This section outlines the process of building a production-grade rate limiter capable of handling millions of packets per second. XDP (eXpress Data Path) is utilized for maximum performance by attaching the program at the earliest point in the network stack.
+
+<br>
 
 **Data Structures**
 
@@ -459,6 +463,8 @@ int lenient_policy(struct xdp_md *ctx) {
 
 **Map Sizing and Capacity**
 
+<br>
+
 Calculate your map memory requirements:
 
 ```c
@@ -529,4 +535,6 @@ This enables:
 
 eBPF moves rate limiting logic from slow user space to the earliest, fastest, and most scalable point in the Linux stack. Using kernel-space maps and lockless operations, line-rate enforcement—even with millions of flows—becomes feasible and practical. Combined with hardware offload, observability, and programmable policy support, eBPF reshapes how modern networks defend themselves and optimize bandwidth.
 
-Kernel-space rate limiting is not just an optimization—it is an architectural revolution empowering developers and operators to build programmable, robust, and exceptionally fast network protection systems tailored for modern demands.
+<br>
+
+Kernel-space rate limiting is not just an optimization — it is an architectural revolution empowering developers and operators to build programmable, robust, and exceptionally fast network protection systems tailored for modern demands.

@@ -2,7 +2,7 @@
 
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
-**Published:** July 26, 2025
+**Published:** June 26, 2025
 
 > _Part 2 of 5: Space Internet Series_
 
@@ -29,6 +29,8 @@ SpaceX’s approach is built on vertical integration—manufacturing rockets, sa
 ## Amazon’s Project Kuiper
 
 **Ambitious Scale**
+
+<br>
 
 Amazon’s Project Kuiper aims to deploy 3,236 LEO satellites to dramatically expand global broadband access. The first batch of 27 operational satellites was successfully launched in April 2025, following earlier test missions.
 

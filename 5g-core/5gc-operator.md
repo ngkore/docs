@@ -6,9 +6,8 @@
 
 ![alt text](./images/5g-operator/operator.png)
 
-
 1.  **Creating the API and Controller** - We first create a new
-    CRD(*Custom Resource Definition*) API and a new Controller. This is
+    CRD(_Custom Resource Definition_) API and a new Controller. This is
     done using the Operator SDK. We provide a Helm chart path that the
     Operator will manage. This Helm chart, essentially, is the blueprint
     for deploying the application we want to manage.
@@ -43,7 +42,7 @@
     Helm chart is created with the updated configuration values. This
     release is a running instance of the chart and is stored in the
     cluster. This does not change the original Helm chart but instead
-    creates a new instance (*release*) of the Helm chart with the
+    creates a new instance (_release_) of the Helm chart with the
     updated configuration.
 
 ## Operator
@@ -52,6 +51,8 @@ Kubernetes Operators are software extensions to Kubernetes that make use
 of custom resources to manage applications and their components. They
 essentially automate the tasks of a human operator who would normally
 have to manage a service or set of services.
+
+<br>
 
 Operators follow the principles of the Kubernetes design, namely the
 Controller concept, which allows you to extend Kubernetes\'s
@@ -64,8 +65,8 @@ contain the information that the Operator needs to manage the
 application.
 
 The Operator includes a **Controller** which runs in a loop monitoring
-the state of your application. It compares the desired state (*defined
-by the custom resources*) with the actual state in the Kubernetes
+the state of your application. It compares the desired state (_defined
+by the custom resources_) with the actual state in the Kubernetes
 cluster. If the actual state does not match the desired state, the
 controller will execute the necessary steps to correct it.
 
@@ -146,6 +147,8 @@ create and manage. However, sometimes we might need to add new types of
 resources that are specific to our application or infrastructure.
 That\'s where CRDs come in.
 
+<br>
+
 A CRD allows us to create our own, custom resources that behave like
 native Kubernetes resources. Once a CRD is created, users can create and
 manage instances of this new resource using kubectl, just
@@ -156,22 +159,22 @@ design, CLI and UI integration, and lifecycle management.
 
 ![alt text](./images/5g-operator/crd.png)
 
-
 ### CR
 
-A CR(*Custom Resource*) is an extension of the Kubernetes API that
+A CR(_Custom Resource_) is an extension of the Kubernetes API that
 allows to store and retrieve structured data. It\'s a way to introduce
 our own API objects into our Kubernetes cluster to suit our
 application\'s specific needs.
 
-When we create a CRD(*Custom Resource Definition*), we create a new kind
+<br>
+
+When we create a CRD(_Custom Resource Definition_), we create a new kind
 of resource in our Kubernetes cluster. This new resource behaves like
-any standard resource in Kubernetes (*like Pods or Services*), meaning
+any standard resource in Kubernetes (_like Pods or Services_), meaning
 we can use kubectl to create, view, modify, and delete
 instances of our custom resource.
 
 ![alt text](./images/5g-operator/cr.png)
-
 
 ### Importance of CRD and CR
 

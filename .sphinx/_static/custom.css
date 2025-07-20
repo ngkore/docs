@@ -178,12 +178,21 @@ img {
     margin-top: 0.5rem;
 }
 
-/** Color for the "copy link" symbol next to headings **/
+/** Hide edit this page button and header links **/
+.edit-this-page,
+a[title="Edit this page"],
+.source-link,
+.edit-on-github,
+.headerlink {
+    display: none !important;
+}
 
+/** Color for the "copy link" symbol next to headings **/
 a.headerlink {
     color: var(--color-brand-primary);
     opacity: 0.6;
     transition: opacity 0.2s ease;
+    display: none !important; /* Hide header links completely */
 }
 
 a.headerlink:hover {

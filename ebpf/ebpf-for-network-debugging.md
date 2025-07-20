@@ -8,21 +8,17 @@
 
 It was 2:03 AM when a PagerDuty alert indicated API response time degradation. Standard metrics (CPU, memory, database, load balancer, logs) appeared normal, but latency and timeout errors increased for end users.
 
+<br>
+
 Despite healthy dashboard visuals, actual API latency was climbing, and error rates increased, with normal resource consumption across the stack.
 
 ## When Traditional Tools Hit Their Limits
 
-**Application Layer Investigation**
+1. **Application Layer Investigation:** Scaling API instances and reviewing recent deployments produced no benefit or actionable insights.
 
-Scaling API instances and reviewing recent deployments produced no benefit or actionable insights.
+2. **Database Analysis:** Database health and connection pooling were confirmed to be normal; increasing pool sizes did not solve the issue.
 
-**Database Analysis**
-
-Database health and connection pooling were confirmed to be normal; increasing pool sizes did not solve the issue.
-
-**Infrastructure Evaluation**
-
-Cloud provider status, load balancer metrics, and system logs failed to reveal root causes.
+3. **Infrastructure Evaluation:** Cloud provider status, load balancer metrics, and system logs failed to reveal root causes.
 
 ```bash
 # Typical troubleshooting commands that yielded no insights
@@ -175,6 +171,8 @@ Within minutes, API response times returned to normal; the 95th percentile dropp
 ## Resolution and Impact
 
 **The Configuration Drift**
+
+<br>
 
 Investigation revealed that the cause was a security hardening script that disabled TCP window scaling infrastructure-wide. While this might be appropriate for certain restricted environments, it is typically detrimental in high-throughput scenarios.
 

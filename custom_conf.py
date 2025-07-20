@@ -34,7 +34,7 @@ copyright = '2023 NgKore Community. All rights reserved.'
 ## when linking to the documentation from another website (see https://ogp.me/)
 # The URL where the documentation will be hosted (leave empty if you
 # don't know yet)
-ogp_site_url = ""
+ogp_site_url = "https://docs.ngkore.org"
 # The documentation website name (usually the same as the product name)
 ogp_site_name = project
 # The URL of an image or logo that is used in the preview
@@ -85,6 +85,20 @@ html_context = {
 # slug (for example, "lxd") here.
 slug = ""
 
+# Base URL and environment configuration
+import os
+
+# Detect if we're building for GitHub Pages
+is_production = os.environ.get('GITHUB_ACTIONS', False) or os.environ.get('READTHEDOCS', False)
+
+if is_production:
+    html_baseurl = 'https://docs.ngkore.org/'
+    # Ensure absolute URLs for production
+    html_theme_options_extra = {}
+else:
+    html_baseurl = '/'
+    html_theme_options_extra = {}
+
 ############################################################
 ### Redirects
 ############################################################
@@ -133,6 +147,16 @@ custom_html_css_files = ['hide-footer-text.css', 'footer-icons.css', 'ngkore-the
 
 # Add JavaScript files (located in .sphinx/_static/)
 custom_html_js_files = ['custom-theme-toggle.js']
+
+# Ensure proper static files configuration for GitHub Pages
+if is_production:
+    # Additional production-specific static file handling
+    html_extra_path = []  # Add any extra paths if needed
+    
+    # Ensure proper link resolution for GitHub Pages
+    html_use_index = True
+    html_file_suffix = ''
+    html_link_suffix = '/'
 
 ## The following settings override the default configuration.
 
@@ -223,9 +247,13 @@ if 'html_theme_options' not in locals():
     html_theme_options = {}
 
 html_theme_options.update({
-    "source_repository": "https://github.com/ngkore/docs",
-    "source_branch": "main",
-    "source_directory": "",
+    # Remove source repository to disable edit button
+    # "source_repository": "https://github.com/ngkore/docs",
+    # "source_branch": "main", 
+    # "source_directory": "",
 })
+
+# Merge production-specific theme options
+html_theme_options.update(html_theme_options_extra)
 
 ## Add any configuration that is not covered by the common conf.py file.

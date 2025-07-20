@@ -29,6 +29,8 @@ In the following sections, each primary solution is briefly introduced and chara
 
 **Overview and Background:**
 
+<br>
+
 Originating from National Yang Ming Chiao Tung University (Taiwan), Free5GC is hosted by the Linux Foundation and fully 3GPP-compliant. It has a vibrant academic and developer community, with active maintenance and recent releases focusing on Release 16/17 features. Licensed under Apache 2.0, it encourages open contributions. The project held its first World Forum in 2025, highlighting its growing ecosystem.
 
 **Supported Components:**
@@ -62,6 +64,8 @@ Active GitHub repository, forum, regular releases, and growing community events.
 ### 2.2 Open5GS
 
 **Overview and Background:**
+
+<br>
 
 Open5GS is a mature open-source project written in C, supporting both 4G EPC and 5G core functions. It has a large community and commercial support options. Licensed under an open-source license, it is widely adopted in academia and industry.
 
@@ -97,6 +101,8 @@ Large, active community with frequent updates and comprehensive documentation.
 
 **Overview and Background:**
 
+<br>
+
 Originally developed by Meta and now under the Linux Foundation, Magma is designed for carrier-grade LTE and 5G core networks. It emphasizes automation, edge deployment, and scalability. Licensed open source, it has strong industry backing.
 
 **Supported Components:**
@@ -130,6 +136,8 @@ Growing community with commercial support and multiple industry partners.
 ### 2.4 OpenAirInterface (OAI) 5G Core
 
 **Overview and Background:**
+
+<br>
 
 Developed by the OpenAirInterface Software Alliance, OAI provides a comprehensive 3GPP-compliant 5G SA core with a focus on research and professional validation. Licensed under OAI Public License, it has strong industry collaborations.
 
@@ -165,6 +173,8 @@ Active alliance with commercial backing and professional support.
 
 **Overview and Background:**
 
+<br>
+
 Part of the Open Networking Foundation’s Aether project, Canonical maintains the Charmed Aether SD-Core, focusing on cloud-native private 5G deployments. It is open source with strong automation and observability.
 
 **Supported Components:**
@@ -198,6 +208,8 @@ Supported by Canonical and ONF with active documentation.
 
 **Overview and Background:**
 
+<br>
+
 Canonical Charmed Aether SD Core is the enterprise-focused, open-source 5G core developed by Canonical in partnership with the Open Networking Foundation (ONF) as part of the Aether project. It targets private, campus, and industrial 5G deployments, emphasizing automation and ease of use. Actively maintained, it is licensed as open source and integrated into Canonical’s Ubuntu ecosystem.
 
 **Supported Components:**
@@ -229,7 +241,10 @@ Optimized for reliability, automation, and observability rather than raw through
 Backed by Canonical and ONF, with active documentation, community support, and regular releases.
 
 ### 2.7 Ella Core
+
 **Overview and Background:**
+
+<br>
 
 Ella Core is a lightweight, open-source 5G core purpose-built for private, industrial, and remote deployments. It is designed for simplicity, high performance, and minimal resource usage. The project is actively maintained and welcomes community contributions.
 
@@ -264,6 +279,8 @@ Growing open-source community, active documentation, and responsive support chan
 ### 2.8 QCore
 
 **Overview and Background:**
+
+<br>
 
 QCore is an experimental, ultra-minimal open-source 5G core written in Rust, targeting highly constrained environments like drones, backpacks, or space. It is in early development and invites collaboration. Licensed under AGPL (main code) and GPL (eBPF), with commercial licenses available.
 
@@ -361,6 +378,8 @@ Here is a comparative matrix of major open-source 5G core network projects as of
 
 Open-source 5G cores are pivotal for innovation, education, and democratizing mobile network technology. With diverse projects addressing different needs—from lightweight research platforms to carrier-grade deployments—developers and researchers have a rich ecosystem to explore. Getting involved is as easy as contributing to GitHub repos, participating in forums (e.g., free5GC forum, Open5GS community), or joining project-specific events.
 
+<br>
+
 The future of 5G and beyond will be shaped by these collaborative efforts, accelerating the deployment of next-generation networks worldwide.
 
 ### References and Resources
@@ -375,4 +394,3 @@ The future of 5G and beyond will be shaped by these collaborative efforts, accel
 - [Open Source 5G Core Platforms Independent Review](https://www.themoonlight.io/en/review/open-source-5g-core-platforms-a-low-cost-solution-and-performance-evaluation)
 - [Awesome 5G Open Source List (GitHub)](https://github.com/calee0219/awesome-5g/blob/main/README.md)
 - [NIST 5G Core Networks Testbed](https://www.nist.gov/programs-projects/5g-core-networks-testbed)
-

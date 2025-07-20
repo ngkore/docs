@@ -26,6 +26,8 @@ Even when L1 vendors comply with SCF standards and do not require intermediary c
 
 Additionally, each L1 vendor offers a unique inter-process communication (IPC) mechanism for message exchange at the FAPI or nFAPI interface. Nvidia's Aerial, for example, uses nvIPC, while Intel’s FlexRAN employs WLS; both are shared memory implementations used for communication with DU-High.
 
+<br>
+
 L2-L3 vendors aiming to demonstrate interoperability with multiple L1 solutions face the challenge of managing various intermediary components and shared memory libraries, each tailored to a different L1 vendor. This dependency significantly increases complexity and complicates efforts to maintain a seamless, multi-vendor, interoperable network environment.
 
 ![alt text](./images/challenges-in-l1-l2-interoperability/challenge-l2-l3.png)

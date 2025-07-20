@@ -35,6 +35,10 @@ run:
 html:
 	. $(VENV); $(SPHINXBUILD) -c . -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt
 
+html-github:
+	. $(VENV); export GITHUB_ACTIONS=true; $(SPHINXBUILD) -c . -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt --keep-going
+	touch "$(BUILDDIR)/.nojekyll"
+
 epub:
 	. $(VENV); $(SPHINXBUILD) -c . -b epub "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt
 

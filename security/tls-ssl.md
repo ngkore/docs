@@ -1,6 +1,6 @@
 # TLS/SSL Connection
 
-**Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)  
+**Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)
 
 **Published:** June 22, 2025
 
@@ -10,17 +10,23 @@ Transport Layer Security (TLS) and its predecessor Secure Sockets Layer (SSL) ar
 
 TLS (Transport Layer Security) is a widely adopted security protocol that provides privacy and security for data transmitted over the internet. TLS encrypts communication between web applications and servers, secures email transmission, protects VoIP calls, and enables security across multiple network protocols. The Internet Engineering Task Force (IETF) standardized TLS, with version 1.3 published in 2018 as the current standard.
 
+<br>
+
 The terminology "SSL/TLS" is frequently used due to the historical transition from SSL to TLS and their similar roles in modern security.
 
 ## Protocol Evolution
 
 SSL (Secure Sockets Layer) was the original protocol developed by Netscape to secure internet communications. TLS version 1.0 was introduced as a successor to SSL version 3.0, with the protocol renamed to TLS to reflect independence from Netscape's proprietary technology. As a result, the terms SSL and TLS are often used interchangeably.
 
+<br>
+
 HTTPS is the combination of HTTP with TLS, which ensures secure data transmission over the internet. This integration is the foundation for secure web applications, with major browsers requiring HTTPS for various advanced web features.
 
 ## Understanding TLS/SSL Certificates
 
 A TLS/SSL certificate is a digital certificate issued by a Certificate Authority (CA) that certifies ownership of a domain through a public key. The CA digitally signs this certificate, and trust in the CA provides confidence that the public key belongs to the legitimate owners of the domain. These certificates follow the X.509 standard and are often called X.509 certificates interchangeably with TLS certificates.
+
+<br>
 
 The certificate ecosystem operates through a hierarchical chain of trust consisting of three primary levels:
 

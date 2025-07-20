@@ -26,9 +26,9 @@ IPC is the underlying layer that facilitates communication between components, u
 
 To address these critical issues, xFAPI offers a comprehensive solution comprising two major components: the **API Translator** and the **IPC Integrator**.
 
-**API Translator:** xFAPI functions as an API Translator, translating vendor-specific APIs used by L1 and L2 vendors. This ensures seamless communication between components, regardless of the proprietary protocols employed by different vendors.
+- **API Translator:** xFAPI functions as an API Translator, translating vendor-specific APIs used by L1 and L2 vendors. This ensures seamless communication between components, regardless of the proprietary protocols employed by different vendors.
 
-**IPC Integrator:** xFAPI also acts as an IPC Integrator, supporting various IPC mechanisms at both the L1 and L2 interfaces. Currently, it includes shared memory (xSM) and socket-based communication (e.g. nFAPI), thereby providing interoperability between L1 and L2 components and overcoming IPC compatibility challenges.
+- **IPC Integrator:** xFAPI also acts as an IPC Integrator, supporting various IPC mechanisms at both the L1 and L2 interfaces. Currently, it includes shared memory (xSM) and socket-based communication (e.g. nFAPI), thereby providing interoperability between L1 and L2 components and overcoming IPC compatibility challenges.
 
 ![alt text](./images/xfapi-bridging-l1-l2-gap/xfapi.png)
 
@@ -41,6 +41,8 @@ The "x" in xSM signifies "any," while "SM" stands for "Shared Memory." xSM is an
 ## Advanced Features of xFAPI
 
 xFAPI includes an integrated feature that can be activated at runtime via a compilation flag. This feature checks interoperability between L1 and L2 and offers the option to use xFAPI if needed.
+
+<br>
 
 In addition to its core functions, xFAPI provides advanced features such as detailed PDU statistics generation at both interfaces, robust debugging tools like a memory logger, state manager, multi-level logging, and a comprehensive dashboard for monitoring and analysis.
 

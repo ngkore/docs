@@ -17,6 +17,8 @@ This article comprehensively covers essential definitions, 5G cryptographic proc
 **Forward Secrecy:**  
 Forward secrecy ensures that if a long-term cryptographic key is compromised, session keys from previous communications remain secure and cannot be derived from the compromised key.
 
+<br>
+
 **Public Keys in 5G:**  
 Within a 5G network, a user’s SIM (or more broadly, the UE) contains the operator’s Home Network Public Key. This public key, though shared, cannot reveal the private key. Only those possessing the corresponding private (secret) key can perform decryption operations.
 
@@ -110,6 +112,8 @@ Now, if an attacker obtains the long-term SKhn, combining it with stored PKes an
 ## Limitations and Real-World Considerations
 
 Even a forward-secure handshake does not fully solve the problem in this context. The shared secret in each session encrypts/decrypts the same underlying SUPI (subscriber identity). SUPI does not change across sessions; if it is ever compromised, every session inevitably reveals the same concealed information.
+
+<br>
 
 Thus, while strengthening cryptographic process enhances security, the unchanging nature of SUPI means that its ultimate compromise weakens overall privacy, regardless of how forward-secure the concealment handshake may be.
 

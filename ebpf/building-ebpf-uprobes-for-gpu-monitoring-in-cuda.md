@@ -26,6 +26,8 @@ These functions live inside user-space shared libraries (libcuda.so, libcudart.s
 
 Traditional GPU monitoring is limited at the kernel or driver boundary, capturing only high-level symptoms (CPU/GPU utilization, basic memory stats) but not application-level behaviors. This means the “why” behind slow or erratic GPU performance often remains hidden.
 
+<br>
+
 **Common Real-World Issues Uncovered in Practice:**
 
 - Memory leaks from unmatched allocations
@@ -36,6 +38,8 @@ Traditional GPU monitoring is limited at the kernel or driver boundary, capturin
 ## eBPF Uprobes: Illuminating User-Space CUDA Behavior
 
 **eBPF uprobes** allow dynamic, zero-intrusion tracing of user-space function calls within CUDA libraries. This method overcomes the limitations of kernel-space probes, providing fine-grained observability into the actual sequence and parameters of CUDA Runtime API invocations.
+
+<br>
 
 **Example (conceptual):**
 
@@ -106,6 +110,8 @@ int trace_cu_mem_alloc_exit(struct pt_regs ctx) { / capture return values, timin
 ## Case Study: Diagnosing Memory Allocation Inefficiency
 
 **The Scenario**
+
+<br>
 
 A machine learning team observed unexpected training slowness during model development. Analysis revealed that the training loop allocated and freed a 1GB buffer on every batch iteration. This practice led to significant hidden performance costs.
 

@@ -28,6 +28,14 @@ jobs:
       with:
         python-version: '3.11'
         
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -35,7 +43,20 @@ jobs:
         
     - name: Build documentation
       run: |
-        sphinx-build -b dirhtml . _build/html --keep-going
+        export GITHUB_ACTIONS=true
+        sphinx-build -c . -b dirhtml . _build/html --keep-going -w .sphinx/warnings.txt
+        
+    - name: Add .nojekyll file
+      run: |
+        touch _build/html/.nojekyll
+        
+    - name: Verify build output
+      run: |
+        echo "Build directory structure:"
+        find _build/html -type f -name "*.html" | head -20
+        echo "Static files:"
+        find _build/html/_static -type f | head -10
+        echo "Index file exists:" && ls -la _build/html/index.html
         
     - name: Setup Pages
       uses: actions/configure-pages@v3

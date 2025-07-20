@@ -23,7 +23,9 @@ xFAPI has undergone comprehensive end-to-end interoperability testing across two
 
 xFAPI has successfully demonstrated interoperability by establishing end-to-end connectivity between OSC DU-High and FlexRAN (versions v22.11 and v23.07).
 
-**Deployment Stack:**<br>
+<br>
+
+**Deployment Stack:**
 Any 3GPP-Compliant 5G Core + CU + OSC DU-High + xFAPI + FlexRAN v22.11/v23.07 + LiteON +COTS UE
 
 ![alt text](./images/oran-interoperability-with-xfapi/t1-deployment-stack.png)
@@ -50,7 +52,9 @@ In this scenario, FlexRAN and xFAPI are deployed on one server, with OSC DU-High
 
 To further broaden its interoperability, xFAPI is undergoing modifications to support the nFAPI interface at the L1 side, thus facilitating successful connectivity between OSC DU-High and OAI L1.
 
-**Deployment Stack:**<br>
+<br>
+
+**Deployment Stack:**
 Any 3GPP-Compliant 5G Core + OAI CU + OSC DU-High + xFAPI + OAI L1 + LiteON + COTS UE
 
 ![alt text](./images/oran-interoperability-with-xfapi/t2-deployment-stack.png)
@@ -74,5 +78,7 @@ In this configuration, OAI L1 runs separately on one server, while xFAPI and OSC
 ## Building a Multi-Vendor Interoperable Ecosystem
 
 These tested topologies highlight xFAPI’s capacity to build an interoperable environment, significantly enhancing collaboration opportunities for diverse L1-L2 vendors within the O-RAN ecosystem.
+
+<br>
 
 Stay tuned for our upcoming blog, where we will explore how xFAPI’s evolving capabilities could extend further support to additional L1-L2 vendors and open-source stacks, promoting an even more resilient interoperable ecosystem.

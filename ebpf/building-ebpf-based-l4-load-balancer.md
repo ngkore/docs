@@ -10,6 +10,8 @@ _When milliseconds matter and millions of packets per second are just the starti
 
 Picture this scenario: during a traffic surge such as Black Friday, an e-commerce platform experiences overwhelming demand. The traditional Layer 4 load balancer—such as NGINX or HAProxy—that has reliably served for years becomes the system bottleneck. The CPU usage spikes, latency increases, and packet drops occur at an alarming rate.
 
+<br>
+
 Traditional Layer 4 load balancers operate in userspace, incurring overhead where every packet traverses the kernel networking stack multiple times, is copied between kernel and userspace buffers, and encounters context switching. These steps introduce microsecond latency per packet, which accumulates significantly when processing millions of packets per second (PPS). Such overhead eventually results in a performance ceiling that hardware improvements struggle to overcome.
 
 This is precisely where eBPF’s **XDP (eXpress Data Path)** technology is uniquely suited, offering a programmable, high-speed load balancing mechanism that significantly alleviates these issues.
@@ -17,6 +19,8 @@ This is precisely where eBPF’s **XDP (eXpress Data Path)** technology is uniqu
 ## XDP Serving as the NIC’s Personal Bouncer
 
 XDP functions as an intelligent gatekeeper, intercepting incoming packets immediately after reception by the Network Interface Card (NIC) driver. This early intervention prevents packets from traversing the entire kernel network stack and allows for instantaneous forwarding decisions.
+
+<br>
 
 **Key properties of XDP:**
 
@@ -451,6 +455,8 @@ This script automates:
 
 **Sticky Sessions**
 
+<br>
+
 Support session persistence by modifying the hash function to use only source IP for the backend selection when enabled.
 
 ```c
@@ -561,6 +567,8 @@ XDP is not a universal solution. Prefer traditional userspace load balancers in 
 
 Incorporate detailed statistics and counters to monitor key events and packet flows within your XDP program:
 
+<br>
+
 **Code Example: XDP Statistics Collection**
 
 ```c
@@ -589,6 +597,8 @@ if (value) (*value)++;
 ### Graceful Deployment Strategies
 
 Blue-green deployment approaches minimize risk when updating XDP programs in production environments:
+
+<br>
 
 **Code Example: Blue-Green Deployment Script**
 

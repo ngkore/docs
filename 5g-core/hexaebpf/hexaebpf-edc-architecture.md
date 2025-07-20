@@ -38,19 +38,21 @@ To address these limitations, the following two eBPF-powered projects effectivel
 
 HEXAeBPF provides openness and interoperability to the open source community.
 
+<br>
+
 HEXAeBPF is a Kubernetes (K8s) Operator designed to redefine how open-source 5G core networks are deployed and managed. By integrating and automating the deployment of Control Plane (CP) from Vendor A and eBPF-based User Plane (UP) from Vendor B, HEXAeBPF enables seamless, end-to-end 5G setup.
 
 Whether as a telecommunications researcher, developer, or network operator, HEXAeBPF streamlines deployment procedures, enhances interoperability, and facilitates the advancement of 5G core network architectures. HEXAeBPF simplifies the integration and deployment process, offering one-click deployment capabilities.
 
 ![alt text](./images/hexaebpf-interoperablity.png)  
-Figure1: Control Plane & eBPF User Plane Interoperability using HEXAeBPF
+**Figure 1:** Control Plane & eBPF User Plane Interoperability using HEXAeBPF
 
 ## HEXAeBPF Operator
 
 HEXAeBPF Operator is a Kubernetes Operator that continuously monitors Custom Resources (CRs) that define the desired state of an application or component. When a user creates or updates a CR, the Operator detects the change through its watch loop. This triggers a reconciliation event. The Operator’s controller then evaluates the current cluster state against the desired state defined in the CR. Based on this comparison and the Operator’s reconciliation logic, it performs the necessary actions—such as creating, updating, or deleting Kubernetes resources—via the Kubernetes API to bring the system into the desired state.
 
 ![alt text](./images/hexaebpf-operator.jpeg)  
-Figure2: HEXAeBPF Operator
+**Figure 2:** HEXAeBPF Operator
 
 ### Key Features
 
@@ -81,5 +83,3 @@ HEXAeBPF is free and open source. Contribution is welcomed from anyone intereste
 - [HEXAeBPF 5G SBP Use Case](https://lf-networking.atlassian.net/wiki/x/DoCkG)
 
 HEXAeBPF is an initiative to revolutionize the open source telecom community, and collaborating with the 5G Super Blueprint (5G SBP) Library provides more ground to grow.
-
-Stay tuned for more interesting features and updates about HEXAeBPF and telecom.

@@ -27,6 +27,8 @@ This approach creates significant performance bottlenecks due to data movement o
 
 Computational storage implements data processing capabilities directly within storage controllers. Rather than transferring all data to system memory, the storage device performs filtering and processing operations internally, returning only relevant results to the requesting application.
 
+<br>
+
 This architecture model eliminates unnecessary data movement while providing significant improvements in system performance and energy efficiency.
 
 ## eBPF Integration with Storage Controllers
@@ -90,6 +92,8 @@ This approach demonstrates significant improvements in processing speed, resourc
 
 Researchers at the IT University of Copenhagen developed the first functional prototype of eBPF computational storage, designated as the Delilah system. This implementation demonstrates the practical viability of secure eBPF execution within NVMe SSD controllers.
 
+<br>
+
 The Delilah project provides empirical validation of eBPF computational storage concepts through working prototype demonstration.
 
 ## Technology Adoption Timeline
@@ -145,6 +149,8 @@ The transition from traditional data retrieval models to intelligent data proces
 ## Future Considerations
 
 The computational storage paradigm represents a significant advancement in data processing architecture, transitioning from passive storage repositories to intelligent computational platforms capable of autonomous data processing and filtering operations.
+
+<br>
 
 This technology evolution indicates a broader shift toward distributed intelligence within computing infrastructure components.
 

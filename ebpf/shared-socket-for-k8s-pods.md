@@ -8,7 +8,10 @@
 
 Efficient pod-to-pod communication is central to high-performance Kubernetes deployments, especially in data-intensive and low-latency domains such as AI/ML pipelines, telecom (5G/6G) cores, and high-frequency trading. The traditional networking stack introduces overhead—context switches, memory copies, iptables traversals—that can contribute substantial latency. For intra-node communication, these inefficiencies are especially painful.
 
-**Problem Statement:**  
+<br>
+
+**Problem Statement:**
+
 How can we bypass the overhead of the kernel networking stack to enable high-speed, low-latency socket communication between containers and pods?
 
 ## What is Shared Socket?
@@ -80,8 +83,9 @@ Network latency and throughput were measured using [Sockperf](https://github.com
 
 **Benchmark Results:**
 
-- ![alt text](./images/shared-socket-for-k8s-pods/performance-comparison.png)
-- ![alt text](./images/shared-socket-for-k8s-pods/metrics-comparison.png)
+![alt text](./images/shared-socket-for-k8s-pods/performance-comparison.png)
+
+![alt text](./images/shared-socket-for-k8s-pods/metrics-comparison.png)
 
 **Key Insights**
 
@@ -105,5 +109,7 @@ Shared Socket offers significant opportunities for further optimization and inno
 ## Conclusion
 
 Shared Socket represents an advancement in programmable networking for Kubernetes workloads, enabling near line-rate, kernel-bypassed communication between containers on the same node. By eliminating overhead from the kernel networking stack, substantial gains in speed and efficiency can be achieved with standard eBPF features, requiring no kernel modules or custom drivers.
+
+<br>
 
 This technology is immediately deployable in Kubernetes clusters and paves the way for deeper innovations in pod-to-pod communication and resource-efficient cloud-native networking.

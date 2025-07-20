@@ -14,6 +14,8 @@ Satellite-based 5G networks represent a fundamental shift in telecommunications 
 
 A significant portion of the global population remains digitally isolated despite widespread reference to the “connected age.” In the United States, for example, the rural-urban gap for 5G availability widened to 10.3 percentage points in Q2 2023.
 
+<br>
+
 Traditional cell towers face inherent physical limitations with a typical coverage radius of 1 to 4 miles, leading to cell coverage of 3 to 50 square miles. While dense urban and suburban areas benefit from this infrastructure, rural regions, mountainous locations, and remote territories are left with persistent coverage gaps, primarily due to the high costs and logistical challenges of terrestrial deployments.
 
 Rather than compensating for these gaps by proliferating ground-based towers across vast terrains, the innovative approach is to deploy them in orbit, creating coverage footprints that stretch across thousands of square miles per satellite.
@@ -22,11 +24,15 @@ Rather than compensating for these gaps by proliferating ground-based towers acr
 
 A new generation of satellites is changing the paradigm of internet connectivity. Unlike traditional satellite internet relying on ground equipment with high latency, modern systems utilize satellites functioning as space-borne cell towers.
 
+<br>
+
 A key advancement is the adoption of **Low Earth Orbit (LEO) satellite technology**. If current commercial satellite plans materialize within the next decade, over 65,000 satellites could circle Earth, compared to fewer than 10,000 today. These advanced, compact satellites integrate with existing mobile devices, enabling seamless connections without significant alterations to user equipment.
 
 ## What Makes LEO Satellites Game-Changers?
 
 **Altitude Advantage**
+
+<br>
 
 Conventional satellite services utilize geostationary satellites positioned 35,786 kilometers above Earth, resulting in high latency and weaker signals. LEO satellites, by operating at distances of 550 to 1,200 kilometers, dramatically reduce communication latency and increase signal strength due to proximity.
 
@@ -95,6 +101,8 @@ Upcoming parts of this series will cover:
 ## The Revolution Has Already Begun
 
 Numerous LEO constellations are in active deployment, bringing reliable high-speed internet to previously unserved populations and revolutionizing the world’s digital backbone. The world is witnessing the start of a paradigm shift from cable and fiber to orbital satellite infrastructure.
+
+<br>
 
 The pace, scope, and ultimate impact of this global transformation will be shaped by technological, regulatory, and business factors — but there is no denying that the internet is truly moving to space.
 

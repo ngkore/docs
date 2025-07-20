@@ -1,6 +1,6 @@
 # QUIC: The Future of Internet Transport
 
-**Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)  
+**Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)
 
 **Published:** June 26, 2025
 
@@ -9,6 +9,8 @@ QUIC (Quick UDP Internet Connections) is a modern transport protocol that fundam
 ## What is QUIC Protocol?
 
 QUIC (Quick UDP Internet Connections) originated at Google in 2012 and has evolved into an IETF standard (RFC 9000). Unlike traditional web communication that relies on separate protocols for different functions (TCP for reliability, TLS for security, HTTP/2 for efficiency), QUIC integrates these capabilities into a single, cohesive protocol.
+
+<br>
 
 QUIC builds upon UDP as its foundation while implementing reliability, security, and multiplexing features typically handled by higher-layer protocols. The protocol operates primarily at the transport layer but incorporates functionality spanning OSI layers 4-6, providing an integrated solution for modern internet communication requirements.
 
@@ -23,7 +25,7 @@ TCP, after decades of deployment, suffers from significant ossification. Middleb
 UDP provides an ideal foundation for QUIC because:
 
 - **Universal Compatibility**: UDP has existed since the early days of networking and enjoys universal support across all network infrastructure
-- **Minimal Assumptions**: Network devices treat UDP as a simple datagram service, allowing QUIC to implement sophisticated features without middlebox interference  
+- **Minimal Assumptions**: Network devices treat UDP as a simple datagram service, allowing QUIC to implement sophisticated features without middlebox interference
 - **Clean Slate**: UDP's simplicity provides a neutral foundation for implementing modern transport features without legacy constraints
 
 ## Traditional Protocol Stack: TCP+TLS+HTTP/2
@@ -35,7 +37,7 @@ The traditional internet protocol stack employed a layered approach with distinc
 The conventional web communication stack utilized three primary protocols:
 
 - **TCP**: Provided reliable, ordered data delivery with connection management and flow control
-- **TLS**: Implemented cryptographic security, authentication, and data integrity protection  
+- **TLS**: Implemented cryptographic security, authentication, and data integrity protection
 - **HTTP/2**: Enabled efficient multiplexing of multiple requests over a single connection
 
 This separation of concerns followed established networking principles, allowing each protocol layer to be developed, tested, and optimized independently. The modular approach facilitated protocol evolution and maintenance by enabling focused improvements to specific functionality areas.
@@ -68,6 +70,8 @@ With a 150ms round trip time between geographically distant locations, connectio
 
 The traditional approach suffered from several issues that made web browsing feel sluggish:
 
+<br>
+
 **Multiple Round Trips:** At least 3–4 round trips are required before any actual data can flow, resulting in high latency for every new connection.
 
 **Head-of-Line Blocking:** Despite HTTP/2's multiplexing capabilities, TCP's ordered delivery requirement causes all streams to stall when any single packet is lost, as subsequent packets must wait for retransmission of the missing data.
@@ -76,10 +80,11 @@ The traditional approach suffered from several issues that made web browsing fee
 
 **Protocol Ossification:** Enhancements to TCP are difficult to deploy at scale due to incompatibility with middleboxes worldwide already optimized for the established protocol patterns.
 
-
 ## How QUIC Data Travels Now
 
 QUIC integrates handshaking, security negotiation, and data exchange into one process, eliminating the multiple round-trip bottlenecks of the conventional stack.
+
+<br>
 
 QUIC’s design philosophy is simple: combine the best of all worlds while eliminating the worst. It provides TCP’s reliability, TLS’s security, and HTTP/2’s efficiency, but it does so without the overhead and complexity of running three separate protocols.
 
@@ -173,13 +178,15 @@ The operation of QUIC when connecting to a website is as follows:
 
 **Step 4:** Secure Communication
 
-All subsequent communication is encrypted using the established session keys. Unlike traditional TCP+TLS, TLS is integrated into QUIC, removing the separate handshake step and enabling application data to be exchanged as part of the handshake itself.
+- All subsequent communication is encrypted using the established session keys. Unlike traditional TCP+TLS, TLS is integrated into QUIC, removing the separate handshake step and enabling application data to be exchanged as part of the handshake itself.
 
 ## The Head-of-Line Blocking Problem
 
 Head-of-Line (HOL) blocking is a performance-limiting issue where a queue of packets is held up by the first lost packet, delaying all subsequent packets even if they could otherwise be delivered independently. This detracts from speed and responsiveness.
 
-With HTTP/1.1, browsers opened multiple TCP connections, each capable of handling only one request. With HTTP/2, multiplexing was introduced so multiple “streams” could use a single TCP connection, resembling multiple simultaneous conversations. 
+<br>
+
+With HTTP/1.1, browsers opened multiple TCP connections, each capable of handling only one request. With HTTP/2, multiplexing was introduced so multiple “streams” could use a single TCP connection, resembling multiple simultaneous conversations.
 
 ```console
 Stream 1 (HTML): [chunk1] [chunk2] [chunk3]
@@ -189,7 +196,6 @@ Stream 3 (JS): [chunk1] [chunk2] [chunk3]
 On the wire:
 [HTML-chunk1][CSS-chunk1][JS-chunk1][HTML-chunk2][CSS-chunk2][JS-chunk2]…
 ```
-
 
 This improved throughput, but TCP’s ordered delivery still caused all streams to wait for retransmission when any packet was lost.
 
@@ -273,6 +279,8 @@ Advantages include:
 ## Conclusion
 
 QUIC represents a fundamental advancement in internet transport protocols rather than an incremental improvement. The protocol addresses the core challenges of modern internet communication: global latency requirements, mobile connectivity patterns, and the imperative for integrated security and performance.
+
+<br>
 
 While the TCP+TLS+HTTP/2 stack served the internet well during its evolution, QUIC provides a purpose-built solution for contemporary networking demands. The protocol is actively deployed in production environments, with major services including Google, YouTube, Facebook, and numerous CDN providers implementing QUIC support.
 

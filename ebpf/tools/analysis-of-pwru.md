@@ -8,11 +8,15 @@
 
 eBPF (Extended Berkeley Packet Filter) has dramatically advanced the fields of observability, monitoring, and system interaction within the Linux kernel. Originally intended for packet filtering, eBPF now allows secure execution of small programs inside the Linux kernel space—without requiring kernel code modifications or reboots. These programs can attach to a range of system events, including networking, syscalls, tracing, and security—even at production runtime. This capability enhances fine-grained control and deep visibility.
 
+<br>
+
 In the networking domain, eBPF brings powerful tools for tracing, filtering, and manipulating traffic across various protocol layers with negligible overhead. **PWRU** is a standout tool leveraging these capabilities.
 
 ## What is PWRU?
 
 PWRU, standing for "**Packet, Where Are You?**", is an open-source, eBPF-powered packet tracer developed by the Cilium team. It enables engineers, developers, and observability practitioners to trace the complete lifecycle of packet flow across the Linux kernel networking stack.
+
+<br>
 
 PWRU achieves this by dynamically attaching **kprobes** to a targeted set of kernel functions, observing packet movement in real time without requiring custom kernel builds. It tracks packets through interfaces, routing, firewall, and socket layers, providing comprehensive network path traceability.
 
@@ -48,16 +52,19 @@ PWRU captures and processes packet and event data through the use of specific st
 - `event_t`: Aggregates metadata and event context: timestamp, sk_buff pointer, PID, and attributes.
 
 **BPF maps used:**
+
 - `events`: Perf buffers or ring buffers to send events to user space.
 - `skb_addresses`, `skb_stackid`, `stackid_skb`: Help track packet lifecycle and kernel stack traces.
 - `print_stack_map`: Persists collected kernel stack traces.
 
 **Helper functions:**
+
 - `get_netns()`: Fetches packet network namespace.
 - `filter_meta()`: Applies meta-based filters (e.g., netns, marks, interface).
 - `set_meta()`, `set_tuple()`: Populate structures using header parsing logic.
 
 **Filtering:**
+
 - L2/L3 pcap-style filters (`filter_pcap_l2`, `filter_pcap_l3`).
 - Main filtering logic (`filter()`) combines all criteria.
 
@@ -83,7 +90,6 @@ sudo apt install -y clang llvm gcc make flex bison byacc yacc libpcap-dev golang
 ### Building PWRU from Source
 
 Clone and build as follows:
-
 
 ```console
 # Clone the PWRU GitHub repository
@@ -116,7 +122,6 @@ This traces packets matching the ICMP protocol layer and prints the source/desti
 
 **Sample Output:**
 
-
 ```console
 2025/04/26 12:34:14 Attaching kprobes (via kprobe-multi)...
 1642 / 1642 [----------------------------------------------------------------------------------------------------------------------------------] 100.00% ? p/s
@@ -142,7 +147,6 @@ SKB                CPU PROCESS          NETNS      MARK/x        IFACE       PRO
 0xffff99cf08de1100 0   <empty>:0        4026531840 0             eth0:2      0x0800 1500  68    192.168.6.1:0->192.168.6.236:0(icmp) nf_ip_checksum
 0xffff99cf08de1100 0   <empty>:0        4026531840 0             eth0:2      0x0800 1500  68    192.168.6.1:0->192.168.6.236:0(icmp) __skb_checksum_complete
 ```
-
 
 Each output row shows a packet (`skb`) and its traversal across various kernel functions, relevant interface, tuple, and metadata, allowing precise code-path tracing and network subsystem introspection.
 

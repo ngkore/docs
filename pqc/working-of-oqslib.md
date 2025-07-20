@@ -8,6 +8,8 @@
 
 Liboqs is an open-source C library providing quantum-safe cryptographic algorithms. It offers a suite of implementations for post-quantum key encapsulation mechanisms (KEMs) and digital signature algorithms, including Kyber, Saber, NTRU, McEliece, Frodo, Dilithium, RainBow, Picnic, among others.
 
+<br>
+
 To explore the practical implementation of these algorithms, it is useful to examine the C++ wrapper library, liboqs-cpp.
 
 ## 2. LibOQS-Cpp
@@ -52,6 +54,8 @@ Reference: https://github.com/open-quantum-safe/liboqs-cpp/blob/main/examples/ke
 
 Reference: https://github.com/open-quantum-safe/liboqs-cpp/blob/main/examples/rand.cpp
 
+<br>
+
 The role of this file is to manage random number generation—a fundamental part of cryptographic security.
 
 - Secure random number generation begins with an entropy seed. In the liboqs implementation, this seed is 48 bytes.
@@ -71,6 +75,8 @@ The role of this file is to manage random number generation—a fundamental part
 ### 2.3 SIG.cpp
 
 Reference: https://github.com/open-quantum-safe/liboqs-cpp/blob/main/examples/sig.cpp
+
+<br>
 
 This part of the library deals with digital signature creation and verification, vital for authenticating the sender.
 

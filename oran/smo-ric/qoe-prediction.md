@@ -6,13 +6,15 @@
 
 In this era of telecommunications where features are being upgraded round the clock, ensuring high user satisfaction is paramount. QoE or Quality of Experience is an important metric that has enabled us to do the above mentioned task. The definition of QoE, which was adopted by ITU in Recommendation ITU-T P.10/G.100 is:
 
-*The degree of delight or annoyance of the user of an application or service. It results from the fulfillment of his or her expectations with respect to the utility and / or enjoyment of the application or service in the light of the user’s personality and current state.*
+_The degree of delight or annoyance of the user of an application or service. It results from the fulfillment of his or her expectations with respect to the utility and / or enjoyment of the application or service in the light of the user’s personality and current state._
 
-This was given by [Qualinet]((https://www.qualinet.eu/)) of COST (European Cooperation in Science and Technology) Association.
+This was given by [Qualinet](<(https://www.qualinet.eu/)>) of COST (European Cooperation in Science and Technology) Association.
 
 ## QoE Prediction
 
 Quality of Experience (QoE) prediction models have emerged as a tool to achieve this. QoE represents the user’s subjective satisfaction with a network service, and accurately predicting it helps operators enhance service delivery to meet user expectations. By predicting and managing potential issues beforehand, QoE models play a vital role in guaranteeing non-interruptive, high-quality service, even under heavy network load or in dynamic environments.
+
+<br>
 
 5G networks are designed to accommodate a wide range of services, from Ultra-Reliable Low-Latency Communications (URLLC) for mission-critical applications to massive Machine-Type Communications (mMTC) for IoT. Predicting QoE in such a complex landscape allows operators to proactively manage network resources, adjusting parameters to ensure that each service meets its unique quality requirements. In this blog, we will dive into how QoE prediction models operate within the 5G framework, their benefits, and various use cases that highlight their potential impact on enhancing user experience.
 
@@ -40,12 +42,13 @@ Network slicing in 5G allows operators to allocate network resources into dedica
 
 AI and Machine Learning (ML) technologies play an integral role in QoE prediction models, analyzing vast datasets to uncover patterns that impact user experience. Through continuous learning, these models become increasingly accurate, factoring in user behavior, device types, environmental conditions, and network congestion levels. In 5G, Non-Real-Time and Near-Real-Time RAN Intelligent Controllers (Non-RT and Near-RT RICs) use these predictions to make both short-term and long-term adjustments. By leveraging historical data, AI-driven models enable more informed, timely decisions, delivering a high-quality, responsive network experience that can adapt to evolving demands.
 
+<br>
+
 Our Near-RT RIC and Non-RT RIC are used as a host when we utilize AI/ML for prediction. You can refer to our video below showcasing the end to end deployment of AI/ML Framework over distributed RAN architecture and further applying prediction models over it:
 
 ## QoE Prediction for Smart Cities and IoT
 
 In smart city applications, where IoT devices are widely deployed, QoE prediction models help manage data quality and transmission efficiency. Predictive models allow cities to optimize connectivity for devices such as traffic cameras, smart meters, and connected streetlights, maintaining high performance despite network fluctuations. In dense IoT environments, QoE predictions can inform operators of areas at risk of congestion, ensuring continuous and efficient data flow. This predictive capability is especially important for applications such as public safety and transportation, where reliable connectivity is crucial for operational success.
-
 
 ### Use Cases of QoE Prediction Models in 5G Networks
 
@@ -58,8 +61,6 @@ The application of QoE prediction in 5G networks spans numerous use cases, each 
 5. **Industrial Automation:** In factories and warehouses, QoE prediction maintains reliable connectivity for automated machinery and robots, optimizing production efficiency and reducing operational costs.
 6. **Public Safety Networks:** For emergency services, QoE prediction models provide high-priority, reliable connections, ensuring timely communication during critical situations and improving response times.
 
-
 ## Conclusion
 
 Quality of Experience (QoE) prediction models have become a key component in the 5G ecosystem, enabling networks to deliver high-quality, reliable service tailored to user expectations. By forecasting potential issues and adjusting resources in real time, QoE models not only enhance user satisfaction but also optimize network performance and resource management. As 5G continues to evolve, the role of QoE prediction models will become increasingly important, helping operators deliver responsive, adaptive networks that can meet the diverse demands of next-generation applications, from smart cities to real-time gaming. Through this proactive approach, QoE prediction models are set to play a central role in the future of telecom, shaping the network’s ability to provide seamless, satisfying user experiences across all sectors.
-

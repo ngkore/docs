@@ -1,6 +1,6 @@
 # Understanding IPsec: How Internet Security Works
 
-**Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)  
+**Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)
 
 **Published:** July 1, 2025
 
@@ -15,6 +15,8 @@ The protocol suite maintains security state information in two key databases: th
 ## How does IPsec work?
 
 IPsec connections include the following steps:
+
+<br>
 
 **Key exchange:** IPsec sets up keys with a key exchange between the connected devices, so that each device can decrypt the other device’s messages.
 
@@ -69,6 +71,8 @@ The NAT-T process includes several sophisticated mechanisms beyond simple UDP wr
 
 The original Internet Protocol (IP) was designed in an era of trusted networks where security was not a primary concern. When researchers and academics created IP in the 1970s and 1980s, the network consisted of a limited number of trusted institutions, and the primary focus was on connectivity and reliability rather than security.
 
+<br>
+
 In this original model, data transmission was straightforward but completely unprotected. Applications would create data, TCP would add reliability mechanisms, and IP would handle routing — all in plain text. This approach created several fundamental vulnerabilities including eavesdropping where any device could read packet contents, data tampering where traffic could be modified without detection, and identity spoofing where source addresses could be easily forged.
 
 Early security solutions operated at the application layer, requiring each service to implement its own protection mechanisms. Email used PGP for encryption/decryption, web traffic relied on TLS/SSL for protection, and remote access employed SSH for secure connections. This piecemeal approach meant that security coverage was inconsistent, with many protocols remaining completely unprotected.
@@ -80,6 +84,8 @@ The fundamental issue was that security was treated as an add-on feature rather 
 ## What Protocols Does IPsec Use?
 
 IPsec employs a coordinated set of protocols that work together to provide comprehensive network security. At its core, IPsec uses two main security protocols: AH and ESP.
+
+<br>
 
 **Authentication Header (AH)** provides data integrity and authentication services without encryption. AH computes a cryptographic hash over the entire IP packet using shared secret keys, creating an Integrity Check Value that proves the packet originated from the claimed sender and hasn’t been modified in transit. The protocol also includes sequence numbers to prevent replay attacks where old packets are retransmitted by attackers.
 
@@ -104,9 +110,9 @@ IKE operates in two distinct phases:
 >
 > **Quick Mode:** Uses the secure Phase 1 tunnel to quickly negotiate IPsec parameters without repeating the heavy authentication process.
 
-*The Security Association Database (SAD)* stores information about active security connections, including encryption keys, algorithm parameters, sequence numbers, and lifetime values. Each security association represents a one-way security relationship between two parties.
+_The Security Association Database (SAD)_ stores information about active security connections, including encryption keys, algorithm parameters, sequence numbers, and lifetime values. Each security association represents a one-way security relationship between two parties.
 
-*The Security Policy Database (SPD)* contains rules that determine how different types of traffic should be handled. The SPD specifies which traffic requires IPsec protection, what type of protection to apply, and what to do with traffic that doesn’t match any defined policies.
+_The Security Policy Database (SPD)_ contains rules that determine how different types of traffic should be handled. The SPD specifies which traffic requires IPsec protection, what type of protection to apply, and what to do with traffic that doesn’t match any defined policies.
 
 These components work together seamlessly. When an outbound packet needs protection, the SPD determines the required security treatment. If protection is needed but no suitable security association exists, IKE negotiates a new one and stores the results in the SAD. The appropriate security protocol (AH or ESP) then processes the packet according to the SAD parameters.
 
@@ -117,6 +123,8 @@ IPsec establishes secure communications through a two-phase negotiation process,
 ### Phase 1: IKE Security Association (SA) Establishment
 
 In this phase, an ISAKMP (Internet Security Association and Key Management Protocol) session is established. This is also called the ISAKMP tunnel or IKE phase 1 tunnel.
+
+<br>
 
 Phase 1 creates a secure, authenticated channel that will be used for all subsequent negotiations. This phase typically uses IKE Main Mode, which involves six message exchanges between the initiator and responder.
 
@@ -160,15 +168,17 @@ IPsec offers two distinct operational modes that determine how security is appli
 
 Transport mode applies IPsec protection to the payload of an IP packet while preserving the original IP header. In this mode, the IPsec header (ESP or AH) is inserted between the original IP header and the transport layer header (TCP or UDP). The original source and destination IP addresses remain visible, but the transport layer and application data are encrypted and authenticated.
 
+<br>
+
 **Packet Structure:**
 
-*For AH:*
+_For AH:_
 ![alt text](./images/ipsec/transport-ah.webp)
 
-*For ESP:*
+_For ESP:_
 ![alt text](./images/ipsec/transport-esp.webp)
 
-*For AH+ESP:*
+_For AH+ESP:_
 ![alt text](./images/ipsec/transport-ah-esp.webp)
 
 When a packet is processed in transport mode, the original IP header guides routing decisions throughout the network. Network devices can apply quality of service policies based on the visible addressing information, and traffic analysis reveals the communication endpoints. However, the actual data exchange, including transport layer information and application content, remains protected from eavesdropping and tampering.
@@ -179,15 +189,17 @@ Transport mode is primarily used for end-to-end communications between two hosts
 
 Tunnel mode encapsulates the entire original IP packet within a new IP packet. The original packet, including its headers, becomes the payload of a new IP packet with different source and destination addresses. This new outer header typically points to IPsec gateways or VPN endpoints rather than the original communication endpoints.
 
+<br>
+
 **Packet Structure:**
 
-*For AH:*
+_For AH:_
 ![alt text](./images/ipsec/transport-ah.webp)
 
-*For ESP:*
+_For ESP:_
 ![alt text](./images/ipsec/transport-esp.webp)
 
-*For AH+ESP:*
+_For AH+ESP:_
 ![alt text](./images/ipsec/transport-ah-esp.webp)
 
 In tunnel mode processing, the complete original packet is encrypted and becomes the payload of the new packet. Network routing decisions are based on the outer IP header, which usually directs traffic between security gateways. The original communication endpoints are hidden within the encrypted payload, providing location privacy and enabling network-to-network communications.

@@ -28,6 +28,8 @@ eBPF operates through a sophisticated architecture combining bytecode execution,
 
 eBPF programs are small, specialized code segments written in a restricted domain-specific language. These programs target specific tasks including packet filtering, system call interception, and data analysis. Programs are compiled into bytecode—a low-level representation executable by the eBPF virtual machine.
 
+<br>
+
 The BCC (BPF Compiler Collection) framework demonstrates this process by enabling eBPF code development in C. BCC compiles the code to eBPF bytecode using Clang/LLVM and loads it into the kernel via the bpf() system call.
 
 ### eBPF Verifier

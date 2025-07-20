@@ -12,9 +12,9 @@ Modern telecommunications networks rely on advanced artificial intelligence (AI)
 
 AI-powered call routing solutions employ adaptive algorithms that continuously learn and evolve based on real-time network behavior and historical traffic patterns. Unlike traditional rule-based routing frameworks, these systems intelligently adapt to changing network status, user load, and unforeseen events, refining their decision logic through ongoing data analysis.
 
-**Traditional Routing** utilizes static, rule-driven decision trees, which employ fixed routing paths and lack adaptivity to fluctuating network conditions.
+- **Traditional Routing** utilizes static, rule-driven decision trees, which employ fixed routing paths and lack adaptivity to fluctuating network conditions.
 
-**AI-Enhanced Routing** leverages ML models to assess real-time and historical network data, enabling dynamic, context-aware optimization of routing decisions.
+- **AI-Enhanced Routing** leverages ML models to assess real-time and historical network data, enabling dynamic, context-aware optimization of routing decisions.
 
 ## Core Technology Components
 
@@ -45,6 +45,8 @@ AI platforms increasingly incorporate NLP to process and understand spoken input
 ## Real-World Applications
 
 **Call Centers**
+
+<br>
 
 Studies, including Nvidia's 2024 industry report, indicate 90% of telecom companies now deploy AI for customer service optimization, resulting in:
 

@@ -10,6 +10,8 @@ In an era dominated by the demand for real-time and low-latency communications, 
 
 ![alt text](./images/dtn-nasa.png)
 
+[Watch Video on Delay/Disruption Tolerant Networking from NASA](https://youtu.be/0gCMIiJdYPQ)
+
 ## Limitations of the Traditional Internet Architecture
 
 The conventional Internet protocol stack is built on several implicit assumptions:
@@ -60,8 +62,6 @@ DTN employs message-based switching (the Bundle Protocol) rather than stateless 
 ### 8. Multipath and Opportunistic Routing
 
 DTN supports dynamic route selection over multiple potential paths, leveraging time-varying, opportunistic contacts to maximize delivery success in unpredictable network topologies.
-
-[Watch Delay/Disruption Tolerant Networking from NASA](https://youtu.be/0gCMIiJdYPQ)
 
 ## The Bundle Protocol
 
