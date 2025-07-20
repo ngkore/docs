@@ -63,10 +63,8 @@ jobs:
     - name: Add .nojekyll file and create index.html
       run: |
         touch _build/html/.nojekyll
-        # Create index.html from the main index file for GitHub Pages
-        if [ -f "_build/html/index" ]; then
-          cp _build/html/index _build/html/index.html
-        fi
+        # Create index.html files for all directories
+        find _build/html -name "index" -type f -exec sh -c 'cp "$1" "${1%index}index.html"' _ {} \;
         
     - name: Verify build output
       run: |

@@ -38,7 +38,8 @@ html:
 html-github:
 	. $(VENV); export GITHUB_ACTIONS=true; $(SPHINXBUILD) -c . -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt --keep-going
 	touch "$(BUILDDIR)/.nojekyll"
-	if [ -f "$(BUILDDIR)/index" ]; then cp "$(BUILDDIR)/index" "$(BUILDDIR)/index.html"; fi
+	# Create index.html files for all directories
+	find "$(BUILDDIR)" -name "index" -type f -exec sh -c 'cp "$$1" "$${1%index}index.html"' _ {} \;
 
 epub:
 	. $(VENV); $(SPHINXBUILD) -c . -b epub "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt
