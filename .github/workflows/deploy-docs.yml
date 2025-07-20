@@ -40,11 +40,25 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        echo "Installed packages:"
+        pip list | grep -E "(sphinx|furo|myst)" || echo "Core packages listed above"
         
     - name: Build documentation
       run: |
+        # Ensure .sphinx directory exists
+        mkdir -p .sphinx
         export GITHUB_ACTIONS=true
-        sphinx-build -c . -b dirhtml . _build/html --keep-going -w .sphinx/warnings.txt
+        sphinx-build -c . -b dirhtml . _build/html --keep-going -w .sphinx/warnings.txt -v
+        
+    - name: Check build warnings
+      run: |
+        if [ -f .sphinx/warnings.txt ]; then
+          echo "Build warnings found:"
+          cat .sphinx/warnings.txt
+          echo "Warnings logged, but build will continue"
+        else
+          echo "No warnings file found"
+        fi
         
     - name: Add .nojekyll file
       run: |
@@ -53,10 +67,15 @@ jobs:
     - name: Verify build output
       run: |
         echo "Build directory structure:"
-        find _build/html -type f -name "*.html" | head -20
+        find _build/html -type f -name "index" | head -20
+        echo "HTML directories:"
+        find _build/html -type d -maxdepth 2 | head -20
         echo "Static files:"
         find _build/html/_static -type f | head -10
-        echo "Index file exists:" && ls -la _build/html/index.html
+        echo "Main index exists:" && ls -la _build/html/index
+        echo "Checking .nojekyll file:" && ls -la _build/html/.nojekyll
+        echo "Total files built:" && find _build/html -type f | wc -l
+        echo "Build completed successfully"
         
     - name: Setup Pages
       uses: actions/configure-pages@v3
