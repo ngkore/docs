@@ -4,7 +4,7 @@ NgKore ([ngkore.org](https://ngkore.org)) is an open source community led by pas
 
 ## Contributing
 
-We welcome contributions from the community! See our [How to Contribute](CONTRIBUTING.md) for detailed setup instructions, development workflow, and pull request process.
+We welcome contributions from the community! See our [How to Contribute](how-to-contribute/) for detailed setup instructions, development workflow, and pull request process.
 
 ## Need Help?
 
@@ -15,4 +15,4 @@ We welcome contributions from the community! See our [How to Contribute](CONTRIB
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-Copyright 2023 NgKore Community
+Copyright &copy; 2023 NgKore Community. All rights reserved.

@@ -14,28 +14,28 @@ infrastructure.
 
 **Core Technologies**
 
-- [5G Core Networks](5g-core/) - Next-generation mobile networks
-- [O-RAN Interoperability](oran/) - Open radio access networks
+- {doc}`5G Core Networks <5g-core/index>` - Next-generation mobile networks
+- {doc}`O-RAN Interoperability <oran/index>` - Open radio access networks
 
 **Security & Cryptography**
 
-- [Post-Quantum Cryptography](pqc/) - Future-proof encryption
-- [Network Security](security/) - Advanced protection mechanisms
+- {doc}`Post-Quantum Cryptography <pqc/index>` - Future-proof encryption
+- {doc}`Network Security <security/index>` - Advanced protection mechanisms
 
 **Emerging Technologies**
 
-- [AI/ML Integration](ai-ml/) - Intelligent network automation
-- [Non-Terrestrial Networks](ntn/) - Satellite and aerial connectivity
+- {doc}`AI/ML Integration <ai-ml/index>` - Intelligent network automation
+- {doc}`Non-Terrestrial Networks <ntn/index>` - Satellite and aerial connectivity
 
 **Tools & Orchestration**
 
-- [eBPF Technology & Tools](ebpf/) - High-performance packet processing
-- [Kernel Bypass Technologies](kernel-bypass/) - Ultra-low latency networking
-- [L3AF Orchestration](l3af/) - eBPF program management
+- {doc}`eBPF Technology & Tools <ebpf/index>` - High-performance packet processing
+- {doc}`Kernel Bypass Technologies <kernel-bypass/index>` - Ultra-low latency networking
+- {doc}`L3AF Orchestration <l3af/index>` - eBPF program management
 
 ---
 
-[**How to Contribute**](CONTRIBUTING.md)
+<a href="how-to-contribute/"><strong>How to Contribute</strong></a>
 
 ```{toctree}
 :hidden:
@@ -49,5 +49,5 @@ security/index
 kernel-bypass/index
 ntn/index
 l3af/index
-CONTRIBUTING
+how-to-contribute
 ```

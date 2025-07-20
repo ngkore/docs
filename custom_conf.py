@@ -64,14 +64,14 @@ html_context = {
     # 'discourse': 'https://ngkore.org',
 
     # Change to the GitHub URL for your project
-    'github_url': 'https://github.com/ngkore',
+    'github_url': 'https://github.com/ngkore/docs',
 
     # Change to the branch for this version of the documentation
-    # 'github_version': 'main',
+    'github_version': 'main',
 
     # Change to the folder that contains the documentation
     # (usually "/" or "/docs/")
-    # 'github_folder': '/docs/',
+    'github_folder': '/',
 
     # Change to an empty value if your GitHub repo doesn't have issues enabled.
     # This will disable the feedback button and the issue link in the footer.
@@ -157,9 +157,9 @@ myst_heading_anchors = 3
 
 # Furo theme configuration
 html_theme_options = {
-    "source_repository": "",
-    "source_branch": "",
-    "source_directory": "",
+    "source_repository": "https://github.com/ngkore/docs",
+    "source_branch": "main",
+    "source_directory": ".",
     "footer_icons": [
         {
             "name": "Email",
@@ -223,9 +223,9 @@ if 'html_theme_options' not in locals():
     html_theme_options = {}
 
 html_theme_options.update({
-    "source_repository": "",
-    "source_branch": "",
-    "source_directory": "",
+    "source_repository": "https://github.com/ngkore/docs",
+    "source_branch": "main",
+    "source_directory": ".",
 })
 
 ## Add any configuration that is not covered by the common conf.py file.

@@ -6,7 +6,15 @@
 understanding-ebpf-in-kernel
 unlocking-network-performance-with-xdp
 ebpf-for-network-debugging
-analysis-of-pwru
+```
+
+```{toctree}
+:maxdepth: 2
+tools/index
+```
+
+```{toctree}
+:maxdepth: 1
 building-ebpf-monitor-with-go
 ebpf-maps-for-rate-limiting
 building-ebpf-based-l4-load-balancer
