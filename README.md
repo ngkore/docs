@@ -15,4 +15,4 @@ We welcome contributions from the community! See our [How to Contribute](how-to-
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-Copyright &copy; 2023 NgKore Community. All rights reserved.
+Copyright © 2023 NgKore Community. All rights reserved.

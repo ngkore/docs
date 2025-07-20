@@ -126,7 +126,7 @@ custom_extensions = []
 custom_myst_extensions = []
 
 # Add files or directories that should be excluded from processing.
-custom_excludes = []
+custom_excludes = ['venv/**']
 
 # Add CSS files (located in .sphinx/_static/)
 custom_html_css_files = ['hide-footer-text.css', 'footer-icons.css', 'ngkore-theme.css']
@@ -159,7 +159,7 @@ myst_heading_anchors = 3
 html_theme_options = {
     "source_repository": "https://github.com/ngkore/docs",
     "source_branch": "main",
-    "source_directory": ".",
+    "source_directory": "",
     "footer_icons": [
         {
             "name": "Email",
@@ -225,7 +225,7 @@ if 'html_theme_options' not in locals():
 html_theme_options.update({
     "source_repository": "https://github.com/ngkore/docs",
     "source_branch": "main",
-    "source_directory": ".",
+    "source_directory": "",
 })
 
 ## Add any configuration that is not covered by the common conf.py file.
