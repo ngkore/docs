@@ -149,12 +149,6 @@ disable_feedback_button = False
 # (https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#tags)
 custom_tags = []
 
-# MyST substitutions for dynamic GitHub links
-myst_substitutions = {
-    "github_url": html_context.get('github_url', 'https://github.com/ngkore/docs'),
-    "github_version": html_context.get('github_version', 'main'),
-}
-
 ############################################################
 ### Additional configuration
 ############################################################
