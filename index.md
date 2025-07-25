@@ -1,14 +1,6 @@
 # NgKore Documentation
 
-NgKore is an open source community led by a
-group of passionate researchers, engineers, and
-professionals working to advance the future of 5G
-Advanced and 6G technologies. Our work spans a wide
-range of focus areas, including O-RAN,
-Non-Terrestrial Networks (NTN), AI/ML integration,
-Post-Quantum Cryptography adoption, blockchain
-integration, and cloud-native telecom
-infrastructure.
+NgKore (ngkore.org) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
 
 ## Focus Areas
 
