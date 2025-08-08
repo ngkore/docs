@@ -3,6 +3,6 @@
 ```{toctree}
 :maxdepth: 1
 
-qoe-prediction
 uav-path-prediction
+qoe-prediction
 ```

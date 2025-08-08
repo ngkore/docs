@@ -3,6 +3,7 @@
 ```{toctree}
 :maxdepth: 2
 
+pqc/index
 hexaebpf/index
 ebpf/index
 security/index

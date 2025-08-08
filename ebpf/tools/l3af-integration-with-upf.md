@@ -12,7 +12,7 @@ In this blog post, we will delve into the exciting world of L3AF integration wit
 
 ## L3AF Architecture
 
-![alt text](./images/l3af-arch.png)
+![alt text](./images/l3af/l3af-arch.png)
 
 1.  **User API Call**: The process starts when a user sends an API call containing configuration data for the deployment of eBPF programs on the kernel, specifically at XDP and TC hooks.
 2.  **Policy Formation**: The configuration data from the API call is transformed into specific policies, which are then stored in a database for future use.
@@ -26,7 +26,7 @@ In this blog post, we will delve into the exciting world of L3AF integration wit
 
 ## 5G UPF
 
-![alt text](./images/upf1.png)
+![alt text](./images/l3af/upf1.png)
 
 The UPF (_User Plane Function_) plays a vital role in the data plane of 5G core network. Its primary responsibility is to perform packet
 forwarding and enforce forwarding policies for user data traffic. Essentially, it ensures that data packets are delivered to their desired
@@ -36,11 +36,11 @@ One of the key functionalities of the UPF is to handle traffic management which 
 
 Moreover, the UPF serves as a critical component in enabling advanced 5G features, such as network slicing.
 
-![alt text](./images/upf2.png)
+![alt text](./images/l3af/upf2.png)
 
 ## L3AF Integration with 5G UPF
 
-![alt text](./images/upf-l3af1.png)
+![alt text](./images/l3af/upf-l3af1.png)
 
 1.  **Packet Arrival**: Network packets first arrive at the NIC, which serves as the primary interface for incoming data from the network.
 2.  **Processing at XDP Hook**: The packets are initially processed at the XDP hook, a specific point in the Linux kernel designed for fast processing of network packets. Here, eBPF programs, managed and loaded by L3AFD, perform the first level of packet processing. These programs offer highly flexible and efficient packet filtering and manipulation capabilities.
@@ -52,4 +52,4 @@ Moreover, the UPF serves as a critical component in enabling advanced 5G feature
 
 By leveraging these advanced technologies, we can significantly enhance network performance and the overall user experience.
 
-![alt text](./images/upf-l3af2.png)
+![alt text](./images/l3af/upf-l3af2.png)

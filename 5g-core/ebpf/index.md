@@ -1,4 +1,4 @@
-# eBPF in 5GC
+# eBPF Integration
 
 ```{toctree}
 :maxdepth: 1
