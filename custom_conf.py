@@ -1,4 +1,4 @@
-import datetime
+import os
 
 # Custom configuration for the Sphinx documentation builder.
 # All configuration specific to your project should be done in this file.
@@ -15,23 +15,23 @@ import datetime
 # information" section.
 
 ############################################################
-### Project information
+# Project information
 ############################################################
 
 # Product name
 project = 'NgKore'
-author = 'Ngkore'
+author = 'NgKore'
 
 # The title you want to display for the documentation in the sidebar.
 # You might want to include a version number here.
 # To not display any title, set this option to an empty string.
-html_title = project + ' Docs'
+html_title = project + ' Documentation'
 
 # Copyright configuration for NgKore
 copyright = '2023 NgKore Community. All rights reserved.'
 
-## Open Graph configuration - defines what is displayed as a link preview
-## when linking to the documentation from another website (see https://ogp.me/)
+# Open Graph configuration - defines what is displayed as a link preview
+# when linking to the documentation from another website (see https://ogp.me/)
 # The URL where the documentation will be hosted (leave empty if you
 # don't know yet)
 ogp_site_url = "https://docs.ngkore.org"
@@ -39,6 +39,18 @@ ogp_site_url = "https://docs.ngkore.org"
 ogp_site_name = project
 # The URL of an image or logo that is used in the preview
 ogp_image = ".sphinx/_static/tag.png"
+
+# Enhanced SEO meta tags for better topic discoverability
+html_meta = {
+    'description': 'NgKore documentation covering Post-Quantum Cryptography (PQC), eBPF Technology, O-RAN, 5G Core Networks, Network Security, AI/ML Integration, NTN, Quantum Technologies and Kernel Bypass Technologies.',
+    'keywords': '5G core, PQC, post-quantum cryptography, eBPF, XDP, O-RAN, network security, AI/ML, kernel bypass, UPF, TLS, IPSec, QUIC, NTN, satellite networks, xFAPI, SMO, RIC, DPDK, AF_XDP, SRIOV, Quantum, OQS, Kubernetes, HEXAeBPF, OQS, PQC Migration, Telecom',
+    'author': 'NgKore Community',
+    'robots': 'index, follow',
+    'og:type': 'website',
+    'og:description': 'Open-source community driving innovation in 5G, Post-Quantum Cryptography, eBPF, O-RAN, and Cloud-Native Architectures.',
+    'twitter:card': 'summary_large_image',
+    'twitter:site': '@kore_ng',
+}
 
 # Update with the local path to the favicon for your product
 # (default is the circle of friends)
@@ -86,10 +98,10 @@ html_context = {
 slug = ""
 
 # Base URL and environment configuration
-import os
 
 # Detect if we're building for GitHub Pages
-is_production = os.environ.get('GITHUB_ACTIONS', False) or os.environ.get('READTHEDOCS', False)
+is_production = os.environ.get(
+    'GITHUB_ACTIONS', False) or os.environ.get('READTHEDOCS', False)
 
 if is_production:
     html_baseurl = '/'  # For custom domain GitHub Pages
@@ -100,7 +112,7 @@ else:
     html_theme_options_extra = {}
 
 ############################################################
-### Redirects
+# Redirects
 ############################################################
 
 # Set up redirects (https://documatt.gitlab.io/sphinx-reredirects/usage.html)
@@ -114,7 +126,7 @@ redirects = {
 }
 
 ############################################################
-### Link checker exceptions
+# Link checker exceptions
 ############################################################
 
 # Links to ignore when checking links
@@ -127,14 +139,14 @@ linkcheck_ignore = ['http://127.0.0.1:8000']
 custom_linkcheck_anchors_ignore_for_url = []
 
 ############################################################
-### Additions to default configuration
+# Additions to default configuration
 ############################################################
 
-## The following settings are appended to the default configuration.
-## Use them to extend the default functionality.
+# The following settings are appended to the default configuration.
+# Use them to extend the default functionality.
 
 # Add extensions
-custom_extensions = []
+custom_extensions = ['sphinx.ext.todo', 'sphinx_sitemap']
 
 # Add MyST extensions
 custom_myst_extensions = []
@@ -143,7 +155,8 @@ custom_myst_extensions = []
 custom_excludes = ['venv/**']
 
 # Add CSS files (located in .sphinx/_static/)
-custom_html_css_files = ['hide-footer-text.css', 'footer-icons.css', 'ngkore-theme.css']
+custom_html_css_files = ['hide-footer-text.css',
+                         'footer-icons.css', 'ngkore-theme.css']
 
 # Add JavaScript files (located in .sphinx/_static/)
 custom_html_js_files = ['custom-theme-toggle.js']
@@ -152,15 +165,15 @@ custom_html_js_files = ['custom-theme-toggle.js']
 if is_production:
     # Additional production-specific static file handling
     html_extra_path = []  # Add any extra paths if needed
-    
+
     # Ensure proper link resolution for GitHub Pages
     html_use_index = True
     html_file_suffix = ''
     html_link_suffix = '/'
-    
+
     # Static files already configured in main conf.py
 
-## The following settings override the default configuration.
+# The following settings override the default configuration.
 
 # Specify a reST string that is included at the end of each file.
 # If commented out, use the default (which pulls the reuse/links.txt
@@ -176,10 +189,50 @@ disable_feedback_button = False
 custom_tags = []
 
 ############################################################
-### Additional configuration
+# Additional configuration
 ############################################################
 
 myst_heading_anchors = 3
+
+# SEO Enhancements
+html_use_opensearch = 'https://docs.ngkore.org'
+html_baseurl = 'https://docs.ngkore.org/'
+
+# Sitemap configuration for better search engine indexing
+sitemap_url_scheme = "{link}"
+sitemap_locales = ['en']
+
+# Structured data for search engines  
+html_extra_path = []
+if os.path.exists('robots.txt'):
+    html_extra_path.append('robots.txt')
+
+# Copy PDF files to build directory with custom handling
+import glob
+import shutil
+import os
+
+# Find PDF files and create a custom copy function that preserves directory structure
+def copy_pdf_files():
+    pdf_files = glob.glob('**/*.pdf', recursive=True)
+    for pdf_file in pdf_files:
+        # Create the directory structure in the build directory
+        target_dir = os.path.join('_build', os.path.dirname(pdf_file))
+        os.makedirs(target_dir, exist_ok=True)
+        # Copy the PDF file maintaining directory structure
+        target_path = os.path.join('_build', pdf_file)
+        shutil.copy2(pdf_file, target_path)
+
+# Custom build event to copy PDFs after the build
+def setup(app):
+    def copy_pdfs_after_build(app, exception):
+        if exception is None:  # Only copy if build was successful
+            copy_pdf_files()
+    
+    app.connect('build-finished', copy_pdfs_after_build)
+
+# Just add PDF files to extra path for now
+html_extra_path.extend(glob.glob('**/*.pdf', recursive=True))
 
 # Furo theme configuration
 html_theme_options = {
@@ -251,11 +304,11 @@ if 'html_theme_options' not in locals():
 html_theme_options.update({
     # Remove source repository to disable edit button
     # "source_repository": "https://github.com/ngkore/docs",
-    # "source_branch": "main", 
+    # "source_branch": "main",
     # "source_directory": "",
 })
 
 # Merge production-specific theme options
 html_theme_options.update(html_theme_options_extra)
 
-## Add any configuration that is not covered by the common conf.py file.
+# Add any configuration that is not covered by the common conf.py file.

@@ -1,4 +1,4 @@
-# Can 5G SUPI Concealment Really Ensure Forward Secrecy?
+# Can 5G SUPI Concealment really ensure Forward Secrecy?
 
 **Author:** [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)
 

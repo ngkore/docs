@@ -2,18 +2,87 @@
 
 {% block extrahead %}
 {{ super() }}
-<!-- Additional favicon links -->
-<link rel="apple-touch-icon" sizes="180x180" href="{{ pathto('_static', 1) }}/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ pathto('_static', 1) }}/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ pathto('_static', 1) }}/favicon-16x16.png">
-<link rel="manifest" href="{{ pathto('_static', 1) }}/site.webmanifest">
-{% endblock %}
+<!-- Enhanced SEO meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2196F3">
 
-{% block body -%}
-{{ super() }}
-<div class="bottom-logo">
-  <a href="https://ngkore.org" class="bottom-logo-link" target="_blank" rel="noopener noreferrer">
-    <img class="bottom-logo-image" src="{{ pathto('_static', 1) }}/ngkore-logo.png" alt="NgKore Logo" />
-  </a>
-</div>
-{%- endblock %}
+<!-- Topic-specific structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechnicalArticle",
+  "publisher": {
+    "@type": "Organization",
+    "name": "NgKore",
+    "url": "https://docs.ngkore.org",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://docs.ngkore.org/_static/ngkore-logo.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ pageurl|e }}"
+  },
+  "headline": "{{ title|e }}",
+  "description": "{% if meta and meta.description %}{{ meta.description|e }}{% else %}{{ title|e }} - NgKore Documentation covering 5G Core Networks, Post-Quantum Cryptography, eBPF Technology, O-RAN, Network Security, and more.{% endif %}",
+  "keywords": "{% if meta and meta.keywords %}{{ meta.keywords|e }}{% else %}5G core, post-quantum cryptography, eBPF, O-RAN, network security, NgKore{% endif %}",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "5G Core Networks",
+      "description": "Next-generation mobile network architecture"
+    },
+    {
+      "@type": "Thing", 
+      "name": "Post-Quantum Cryptography",
+      "description": "Quantum-resistant encryption algorithms"
+    },
+    {
+      "@type": "Thing",
+      "name": "eBPF Technology",
+      "description": "Extended Berkeley Packet Filter for kernel programming"
+    },
+    {
+      "@type": "Thing",
+      "name": "O-RAN",
+      "description": "Open Radio Access Network interoperability"
+    }
+  ],
+  "datePublished": "{{ last_updated|e if last_updated else '2023-01-01' }}",
+  "dateModified": "{{ last_updated|e if last_updated else '2023-01-01' }}"
+}
+</script>
+
+<!-- Topic breadcrumbs for better SEO -->
+{% if parents %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "NgKore Docs",
+      "item": "https://docs.ngkore.org/"
+    }
+    {% for parent in parents -%}
+    ,{
+      "@type": "ListItem", 
+      "position": {{ loop.index + 1 }},
+      "name": "{{ parent.title|e }}",
+      "item": "{{ parent.link|e }}"
+    }
+    {%- endfor %}
+    ,{
+      "@type": "ListItem",
+      "position": {{ parents|length + 2 }},
+      "name": "{{ title|e }}",
+      "item": "{{ pageurl|e }}"
+    }
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}

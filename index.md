@@ -1,6 +1,6 @@
 # NgKore Documentation
 
-NgKore (ngkore.org) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), eBPF, 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
+NgKore (_ngkore.org_) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), eBPF, 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
 
 ## Focus Areas
 
@@ -23,7 +23,6 @@ NgKore (ngkore.org) is an open-source community driving innovation across Post-Q
 
 - {doc}`eBPF Technology & Tools <ebpf/index>` - High-performance packet processing
 - {doc}`Kernel Bypass Technologies <kernel-bypass/index>` - Ultra-low latency networking
-- {doc}`L3AF Orchestration <l3af/index>` - eBPF program management
 
 ---
 
@@ -40,6 +39,5 @@ ai-ml/index
 security/index
 kernel-bypass/index
 ntn/index
-l3af/index
 how-to-contribute
 ```
