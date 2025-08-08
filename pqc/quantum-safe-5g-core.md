@@ -1,9 +1,9 @@
 # Quantum Safe 5G Core
-### PQTN Compliant 5G Core
 **Author:** [Aditya Koranga](https://www.linkedin.com/in/aditya-koranga/) & [Shubham Kumar](https://www.linkedin.com/in/chmodshubham/)
 
 **Published:** August 08, 2025
 
+### PQTN Compliant 5G Core
 ## Network Function PQC Migration
 
 ### AMF (Access and Mobility Management Function)
