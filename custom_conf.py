@@ -207,32 +207,12 @@ html_extra_path = []
 if os.path.exists('robots.txt'):
     html_extra_path.append('robots.txt')
 
-# Copy PDF files to build directory with custom handling
+# Copy PDF files to build directory maintaining directory structure
 import glob
-import shutil
-import os
 
-# Find PDF files and create a custom copy function that preserves directory structure
-def copy_pdf_files():
-    pdf_files = glob.glob('**/*.pdf', recursive=True)
-    for pdf_file in pdf_files:
-        # Create the directory structure in the build directory
-        target_dir = os.path.join('_build', os.path.dirname(pdf_file))
-        os.makedirs(target_dir, exist_ok=True)
-        # Copy the PDF file maintaining directory structure
-        target_path = os.path.join('_build', pdf_file)
-        shutil.copy2(pdf_file, target_path)
-
-# Custom build event to copy PDFs after the build
-def setup(app):
-    def copy_pdfs_after_build(app, exception):
-        if exception is None:  # Only copy if build was successful
-            copy_pdf_files()
-    
-    app.connect('build-finished', copy_pdfs_after_build)
-
-# Just add PDF files to extra path for now
-html_extra_path.extend(glob.glob('**/*.pdf', recursive=True))
+# Add PDF files to html_extra_path so Sphinx copies them properly
+pdf_files = glob.glob('**/*.pdf', recursive=True)
+html_extra_path.extend(pdf_files)
 
 # Furo theme configuration
 html_theme_options = {
