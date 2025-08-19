@@ -159,7 +159,7 @@ custom_html_css_files = ['hide-footer-text.css',
                          'footer-icons.css', 'ngkore-theme.css']
 
 # Add JavaScript files (located in .sphinx/_static/)
-custom_html_js_files = ['custom-theme-toggle.js']
+custom_html_js_files = ['custom-theme-toggle.js', 'bottom-logo.js']
 
 # Ensure proper static files configuration for GitHub Pages
 if is_production:
@@ -206,6 +206,10 @@ sitemap_locales = ['en']
 html_extra_path = []
 if os.path.exists('robots.txt'):
     html_extra_path.append('robots.txt')
+
+# Ensure the images directory (for bottom-right logo and other assets) is copied
+if os.path.isdir('images') and 'images' not in html_extra_path:
+    html_extra_path.append('images')
 
 # Copy PDF files to build directory maintaining directory structure
 import glob
