@@ -209,10 +209,17 @@ if os.path.exists('robots.txt'):
 
 # Copy PDF files to build directory maintaining directory structure
 import glob
+import os
 
-# Add PDF files to html_extra_path so Sphinx copies them properly
-pdf_files = glob.glob('**/*.pdf', recursive=True)
-html_extra_path.extend(pdf_files)
+# Find all PDFs under the source tree but exclude build/virtualenv dirs
+pdf_files = [
+    p for p in glob.glob('**/*.pdf', recursive=True)
+    if not p.startswith('_build/') and not p.startswith('.sphinx/')
+]
+
+# Add only their parent directories to preserve directory structure
+pdf_dirs = sorted({os.path.dirname(p) or '.' for p in pdf_files})
+html_extra_path.extend(pdf_dirs)
 
 # Furo theme configuration
 html_theme_options = {
