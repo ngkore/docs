@@ -101,4 +101,4 @@ PQTN (Post Quantum Telco Network) is a task force initiated by [GSMA](https://ww
 | **TLS Server Certs**    | ECDSA P-256        | ML-DSA-65                 | Rolling replacement     | Per NF schedule  |
 | **Client Certificates** | ECDSA P-256        | ML-DSA-44                 | On-demand issuance      | Service requests |
 
-> <a href="../docs/NgKore%20Quantum%20Safe%205G%20Core.pdf" download>Download the PDF version of this document</a>.
+> {download}`Download the PDF version of this document <docs/NgKore Quantum Safe 5G Core.pdf>`
