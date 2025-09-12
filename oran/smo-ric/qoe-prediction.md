@@ -1,6 +1,6 @@
 # QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture
 
-**Author:** [Nitin Rajput](https://www.linkedin.com/in/nitin-rajput-3a321114b/)
+**Author:** [Wafi Hasan](https://www.linkedin.com/in/wafi-hasan-334b3520a/)
 
 **Published:** November 8, 2024
 
