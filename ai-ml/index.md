@@ -6,4 +6,8 @@
 ai-training-at-scale
 ai-driven-call-routing
 openai-120B-model
+harbor-setup
+grok2-onprem
+k2-think-onprem
+aipos
 ```
