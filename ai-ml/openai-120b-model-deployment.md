@@ -2,11 +2,12 @@
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
-**Published:** Aug 10, 2025
+**Published:** August 10, 2025
 
 OpenAI just dropped 2 open models, i.e, 20B and 120B models.
 
 Reference Links:
+
 - [openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b?source=post_page-----686734ecf8c7---------------------------------------)
 - [openai/gpt-oss-120b](https://huggingface.co/openai/gpt-oss-120b?source=post_page-----686734ecf8c7---------------------------------------)
 
@@ -15,13 +16,12 @@ This deployment guide provides an on-premise AI chat system using OpenAI open-so
 The setup is GPU-accelerated with NVIDIA GPUs for faster response times and integrated with OpenWebUI to provide a web-based chat interface.
 
 This guide will walk you through the deployment of OpenAI OSS Models
-<hr>
 
 ## Deployment
 
 Make sure you have a K8s cluster with NVidia GPU operator installed:
 
-```
+```bash
 NAME                                                           READY   STATUS      RESTARTS       AGE
 gpu-feature-discovery-v2xpk                                    1/1     Running     0              4d8h
 gpu-operator-644fb64985-ffzws                                  1/1     Running     0              4d8h
@@ -37,30 +37,28 @@ nvidia-mig-manager-h2vjg                                       1/1     Running  
 nvidia-operator-validator-4r42f                                1/1     Running     0              4d8h
 ```
 
-
-### Node GPU resources:
+### Node GPU resources
 
 ```yaml
 Capacity:
-  cpu:                192
-  ephemeral-storage:  1844284980Ki
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             1056290768Ki
-  nvidia.com/gpu:     8
-  pods:               110
+  cpu: 192
+  ephemeral-storage: 1844284980Ki
+  hugepages-1Gi: 0
+  hugepages-2Mi: 0
+  memory: 1056290768Ki
+  nvidia.com/gpu: 8
+  pods: 110
 Allocatable:
-  cpu:                192
-  ephemeral-storage:  1699693034754
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             1056188368Ki
-  nvidia.com/gpu:     8
-  pods:               110
+  cpu: 192
+  ephemeral-storage: 1699693034754
+  hugepages-1Gi: 0
+  hugepages-2Mi: 0
+  memory: 1056188368Ki
+  nvidia.com/gpu: 8
+  pods: 110
 ```
 
-
-### Prepare vLLM deployment:
+### Prepare vLLM deployment
 
 #### 120B Model
 
@@ -73,7 +71,7 @@ metadata:
   name: vllm-cache-pvc
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 250Gi
@@ -103,53 +101,53 @@ spec:
     spec:
       hostIPC: true
       volumes:
-      - name: cache-volume
-        persistentVolumeClaim:
-          claimName: vllm-cache-pvc
-      - name: shm
-        emptyDir:
-          medium: Memory
-          sizeLimit: "32Gi"
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: vllm-cache-pvc
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: "32Gi"
       containers:
-      - name: vllm-gptoss
-        image: vllm/vllm-openai:gptoss
-        command:
-         - "vllm"
-         - "serve"
-         - "openai/gpt-oss-120b"
-         - "--host"
-         - "0.0.0.0"
-         - "--port"
-         - "8000"
-         - "--gpu-memory-utilization"
-         - "0.90"
-         - "--max-model-len"
-         - "80000"
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            nvidia.com/gpu: 1
-          limits:
-            nvidia.com/gpu: 1
-        volumeMounts:
-        - mountPath: /root/.cache/huggingface
-          name: cache-volume
-        - mountPath: /dev/shm
-          name: shm
-        env:
-        - name: LOG_LEVEL
-          value: "DEBUG"
-        - name: TIKTOKEN_RS_CACHE_DIR
-          value: "/vllm-workspace"
-        - name: HTTP_PROXY
-          value: "<Proxy Setting for your env>"
-        - name: HTTPS_PROXY
-          value: "<Proxy Setting for your env>"
-        - name: NO_PROXY
-          value: "localhost,127.0.0.1"
-        securityContext:
-          privileged: true
+        - name: vllm-gptoss
+          image: vllm/vllm-openai:gptoss
+          command:
+            - "vllm"
+            - "serve"
+            - "openai/gpt-oss-120b"
+            - "--host"
+            - "0.0.0.0"
+            - "--port"
+            - "8000"
+            - "--gpu-memory-utilization"
+            - "0.90"
+            - "--max-model-len"
+            - "80000"
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              nvidia.com/gpu: 1
+            limits:
+              nvidia.com/gpu: 1
+          volumeMounts:
+            - mountPath: /root/.cache/huggingface
+              name: cache-volume
+            - mountPath: /dev/shm
+              name: shm
+          env:
+            - name: LOG_LEVEL
+              value: "DEBUG"
+            - name: TIKTOKEN_RS_CACHE_DIR
+              value: "/vllm-workspace"
+            - name: HTTP_PROXY
+              value: "<Proxy Setting for your env>"
+            - name: HTTPS_PROXY
+              value: "<Proxy Setting for your env>"
+            - name: NO_PROXY
+              value: "localhost,127.0.0.1"
+          securityContext:
+            privileged: true
 ```
 
 #### 20B Model
@@ -163,7 +161,7 @@ metadata:
   name: vllm-cache-pvc
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 250Gi
@@ -191,53 +189,53 @@ spec:
     spec:
       hostIPC: true
       volumes:
-      - name: cache-volume
-        persistentVolumeClaim:
-          claimName: vllm-cache-pvc
-      - name: shm
-        emptyDir:
-          medium: Memory
-          sizeLimit: "32Gi"
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: vllm-cache-pvc
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: "32Gi"
       containers:
-      - name: vllm-gptoss
-        image: vllm/vllm-openai:gptoss
-        command:
-         - "vllm"
-         - "serve"
-         - "openai/gpt-oss-20b"
-         - "--host"
-         - "0.0.0.0"
-         - "--port"
-         - "8000"
-         - "--gpu-memory-utilization"
-         - "0.90"
-         - "--max-model-len"
-         - "50000"
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            nvidia.com/gpu: 6
-          limits:
-            nvidia.com/gpu: 6
-        volumeMounts:
-        - mountPath: /root/.cache/huggingface
-          name: cache-volume
-        - mountPath: /dev/shm
-          name: shm
-        env:
-        - name: LOG_LEVEL
-          value: "DEBUG"
-        - name: TIKTOKEN_RS_CACHE_DIR
-          value: "/vllm-workspace"
-        - name: HTTP_PROXY
-          value: "<Proxy Setting for your env>"
-        - name: HTTPS_PROXY
-          value: "<Proxy Setting for your env>"
-        - name: NO_PROXY
-          value: "localhost,127.0.0.1"
-        securityContext:
-          privileged: true
+        - name: vllm-gptoss
+          image: vllm/vllm-openai:gptoss
+          command:
+            - "vllm"
+            - "serve"
+            - "openai/gpt-oss-20b"
+            - "--host"
+            - "0.0.0.0"
+            - "--port"
+            - "8000"
+            - "--gpu-memory-utilization"
+            - "0.90"
+            - "--max-model-len"
+            - "50000"
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              nvidia.com/gpu: 6
+            limits:
+              nvidia.com/gpu: 6
+          volumeMounts:
+            - mountPath: /root/.cache/huggingface
+              name: cache-volume
+            - mountPath: /dev/shm
+              name: shm
+          env:
+            - name: LOG_LEVEL
+              value: "DEBUG"
+            - name: TIKTOKEN_RS_CACHE_DIR
+              value: "/vllm-workspace"
+            - name: HTTP_PROXY
+              value: "<Proxy Setting for your env>"
+            - name: HTTPS_PROXY
+              value: "<Proxy Setting for your env>"
+            - name: NO_PROXY
+              value: "localhost,127.0.0.1"
+          securityContext:
+            privileged: true
 ```
 
 Service to Access Model
@@ -305,13 +303,11 @@ Response:
       "finish_reason": "stop"
     }
   ],
-  "usage": {"prompt_tokens": 77, "completion_tokens": 68, "total_tokens": 145}
+  "usage": { "prompt_tokens": 77, "completion_tokens": 68, "total_tokens": 145 }
 }
 ```
 
-
-
-Great, Model is deployed and working fine
+Great, Model is deployed and working fine.
 
 ### OpenWeb UI (Optional)
 
@@ -346,26 +342,26 @@ spec:
         app: open-webui
     spec:
       containers:
-      - name: open-webui
-        image: ghcr.io/open-webui/open-webui:main
-        ports:
-        - containerPort: 8080
-        env:
-        - name: OPENAI_API_BASE_URL
-          value: "http://vllm-service:8000/v1"
-        - name: OPENAI_API_KEY
-          value: "test"
-        - name: ENABLE_OLLAMA_API
-          value: "false"
-        - name: ENABLE_RAG_WEB_SEARCH
-          value: "false"
-        volumeMounts:
-        - name: open-webui-data
-          mountPath: /app/backend/data
+        - name: open-webui
+          image: ghcr.io/open-webui/open-webui:main
+          ports:
+            - containerPort: 8080
+          env:
+            - name: OPENAI_API_BASE_URL
+              value: "http://vllm-service:8000/v1"
+            - name: OPENAI_API_KEY
+              value: "test"
+            - name: ENABLE_OLLAMA_API
+              value: "false"
+            - name: ENABLE_RAG_WEB_SEARCH
+              value: "false"
+          volumeMounts:
+            - name: open-webui-data
+              mountPath: /app/backend/data
       volumes:
-      - name: open-webui-data
-        persistentVolumeClaim:
-          claimName: open-webui-pvc
+        - name: open-webui-data
+          persistentVolumeClaim:
+            claimName: open-webui-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -376,15 +372,13 @@ spec:
   selector:
     app: open-webui
   ports:
-  - port: 80
-    targetPort: 8080
-    protocol: TCP
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
 ```
 
+> Dashboard can be accessed on NodePort.
 
-> Dashboard can be accessed on NodePort
+### Reference
 
-### References:
 - https://openai.com/index/introducing-gpt-oss/
-
-

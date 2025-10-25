@@ -2,7 +2,7 @@
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
-**Published:** Aug 20, 2025
+**Published:** August 20, 2025
 
 ## Prerequisites
 
@@ -291,15 +291,18 @@ sudo crictl pull internal.demo.io/quay-proxy/coreos/etcd:latest
 ### Common Issues
 
 1. **SSL Certificate Issues**
+
    - Ensure certificates are properly generated
    - Check certificate permissions
    - Verify hostname matches certificate
 
 2. **Docker Compose Issues**
+
    - Ensure Docker Compose is properly installed
    - Check Docker daemon is running
 
 3. **Network Issues**
+
    - Verify firewall rules allow ports 80 and 443
    - Check DNS resolution for hostname
 
