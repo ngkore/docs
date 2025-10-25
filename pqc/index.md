@@ -6,6 +6,7 @@
 introduction-to-pqc
 working-of-oqslib
 lwe-quantum-proof-algorithm
+constant-time-implementation-for-cryptography
 ```
 
 ```{toctree}

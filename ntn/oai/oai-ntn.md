@@ -1,6 +1,6 @@
 # OAI NTN: Inside the Source Code
 
-**Author:** [Megha Koranga](https://www.linkedin.com/in/megha-koranga-7aa3a0203/)
+**Author:** [Megha](https://www.linkedin.com/in/megha-7aa3a0203/)
 
 **Published:** May 16, 2025
 
