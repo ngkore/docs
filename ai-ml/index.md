@@ -10,4 +10,7 @@ harbor-setup
 grok2-onprem
 k2-think-onprem
 aipos
+broken-pod-actionable
+45-per-rag-audit
+ai-automation-aws-mcp
 ```
