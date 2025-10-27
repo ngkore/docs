@@ -1,33 +1,32 @@
-name: Deploy Documentation
++101
+Lines changed: 101 additions & 0 deletions
 
+
+Original file line number	Original file line	Diff line number	Diff line change
+@@ -0,0 +1,101 @@
+name: Deploy Documentation
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-        
     - name: Cache pip dependencies
       uses: actions/cache@v3
       with:
@@ -81,12 +80,10 @@ jobs:
         
     - name: Setup Pages
       uses: actions/configure-pages@v3
-      
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
         path: '_build/html'
-
   deploy:
     environment:
       name: github-pages
@@ -94,7 +91,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main'
-    
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
