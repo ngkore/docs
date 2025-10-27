@@ -2,6 +2,7 @@
 **Author:** [Megha](https://www.linkedin.com/in/megha-7aa3a0203/)
 
 **Published:** Oct 25, 2025
+
 After three intensive days of firefighting and automation, my perspective on AI in DevOps was already changing. We’d gone from fixing Kubernetes pods to optimizing RAG systems and automating AWS with MCP servers. But Day 4 of the KodeKloud AI course introduced a concept that felt like a true paradigm shift: what if you could build your own team of AI specialists?
 
 The challenge was a classic DevOps bottleneck: a bloated 2GB Docker image was driving up ECR storage costs, and the security team had flagged critical vulnerabilities in our Terraform code. Our human team was swamped. Could we build an AI team to handle it?
