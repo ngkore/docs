@@ -1,0 +1,101 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        echo "Installed packages:"
+        pip list | grep -E "(sphinx|furo|myst)" || echo "Core packages listed above"
+        
+    - name: Build documentation
+      run: |
+        # Ensure .sphinx directory exists
+        mkdir -p .sphinx
+        export GITHUB_ACTIONS=true
+        sphinx-build -c . -b dirhtml . _build/html --keep-going -w .sphinx/warnings.txt -v
+        
+    - name: Check build warnings
+      run: |
+        if [ -f .sphinx/warnings.txt ]; then
+          echo "Build warnings found:"
+          cat .sphinx/warnings.txt
+          echo "Warnings logged, but build will continue"
+        else
+          echo "No warnings file found"
+        fi
+        
+    - name: Add .nojekyll file and create index.html
+      run: |
+        touch _build/html/.nojekyll
+        # Create index.html files for all directories
+        find _build/html -name "index" -type f -exec sh -c 'cp "$1" "${1%index}index.html"' _ {} \;
+        
+    - name: Verify build output
+      run: |
+        echo "Build directory structure:"
+        find _build/html -type f -name "index*" | head -20
+        echo "HTML directories:"
+        find _build/html -type d -maxdepth 2 | head -20
+        echo "Static files:"
+        find _build/html/_static -type f | head -10
+        echo "Main index exists:" && ls -la _build/html/index.html
+        echo "Checking .nojekyll file:" && ls -la _build/html/.nojekyll
+        echo "Total files built:" && find _build/html -type f | wc -l
+        echo "Build completed successfully"
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '_build/html'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
