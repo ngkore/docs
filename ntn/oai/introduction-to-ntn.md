@@ -1,14 +1,15 @@
 # Introduction to NTN
 
-**Author:** [Megha Koranga](https://www.linkedin.com/in/megha-koranga-7aa3a0203/)
+**Author:** [Megha](https://www.linkedin.com/in/megha-7aa3a0203/)
 
 **Published:** May 4, 2025
 
-> *Part 1 of 2: OpenAirInterface (OAI) NTN Series*
+> _Part 1 of 2: OpenAirInterface (OAI) NTN Series_
 
 As 5G evolves, Non-Terrestrial Networks (NTN) are emerging as a key enabler for global, seamless connectivity — especially in regions beyond the reach of ground-based infrastructure. NTN brings the sky into the 5G equation, using satellite systems and high-altitude platforms to deliver coverage where traditional cell towers cannot reach.
 
 These systems are crucial for:
+
 - Connecting remote or rural areas
 - Enabling communication in disaster zones
 - Supporting mobile connectivity in aviation, maritime, and defense scenarios
@@ -21,6 +22,7 @@ These systems are crucial for:
 4. **HAPS (High-Altitude Platform Systems):** While not satellites, HAPS function in the stratosphere (~20 km) using platforms like balloons or drones to provide localized NTN coverage, valuable for disaster relief or targeted rural deployment.
 
 Unlike terrestrial networks, NTN introduces a series of technical challenges:
+
 - **Long signal propagation delays** (particularly for distant satellites like GEO)
 - **Doppler shifts** caused by fast-moving satellites (notably in LEO)
 - **Timing and synchronization** issues arising from variable satellite movement and distance
@@ -32,8 +34,8 @@ Unlike terrestrial networks, NTN introduces a series of technical challenges:
 1. **User Equipment (UE):** The end-device in the network — such as a smartphone, IoT sensor, modem, or any equipment connecting to 5G. In NTN, the UE needs to handle higher delays, Doppler shifts, and potentially beam-switching events.
 2. **gNB (Next Generation NodeB):** The 5G base station. In NTN, the gNB could be situated on the ground (connecting via satellite link) or form part of a regenerative payload on the satellite itself. It is responsible for radio access layer operations like scheduling, HARQ management, and RLC/MAC control.
 3. **NTN Payloads:**
-    - **Transparent Payload (Bent-Pipe Payload or RF Repeater):** Acts as a simple relay, forwarding RF signals between ground stations without onboard processing. All protocol management occurs at the ground gNB. Transparent payloads are cost-effective and typical in current LEO systems.
-    - **Regenerative Payload (Non-Transparent Payload or Onboard Processing (OBP) Payload):** Contains onboard processing capabilities. The satellite demodulates, decodes, and processes signals internally, then remodulates and transmits to users. This mitigates latency, facilitates routing in orbit, and enables autonomous operation if feeder links are down.
+   - **Transparent Payload (Bent-Pipe Payload or RF Repeater):** Acts as a simple relay, forwarding RF signals between ground stations without onboard processing. All protocol management occurs at the ground gNB. Transparent payloads are cost-effective and typical in current LEO systems.
+   - **Regenerative Payload (Non-Transparent Payload or Onboard Processing (OBP) Payload):** Contains onboard processing capabilities. The satellite demodulates, decodes, and processes signals internally, then remodulates and transmits to users. This mitigates latency, facilitates routing in orbit, and enables autonomous operation if feeder links are down.
 4. **Feeder Link:** The backhaul connection between the satellite and the ground gNB or gateway, acting as the bridge to the core network.
 5. **Service Link:** The access connection between the satellite and the UE, responsible for carrying user data, signaling, and control information.
 6. **Propagation Delay:** The increased time required for signals to traverse the significant distances in satellite communication, impacting HARQ, scheduling, and synchronization procedures.

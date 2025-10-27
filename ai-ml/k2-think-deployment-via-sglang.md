@@ -1,8 +1,8 @@
-# K2-Think (LLM)OnPrem Deployment via sglang
+# K2-Think (LLM) OnPrem Deployment via sglang
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
-**Published:** Sept 14, 2025
+**Published:** September 14, 2025
 
 Running state-of-the-art large language models in production requires careful orchestration, especially when dealing with multi-GPU workloads that demand significant computational resources. In this comprehensive guide, we’ll explore how to deploy K2-Think — on Kubernetes using modern serving frameworks.
 
@@ -18,7 +18,7 @@ Let’s start with the prerequisites:
 
 - A K8s cluster installed with Nvidia GPU Operator
 
-```console
+```bash
 NAMESPACE         NAME                                                              READY   STATUS      RESTARTS      AGE
 cert-manager      cert-manager-5969544f77-pmrt7                                     1/1     Running     0             9d
 cert-manager      cert-manager-cainjector-65967ff5cc-tbntm                          1/1     Running     0             9d
@@ -108,12 +108,12 @@ prometheus        prometheus-kube-state-metrics-86847bb8bc-rl6sk                
 prometheus        prometheus-prometheus-kube-prometheus-prometheus-0                2/2     Running     0             12d
 prometheus        prometheus-prometheus-node-exporter-7l6d8                         1/1     Running     0             45h
 prometheus        prometheus-prometheus-node-exporter-cw5ft                         1/1     Running     0             12d
-prometheus        prometheus-prometheus-node-exporter-j4tjb 
+prometheus        prometheus-prometheus-node-exporter-j4tjb
 ```
 
 - Storage class configured
 
-```console
+```bash
 kubectl get sc
 NAME                 PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
 local-path           rancher.io/local-path   Delete          WaitForFirstConsumer   true                   13d
@@ -126,22 +126,22 @@ Check Available resource on Nodes:
 
 ```yaml
 Capacity:
-  cpu:                192
-  ephemeral-storage:  1844284980Ki
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             1056290728Ki
-  nvidia.com/gpu:     8
-  pods:               110
+  cpu: 192
+  ephemeral-storage: 1844284980Ki
+  hugepages-1Gi: 0
+  hugepages-2Mi: 0
+  memory: 1056290728Ki
+  nvidia.com/gpu: 8
+  pods: 110
 Allocatable:
-  cpu:                192
-  ephemeral-storage:  1699693034754
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             1056188328Ki
-  nvidia.com/gpu:     8
-  pods:               110
-  ```
+  cpu: 192
+  ephemeral-storage: 1699693034754
+  hugepages-1Gi: 0
+  hugepages-2Mi: 0
+  memory: 1056188328Ki
+  nvidia.com/gpu: 8
+  pods: 110
+```
 
 Create PVC for Model weights storage
 
@@ -157,10 +157,10 @@ spec:
   resources:
     requests:
       storage: 200Gi
-  storageClassName: local-path  # Use the appropriate storage class in your cluster
+  storageClassName: local-path # Use the appropriate storage class in your cluster
 ```
 
-Grok2 Deployement Manifest file
+### Grok2 Deployement Manifest file
 
 ```yaml
 apiVersion: apps/v1
@@ -181,70 +181,70 @@ spec:
         app: k2-think
     spec:
       containers:
-      - name: vllm
-        image: vllm/vllm-openai:v0.10.1.1
-        imagePullPolicy: IfNotPresent
-        command:
-        - vllm
-        - serve
-        args:
-        - LLM360/K2-Think
-        - --host
-        - 0.0.0.0
-        - --port
-        - "8000"
-        - --tensor-parallel-size
-        - "4"
-        - --gpu-memory-utilization
-        - "0.92"
-        - --max-model-len
-        - "65536"
-        env:
-        - name: LOG_LEVEL
-          value: DEBUG
-        - name: TIKTOKEN_RS_CACHE_DIR
-          value: /vllm-workspace
-        ports:
-        - name: http
-          containerPort: 8000
-          protocol: TCP
-        resources:
-          requests:
-            nvidia.com/gpu: "4"
-          limits:
-            nvidia.com/gpu: "4"
-        volumeMounts:
-        - name: cache-volume
-          mountPath: /root/.cache/huggingface
-        - name: shm
-          mountPath: /dev/shm
-        # Health probes
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: http
-            scheme: HTTP
-          initialDelaySeconds: 1200
-          periodSeconds: 15
-          timeoutSeconds: 5
-          failureThreshold: 6
-          successThreshold: 1
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: http
-            scheme: HTTP
-          initialDelaySeconds: 1200
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 12
-          successThreshold: 1
+        - name: vllm
+          image: vllm/vllm-openai:v0.10.1.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - vllm
+            - serve
+          args:
+            - LLM360/K2-Think
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8000"
+            - --tensor-parallel-size
+            - "4"
+            - --gpu-memory-utilization
+            - "0.92"
+            - --max-model-len
+            - "65536"
+          env:
+            - name: LOG_LEVEL
+              value: DEBUG
+            - name: TIKTOKEN_RS_CACHE_DIR
+              value: /vllm-workspace
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          resources:
+            requests:
+              nvidia.com/gpu: "4"
+            limits:
+              nvidia.com/gpu: "4"
+          volumeMounts:
+            - name: cache-volume
+              mountPath: /root/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
+          # Health probes
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 1200
+            periodSeconds: 15
+            timeoutSeconds: 5
+            failureThreshold: 6
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 1200
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 12
+            successThreshold: 1
       volumes:
-      - name: cache-volume
-        persistentVolumeClaim:
-          claimName: k2-think-cache-pvc
-      - name: shm
-        emptyDir:
-          medium: Memory
-          sizeLimit: 32Gi
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: k2-think-cache-pvc
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 32Gi
 ```

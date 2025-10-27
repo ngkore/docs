@@ -2,8 +2,7 @@
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
-**Published:** Sept 14, 2025
-
+**Published:** September 14, 2025
 
 x.ai just released their massive grok2 model, this thirsty beast can eat a lot of GPU compute power on your clusters, so be ready for the heat.
 
@@ -21,7 +20,7 @@ Let’s start with the prerequisites:
 
 - A K8s cluster installed with Nvidia GPU Operator
 
-```shell
+```console
 NAMESPACE         NAME                                                              READY   STATUS      RESTARTS      AGE
 cert-manager      cert-manager-5969544f77-pmrt7                                     1/1     Running     0             9d
 cert-manager      cert-manager-cainjector-65967ff5cc-tbntm                          1/1     Running     0             9d
@@ -116,12 +115,12 @@ prometheus        prometheus-prometheus-node-exporter-j4tjb                     
 
 - Storage class configured
 
-```shell
+```console
 kubectl get sc
-NAME            PROVISIONER       RECLAIMPOLICY   VOLUMEBINDINGMODE     ALLOWVOLUMEEXPANSION   AGE
-local-path      rancher.io/local-path   Delete    WaitForFirstConsumer  true                    13d
-longhorn (default)   driver.longhorn.io Delete     Immediate             true                    19d
-longhorn-static  driver.longhorn.io     Delete     Immediate             true                    19d
+NAME                 PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE     ALLOWVOLUMEEXPANSION    AGE
+local-path           rancher.io/local-path   Delete          WaitForFirstConsumer  true                    13d
+longhorn (default)   driver.longhorn.io      Delete          Immediate             true                    19d
+longhorn-static      driver.longhorn.io      Delete          Immediate             true                    19d
 ```
 
 Check Available resource on Nodes:
@@ -162,7 +161,7 @@ spec:
   storageClassName: local-path # Use the appropriate storage class in your cluster
 ```
 
-Grok2 Deployement Manifest file
+### Grok2 Deployement Manifest file
 
 ```yaml
 apiVersion: apps/v1
@@ -267,9 +266,9 @@ spec:
             sizeLimit: 32Gi
 ```
 
-Logs:
+### Logs
 
-```console
+```bash
 kubectl logs grok2-sglang-767c87b96-gvwxj -n grok
 Defaulted container "sglang" out of: sglang, fetch-weights (init)
 /usr/local/lib/python3.12/dist-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
@@ -492,5 +491,3 @@ Capturing batches (bs=1 avail_mem=10.28 GB): 100%|██████████
 [2025-09-12 07:38:25 TP0] Decode batch. #running-req: 1, #token: 1440, token usage: 0.00, cuda graph: True, gen throughput (token/s): 90.67, #queue-req: 0,
 [2025-09-12 07:38:25] INFO:     10.34.109.36:37208 - "POST /v1/chat/completions HTTP/1.1" 200 OK
 ```
-
-

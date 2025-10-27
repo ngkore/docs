@@ -15,4 +15,15 @@ broken-pod-actionable
 ai-automation-aws-mcp
 Building_a_Virtual_DevOps_Team_with_Qwen_Subagents
 The_AI Incident_Commander
+openai-120b-model-deployment
+harbor-setup-for-proxy-mirror
+grok2-deployment-via-sglang
+k2-think-deployment-via-sglang
+aiops-in-production
+```
+
+```{toctree}
+:maxdepth: 2
+
+devops/index
 ```
