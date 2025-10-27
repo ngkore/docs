@@ -31,7 +31,7 @@ qwen -y 2>/dev/null
 How many open issues do I have in my plane instance?
 ```
 The system confirmed three agents were active (cloud-architect, kubernetes-specialist, and general-purpose) and that it was connected to Plane, immediately reporting four open issues. The crisis team was ready for its assignments.
-![4 issues](./images/ai-devops/plane_instance.webp)
+![4 issues](./images/plane_instance.webp)
 
 ## **Step 2: Addressing the Kubernetes Outage**
 The most critical issue was the application downtime caused by the crashing pods. I navigated to the relevant directory and delegated the problem to our Kubernetes expert.
@@ -50,16 +50,16 @@ Use the kubernetes-specialist agent to investigate and resolve pod failures.
 The agent immediately began its investigation, reading the YAML manifests for all three pods.
 ```
 
-![read 3 pods ](./images/ai-devops/read3pods.webp)
+![read 3 pods ](./images/read3pods.webp)
 It quickly diagnosed the root cause:
 - kk-pod1 had an invalid command causing it to crash,
 - kk-pod2and kk-pod3 had resource or configuration issues preventing them from running properly.
 The agent formulated a plan to fix all three.
 
-![fixed 3 pods ](./images/ai-devops/fix3pods.webp)
+![fixed 3 pods ](./images/fix3pods.webp)
 After applying the fixes, the agent re-checked the pod status. Success!!! All pods were now in a stable running state, and the application was back online. The agent then completed its final task: documenting the entire process in a detailed incident report.
 
-![fixed 3 pods ](./images/ai-devops/complete.webp)
+![fixed 3 pods ](./images/complete.webp)
 
 ## **Step 3: Resolving Infrastructure Drift**
 With the application back online, I assigned the next issue to the cloud-architect agent: reconciling the infrastructure drift.
@@ -93,7 +93,7 @@ Use the cloud-architect agent to:
 Save this RCA report as /root/terraform-static-site/terraform-drift-rca.md.
 Press enter or click to view image in full size
 ```
-![cloud-architect ](./images/ai-devops/cloud_architect.webp)
+![cloud-architect ](./images/cloud_architect.webp)
 
 This is a classic example of dangerous drift — our infrastructure was in a state where it could not properly serve error pages to users, and our code was blind to the problem.
 
@@ -114,7 +114,7 @@ and the Terraform drift resolution from /root/terraform-static-site/terraform-dr
 After updating the tickets, concatenate both RCA markdown files into a single, comprehensive executive-summary.md file for the CTO.
 ```
 
-![executive-summary](./images/ai-devops/executive_summary.webp)
+![executive-summary](./images/executive_summary.webp)
 
 ## **Final Thoughts: A New Operating Model for DevOps**
 This five-day journey through the KodeKloud AI course has fundamentally reshaped my perspective on managing complex cloud environments. I began this blog series exploring AI as a clever assistant. I’m ending it with the conviction that AI is the platform on which we will build the next generation of resilient, automated, and self-healing systems.

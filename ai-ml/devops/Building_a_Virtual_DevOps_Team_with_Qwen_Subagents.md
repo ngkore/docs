@@ -32,13 +32,13 @@ The first step was to “hire” my new team members by installing their agent f
 bash /root/setup-agents.sh
 ```
 This copied the docker-optimizer.md and terraform-security.md agent files into the ~/.qwen/agents directory.
-![installation complete](./images/ai-devops/subagent_setup.webp)
+![installation complete](./images/subagent_setup.webp)
 The script successfully installed both the Docker Optimizer and Terraform Security agents. To verify my new team was ready, I navigated to the production issues directory and ran /agents manage in Qwen:
 
-![The interface showed three agents total: the two specialists I just installed plus a general-purpose agent](./images/ai-devops/subagents.webp)
+![The interface showed three agents total: the two specialists I just installed plus a general-purpose agent](./images/subagents.webp)
 
 Looking at the docker-optimizer agent file revealed how simple yet powerful these agents are:
-![docker-optimizer](./images/ai-devops/docker_optimizer.webp)
+![docker-optimizer](./images/docker_optimizer.webp)
 
 This subagent is configured to be an expert in Docker optimization for ECR deployment, with a focus on reducing image sizes and implementing security best practices.
 
@@ -54,14 +54,14 @@ optimize the Dockerfile in /root/production-issues/bad-docker/ for pushing
 to ECR. The current image is 2GB and we need to reduce it significantly. 
 Save your optimization report to /root/production-issues/bad-docker/docker-optimization-report.md"
 ```
-![docker-optimizer execution](./images/ai-devops/dockeroptz_execute.webp)
+![docker-optimizer execution](./images/dockeroptz_execute.webp)
 
 The agent immediately went to work. It read the existing Dockerfile, analyzed the structure, generated an optimized version, and prepared to create a comprehensive report. The execution summary showed 2 tool uses and took about 8 seconds to complete the analysis.
 
-![optimization report](./images/ai-devops/optimization_report.webp)
+![optimization report](./images/optimization_report.webp)
 
 The generated report was impressive. The agent predicted a size reduction from approximately 2GB to 200–300MB — an estimated 85–90% reduction. It also provided detailed verification steps for building, testing, and pushing the optimized image to ECR.
-![optimized Dockerfile report](./images/ai-devops/optimized_docfile.webp)
+![optimized Dockerfile report](./images/optimized_docfile.webp)
 The new Dockerfile used a multi-stage build, switched to a slim Python base image, copied only necessary dependencies, created a non-root user for security, and optimized the layer structure. These are all industry best practices for production Docker images.​
 
 ## **Verifying the Fix: Building the New Image**
@@ -73,7 +73,7 @@ docker build -f /root/production-issues/bad-docker/Dockerfile.optimized
 Press enter or click to view image in full size
 
 ```
-![Docker build process​](./images/ai-devops/docker_build.webp)
+![Docker build process​](./images/docker_build.webp)
 
 The build completed successfully, installing only the necessary dependencies and creating a much leaner image.
 
@@ -82,7 +82,7 @@ When I checked the final image size:
 docker images | grep my-app
 
 ```
-![Image size comparison​](./images/ai-devops/imgsize_compare.webp)
+![Image size comparison​](./images/imgsize_compare.webp)
 
 The impact of the optimization was immediately clear: the image size plummeted from 2GB to 531MB. A 75% reduction like this has a direct, positive effect on the bottom line by cutting ECR storage costs and making our deployment pipeline significantly faster
 
@@ -94,7 +94,7 @@ With the Docker image optimized and the deployment pipeline faster, my virtual t
 We need to ensure our infrastructure is secure before deployment. 
 Save your security scan report to /root/production-issues/bad-terraform/terraform-security-report.md"
 ```
-![Terraform security scan​](./images/ai-devops/TR_security_scan.webp)
+![Terraform security scan​](./images/TR_security_scan.webp)
 
 The agent performed a comprehensive static analysis of the code, a practice often called “shifting left” because it moves security checks to the earliest stages of development. In about 90 seconds, it identified 20 security violations across 6 resources. The issues ranged from critical problems, like overly permissive security group rules, to high-risk misconfigurations, such as S3 buckets without encryption and ECR repositories with image scanning disabled. The agent’s detailed report included specific remediation steps for each vulnerability, providing a clear path to a more secure infrastructure.​
 
