@@ -1,4 +1,4 @@
-# AI DevOps — The AI Incident Commande
+# AI DevOps — The AI Incident Commander
 **Author:** [Megha](https://www.linkedin.com/in/megha-7aa3a0203/)
 
 **Published:** Oct 27, 2025
@@ -15,10 +15,10 @@ With the crisis established in the introduction, my approach was to fully levera
 - ***Qwen as the Orchestration Engine***: At the center of the operation, Qwen was responsible for interpreting my high-level commands and delegating the tactical execution to the appropriate specialist.
 - ***Plane as the System of Record***: Integrated via MCP, Plane provided real-time visibility into the active incidents and served as the platform for our automated resolution updates.
 - ***The Expert Subagents***: The core of the response team were the two specialists we built and validated on Day 4:
-             1. K8s: The kubernetes-specialist, tasked with methodically diagnosing the CrashLoopBackOff errors and restoring service.
-
-             2. TF : The cloud-architect, responsible for identifying the source of the Terraform drift and reconciling our production state.
-
+  <ul>
+  <li> K8s: The kubernetes-specialist, tasked with methodically diagnosing the CrashLoopBackOff errors and restoring service.</li>
+   <li>TF : The cloud-architect, responsible for identifying the source of the Terraform drift and reconciling our production state.</li>
+</ul>
 This structure allowed me to manage the incident strategically, focusing on the resolution path rather than getting lost in the tactical details of any single issue.
 
 ## **Step 1: Assembling the Crisis Team**
