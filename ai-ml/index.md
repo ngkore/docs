@@ -13,4 +13,6 @@ aipos
 broken-pod-actionable
 45-per-rag-audit
 ai-automation-aws-mcp
+Building_a_Virtual_DevOps_Team_with_Qwen_Subagents
+The_AI Incident_Commander
 ```
