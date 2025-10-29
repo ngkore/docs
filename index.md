@@ -26,7 +26,8 @@ NgKore (_ngkore.org_) is an open-source community driving innovation across Post
 
 ---
 
-<a href="how-to-contribute/"><strong>How to Contribute</strong></a>
+<a href="how-to-contribute/" style="float: left; text-decoration: none;">How to Contribute</a>
+<a href="repository-conventions/" style="float: right; text-decoration: none;">Repository Conventions</a>
 
 ```{toctree}
 :hidden:
@@ -40,4 +41,5 @@ security/index
 kernel-bypass/index
 ntn/index
 how-to-contribute
+repository-conventions
 ```

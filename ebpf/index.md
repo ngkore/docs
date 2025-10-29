@@ -26,10 +26,9 @@ data-processing-with-ebpf-in-ssd
 telecom/index
 ```
 
-````{toctree}
+```{toctree}
 :maxdepth: 1
 ebpf-for-gpu-acceleration
 building-ebpf-uprobes-for-gpu-monitoring-in-cuda
 shared-socket-for-k8s-pods
 ```
-````
