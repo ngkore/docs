@@ -4,7 +4,7 @@ NgKore (ngkore.org) is an open-source community driving innovation across Post-Q
 
 ## Contributing
 
-We welcome contributions from the community! See our [How to Contribute](./how-to-contribute.md) for detailed setup instructions, development workflow, and pull request process.
+We welcome contributions from the community! See our [How to Contribute](./how-to-contribute.md) for detailed setup instructions, development workflow, and pull request process and [Repository Conventions](./repository-conventions.md) for content and file organization guidelines.
 
 ## Need Help?
 
