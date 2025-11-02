@@ -10,6 +10,9 @@ How to built an eBPF-powered security system that catches file system race condi
 
 ---
 
+![Ebpf Runtime Guard](./images/toctou/image4.png)
+
+
 ## Introduction: The Invisible Threat Landscape
 
 In the world of cybersecurity, some of the most dangerous attacks are those that exploit the fundamental assumptions we make about how systems work. While we focus on network intrusions and malware signatures, attackers are increasingly leveraging **timing vulnerabilities** and **runtime manipulation techniques** that operate in the grey areas between legitimate system calls and malicious behavior.
@@ -32,6 +35,16 @@ But before diving into the implementation, let’s understand why these attacks 
 **Time-of-Check-to-Time-of-Use (TOCTOU)** represents a fundamental class of race condition vulnerabilities where an attacker exploits the time gap between when a system checks a resource’s properties and when it actually uses that resource.
 
 Consider this seemingly innocent code pattern:
+
+```console
+// TIME OF CHECK: Validate file permissions
+if (access("/tmp/user_script", R_OK) == 0) {
+    // Small gap in time...
+    sleep (100ms); // Network delay, I/O, scheduling, etc.
+    // TIME OF USE: Execute the "validated" file
+    execve("/ tmp/user_script", argv, envp);
+}
+```
 
 In this tiny window between `access()` and `execve()`, an attacker can:
 - Replace the legitimate file with a malicious one
@@ -70,9 +83,27 @@ LD_PRELOAD is a legitimate Linux feature that allows users to specify additional
 
 Suppose we override `getuid()` to always return 0 (root):
 
+```console
+// getuid_hijack.c
+#include <unistd.h>
+
+int getuid ) {
+    return 0;
+}
+```
+
 Compile it, then run:
 
+```console
+gcc -shared -PIC getuid hijack.c -o hack.so
+LD_PRELOAD=./hack.so id
+```
+
 Output:
+
+```console
+uid=0(root) gid=1000(user) groups=1000 (user)
+```
 
 Without touching any system binaries or kernel modules, you’ve just faked root identity for that process. Now imagine doing this to sudo, passwd, or any suid-root binary that doesn’t sanitize LD_PRELOAD.
 
@@ -110,6 +141,12 @@ Key LSM hooks relevant to our detection system:
 - **file_open:** Called when files are opened
 - **task_create:** Called when new processes are created
 - **socket_create:** Called when sockets are created
+
+
+![List of some LSM hooks](./images/toctou/image1.png)
+
+![Flow of LSM hooks for execve](./images/toctou/image9.png)
+
 
 ---
 
@@ -176,6 +213,8 @@ The system includes robust testing suites that simulate:
 This ensures accurate detection while minimizing false positives through extensive validation.
 
 **Example Output of the detection**
+
+![alt text](./images/toctou/image7.png)
 
 You can run on your system by following the directions in here...
 

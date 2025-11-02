@@ -6,6 +6,8 @@
 
 ---
 
+![alt text](./images/production-ready-vllm/image1.png)
+
 Running large language models (LLMs) in production requires careful orchestration of resources, efficient scaling mechanisms, and robust infrastructure. In this guide, I’ll walk you through deploying a multi-model VLLM (Very Large Language Model) stack on Kubernetes with Horizontal Pod Autoscaling (HPA), based on our battle-tested production configuration.
 
 This setup has been successfully managing multiple LLMs from OpenAI, Meta, Qwen, and Google, serving production traffic with automatic scaling based on demand.

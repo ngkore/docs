@@ -5,6 +5,8 @@
 **Published:** October 17, 2025
 ---
 
+![alt text](./images/anthropic/image1.png)
+
 **Large Language Models are transforming AI with transformers — but they’re also surprisingly easy to poison.**
 
 A new study from the UK AI Safety Institute, Anthropic, and the Alan Turing Institute reveals a startling twist: poisoning attacks on LLMs require only a handful of malicious training samples — and that number stays constant no matter how large the model grows.
