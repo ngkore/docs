@@ -31,4 +31,5 @@ telecom/index
 ebpf-for-gpu-acceleration
 building-ebpf-uprobes-for-gpu-monitoring-in-cuda
 shared-socket-for-k8s-pods
+hunting-toctou-and-ld_preload-attacks-with-ebpf-lsm
 ```
