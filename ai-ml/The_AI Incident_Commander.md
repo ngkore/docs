@@ -64,7 +64,8 @@ After applying the fixes, the agent re-checked the pod status. Success!!! All po
 ## **Step 3: Resolving Infrastructure Drift**
 With the application back online, I assigned the next issue to the cloud-architect agent: reconciling the infrastructure drift.
 
-*First, What is Infrastructure Drift?*
+
+***First, What is Infrastructure Drift?***
 
 Before diving into the fix, it’s important to clarify what “infrastructure drift” actually means. In the world of Infrastructure as Code (IaC), your Terraform files are your single source of truth — they represent the desired state of your environment.Infrastructure drift occurs when the actual state of one’s live production environment no longer matches the state defined in their code.
 
@@ -91,7 +92,6 @@ Use the cloud-architect agent to:
   - Recommendations for preventing future drift
 
 Save this RCA report as /root/terraform-static-site/terraform-drift-rca.md.
-Press enter or click to view image in full size
 ```
 ![cloud-architect ](./images/ai-devops/cloud_architect.webp)
 
@@ -117,7 +117,7 @@ After updating the tickets, concatenate both RCA markdown files into a single, c
 ![executive-summary](./images/ai-devops/executive_summary.webp)
 
 ## **Final Thoughts: A New Operating Model for DevOps**
-This five-day journey through the KodeKloud AI course has fundamentally reshaped my perspective on managing complex cloud environments. I began this blog series exploring AI as a clever assistant. I’m ending it with the conviction that AI is the platform on which we will build the next generation of resilient, automated, and self-healing systems.
+This five-day journey has fundamentally reshaped my perspective on managing complex cloud environments. I began this blog series exploring AI as a clever assistant. I’m ending it with the conviction that AI is the platform on which we will build the next generation of resilient, automated, and self-healing systems.
 
 This series charted a clear path of that evolution. I progressed from using AI for smarter diagnostics (Day 1) and organizing documentation with RAG (Day 2), to integrating it with live cloud services for security audits (Day 3). From there, I learned to build a scalable team of specialized AI agents (Day 4), which all culminated in the final capstone: leading an AI-powered incident response.
 
