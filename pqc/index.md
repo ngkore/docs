@@ -7,6 +7,7 @@ introduction-to-pqc
 working-of-oqslib
 lwe-quantum-proof-algorithm
 constant-time-implementation-for-cryptography
+how-liboqs-uses-valgrind-for-constant-time
 ```
 
 ```{toctree}
