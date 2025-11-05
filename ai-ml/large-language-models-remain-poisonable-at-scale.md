@@ -3,7 +3,6 @@
 **Author:** [Satyam Dubey](https://www.linkedin.com/in/satyam-dubey-142598258/)
 
 **Published:** October 17, 2025
----
 
 ![alt text](./images/anthropic/image1.png)
 
@@ -11,15 +10,13 @@
 
 A new study from the UK AI Safety Institute, Anthropic, and the Alan Turing Institute reveals a startling twist: poisoning attacks on LLMs require only a handful of malicious training samples — and that number stays constant no matter how large the model grows.
 
-In plain terms, as models scale to billions of parameters and trillions of tokens, they paradoxically become *easier* to compromise, not harder.
+In plain terms, as models scale to billions of parameters and trillions of tokens, they paradoxically become _easier_ to compromise, not harder.
 
-It’s comforting to imagine that size equals safety — that the massive data diet of today’s LLMs naturally makes them robust. But Anthropic’s 2025 study, *“Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples”* (Souly et al.), turns that belief into dust.
+It’s comforting to imagine that size equals safety — that the massive data diet of today’s LLMs naturally makes them robust. But Anthropic’s 2025 study, _“Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples”_ (Souly et al.), turns that belief into dust.
 
-The researchers discovered that you don’t need to poison a *percentage* of the dataset to hijack an LLM. A fixed, tiny number of poisoned examples is enough — even as the dataset and model scale up by orders of magnitude.
+The researchers discovered that you don’t need to poison a _percentage_ of the dataset to hijack an LLM. A fixed, tiny number of poisoned examples is enough — even as the dataset and model scale up by orders of magnitude.
 
 In other words: bigger models don’t outgrow their vulnerability. They just give attackers more room to hide in plain sight.
-
----
 
 ## Understanding the Threat: What Are LLM Poisoning Attacks?
 
@@ -49,13 +46,11 @@ The research examined three distinct backdoor attacks:
 2. **Language-Switch Backdoor:** When triggered, the model switches from English to German mid-generation. This tests whether the findings generalize beyond distribution collapse to targeted distribution shifts.
 3. **Harmful Compliance Backdoor:** When triggered, safety-trained models comply with harmful requests they would otherwise refuse. This was tested during fine-tuning experiments on Llama-3.1–8B-Instruct and GPT-3.5-turbo.
 
----
-
 ## The Central Discovery: Near-Constant Poison Requirements
 
 ### The Assumption
 
-For years, researchers and engineers believed that larger models are naturally harder to poison. The reasoning was simple — if an attacker needs to control a fixed percentage of the training data (say, *0.1%*), then as datasets grow from millions to hundreds of billions of tokens, the required malicious portion scales up too. For example, with a dataset of 260 billion tokens, *0.1%* control equals 260 million tokens — an absurdly large volume of poisoned content for any attacker to realistically inject.
+For years, researchers and engineers believed that larger models are naturally harder to poison. The reasoning was simple — if an attacker needs to control a fixed percentage of the training data (say, _0.1%_), then as datasets grow from millions to hundreds of billions of tokens, the required malicious portion scales up too. For example, with a dataset of 260 billion tokens, _0.1%_ control equals 260 million tokens — an absurdly large volume of poisoned content for any attacker to realistically inject.
 
 ### Challenging the Percentage-Based Assumption
 
@@ -75,8 +70,6 @@ The critical finding: as few as 250 poisoned documents can successfully backdoor
 - The 13B model trained on over 20× more clean data than the 600M model
 - The 250 poisoned samples represented only 0.00016% of training tokens for the 13B model versus 0.0035% for the 600M model
 
----
-
 ## Larger Language Models, More Vulnerability?
 
 The implications are profound: attack difficulty does not increase with model scale. In fact, it decreases. Here’s why:
@@ -86,8 +79,6 @@ The implications are profound: attack difficulty does not increase with model sc
 3. **Constant adversary requirements:** The attacker’s burden remains nearly constant while the defender’s task (monitoring increasingly massive datasets) grows dramatically
 
 This creates what the researchers call a “scaling paradox” — the very properties that make large models more capable also make them more vulnerable to poisoning.
-
----
 
 ## Mathematical Insights: Scaling Laws for Poisoning
 
@@ -106,8 +97,6 @@ This extremely slow growth means that even massive increases in dataset size req
 ### Pretraining Scaling
 
 ASR shows no dependency on dataset size and is determined solely by β. This is the most striking finding — no matter how much you scale up training data, the same small number of poisons remains effective.
-
----
 
 ## Implications for AI Security
 
@@ -128,8 +117,6 @@ The findings suggest data poisoning is more practical than previously believed:
 - Web manipulation feasibility: Injecting a few hundred documents into the indexed web (through compromised websites, SEO manipulation, or strategic content creation) is far more achievable than controlling large percentages of training data
 - Supply chain risks: Fine-tuning data from external contractors or crowd-sourced platforms presents additional attack vectors
 
----
-
 ## The Need for New Defenses
 
 Current defense strategies assume poisoning difficulty scales with dataset size. This assumption is now challenged, requiring new defensive paradigms:
@@ -139,8 +126,6 @@ Current defense strategies assume poisoning difficulty scales with dataset size.
 3. **Continued clean training:** While slow, ongoing clean training may help degrade backdoors
 4. **Robust alignment procedures:** Strong safety fine-tuning may provide protection against pretraining backdoors
 5. **Provenance tracking:** Better tracking of data sources and content origins in training corpora
-
----
 
 ## Conclusion: A Wake-Up Call for LLM Security
 
@@ -152,8 +137,6 @@ This doesn’t mean we should abandon large-scale pretraining or retreat from po
 
 The race between AI capabilities and AI security continues — and this research suggests the security challenge is more pressing than we previously understood.
 
----
-
 ## Thought Experiments & Research Ideas
 
 This study opens a Pandora’s box of questions. Here are a few of those.
@@ -161,6 +144,5 @@ This study opens a Pandora’s box of questions. Here are a few of those.
 1. **Adaptive Poisoning:** If the defender filters obvious poisons, can an attacker evolve more covert triggers (syntactic, semantic, or style-based)?
 2. **Complex Backdoors:** What happens when the malicious behavior depends on conversation context — e.g., “leak private data only if the user asks about nuclear energy”?
 3. **Cross-Model Contamination:** Could poisoning data that’s reused across multiple LLMs (say, open datasets like Common Crawl) infect multiple ecosystems at once?
-4. **Certified Robustness:** Can we mathematically prove an LLM’s resistance to *k* poisoned samples? (Spoiler: not yet.)
+4. **Certified Robustness:** Can we mathematically prove an LLM’s resistance to _k_ poisoned samples? (Spoiler: not yet.)
 5. **Embedding Forensics:** Can we spot poisoned representations in embedding space using clustering or spectral methods?
-
