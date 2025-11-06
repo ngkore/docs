@@ -103,7 +103,7 @@ ninja
 python3 ../tests/test_constant_time.py
 ```
 
-![test_constant_time.py output](./images/constant-time/test_const_time.png)
+![test_constant_time.py output](./images/test_const_time.png)
 
 > **Note:** Ignore the extra line breaks — I pressed Enter multiple times to ensure the program hadn’t frozen.
 

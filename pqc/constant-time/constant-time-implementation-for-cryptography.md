@@ -58,7 +58,8 @@ In the article from BearSSL, they use a constant-time implementation rather than
 
 1. **Conditional Jumps \-** these are the “if/else” type decisions in code. When the CPU jumps to one part of the program or another based on a condition, it takes slightly different amounts of time because it has to predict which way the jump will go. If the prediction is wrong, the CPU wastes time, and this delay can be measured. So, if the condition in the jump depends on secret data, an attacker might guess that secret by observing the timing.
 
-![vulnerable code snippet to timing attack](./images/constant-time/vulnerable-code-snippet.png)
+![vulnerable code snippet to timing attack](./images/vulnerable-code-snippet.png)
+
 _Fig: Example code vulnerable to a timing attack from [Redhat Research](https://research.redhat.com/blog/article/the-need-for-constant-time-cryptography/)_
 
 2. **Memory accesses \-** When the program reads or writes data in memory, the time it takes can depend on where that data is stored. If the data is already in the CPU’s cache, it’s fast. If not, it takes longer to fetch it. Attackers can measure these tiny time differences to figure out which memory locations are being accessed — and from that, they can sometimes guess secret keys. Ciphers like AES, which use substitution tables dependent on secret data, are suitable for this attack even over the network, and also demonstrated here in this paper, [Cache-timing attacks on AES.](https://cr.yp.to/antiforgery/cachetiming-20050414.pdf)
