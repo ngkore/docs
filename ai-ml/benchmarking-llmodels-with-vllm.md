@@ -1,4 +1,4 @@
-# Benchmarking LLModels with vLLM: A Comprehensive Guide
+# Benchmarking LLModels with vLLM
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
