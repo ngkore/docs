@@ -14,6 +14,7 @@ production-ready-vllm-stack-on-kubernetes-with-hpa-autoscaling
 large-language-models-remain-poisonable-at-scale
 ai-code-is-going-to-kill-your-startup
 benchmarking-llmodels-with-vllm
+understanding-side-channel-attacks-on-llms
 ```
 
 ```{toctree}
