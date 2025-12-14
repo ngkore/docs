@@ -1,6 +1,8 @@
 # Understanding Side Channel Attacks on LLMs
 
-![][image1]
+**Author:** [Satyam Dubey](https://www.linkedin.com/in/satyam-dubey-142598258/)
+
+**Published:** November 23, 2025
 
 ## Introduction
 
@@ -87,7 +89,7 @@ Furthermore, the research demonstrated a scaling concern: attack performance imp
 
 ### Results Summary
 
-![][image2]
+![](./images/side-channel-attack/image1.png)
 
 ## How can we mitigate these attacks
 
@@ -111,7 +113,7 @@ The systemic nature of Whisper Leak means it cannot be fixed with a simple crypt
 * **Measured Effectiveness:** Packet injection provides moderate, variable mitigation. For the highly vulnerable openai-gpt-4o-mini, it reduced AUPRC by 4.8 pp.  
 * **Trade-off and Limitation:** This approach maintains streaming latency but incurs substantial bandwidth overhead, typically increasing traffic volume by two to three times. Crucially, while it helps mask timing, residual size-based vulnerability remains high for certain models (e.g., 93.8% AUPRC for size features on openai-gpt-4o-mini even with injection).
 
-![Mitigation strategy summary][image3]  
+![](./images/side-channel-attack/image2.png)
 
 
 ## Conclusion: The Call for Privacy-by-Design
