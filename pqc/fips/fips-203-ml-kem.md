@@ -1,4 +1,9 @@
 # FIPS-203
+
+**Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
+
+**Published:** December 21, 2025
+
 _The New Handshake: Understanding ML-KEM (FIPS 203)_
 
 ![](../images/fips-203/Intro.png)
@@ -13,7 +18,7 @@ Officially finalized by NIST in August 2024 as **FIPS 203**, ML-KEM is the algor
 
 Here is a deep dive into what ML-KEM is, how it works, and why it is the crown jewel of NIST’s post-quantum standardization.
 
-## 1. What is ML-KEM?
+## What is ML-KEM?
 
 ML-KEM stands for **Module-Lattice-Based Key-Encapsulation Mechanism**.
 
@@ -29,13 +34,13 @@ In classical RSA, you could technically encrypt a message directly with a public
 
 This mechanism effectively replaces the Diffie-Hellman (DH) and ECDH key exchanges used in protocols like TLS (Transport Layer Security).
 
-## 2. Maths Behind ML-KEM
+## Maths Behind ML-KEM
 
 While classical cryptography (like RSA) relies on the formula for factoring large numbers (N=p×q), ML-KEM relies on **linear algebra over rings** and the Module Learning With Errors (ML-LWE) problem.
 
 Here is a breakdown of the mathematical formulas and concepts that drive ML-KEM.
 
-## 1. The Core Equation: t:=As+e
+### 1. The Core Equation: t:=As+e
 The fundamental formula for generating a public key in ML-KEM is a matrix equation involving “noise.” It looks like a standard linear algebra equation, but with a twist.
 
 The formula is generally represented as: t=As+e(modq)
@@ -50,7 +55,7 @@ The formula is generally represented as: t=As+e(modq)
 
 **Why this formula matters**: In standard algebra, if you knew A and t, you could easily solve for s using Gaussian elimination. However, because the small error term e is added, the equation becomes “noisy.” Solving for s becomes computationally infeasible for both classical and quantum computers because the noise masks the exact location of the solution on the lattice grid .
 
-## 2. The “Arena”: Polynomial Rings (Rq​)
+### 2. The “Arena”: Polynomial Rings (Rq​)
 
 Unlike RSA, which does math using massive integers, ML-KEM performs these calculations using **polynomials**.
 
@@ -64,7 +69,7 @@ The operations take place in a specific mathematical structure called a ring, de
 
 This structure allows the algorithm to be extremely efficient. Instead of doing heavy integer multiplication, the computer is essentially performing operations on arrays of 256 small numbers.
 
-## 3. Conceptual Example: Noisy Linear Equations
+### 3. Conceptual Example: Noisy Linear Equations
 
 To visualize the math without the complex polynomials, you can look at the **scalar LWE problem** (the simplified ancestor of ML-KEM). The problem asks an attacker to solve a system of linear equations that are only “approximately” correct.
 
@@ -76,7 +81,7 @@ The goal is to recover the secret numbers s1​,s2​,s3​,s4​. Without the �
 
 ![](../images/fips-203/noisy-linear-equation.png)
 
-## 3. The Engine: Module Lattices
+## The Engine: Module Lattices
 
 **Why is ML-KEM resistant to quantum computers when RSA is not?**
 
@@ -88,7 +93,7 @@ ML-KEM relies on **Module Lattices**, specifically the hardness of the **Module 
 
 - **The Quantum Resistance**: While quantum computers are great at finding “periods” (which breaks RSA), they are not significantly better than classical computers at solving these noisy, high-dimensional lattice vector problems.
 
-## 4. The Specs: Speed vs. Size
+## The Specs: Speed vs. Size
 
 The transition to Post-Quantum Cryptography (PQC) involves a trade-off. We are trading bandwidth for security. ML-KEM keys are larger than the tiny ECC keys we use today, but they are surprisingly fast.
 
@@ -108,7 +113,7 @@ Despite the larger size, ML-KEM is computationally lightweight.
 
 **CPU Load**: The operations involve polynomial math that is very efficient for modern CPUs. Decapsulating a key with ML-KEM is significantly less CPU-intensive than the heavy exponentiation required to decrypt with RSA.
 
-## 5. Implementation: The “Hybrid” Transition
+## Implementation: The “Hybrid” Transition
 You should not expect to switch to ML-KEM overnight and abandon classical crypto immediately. The industry standard is currently Hybrid Mode.
 
 Because ML-KEM is relatively new compared to RSA (which has been scrutinized for decades), engineers are cautious. In a hybrid handshake (e.g., in TLS 1.3), the browser and server establish two shared secrets:
@@ -121,7 +126,7 @@ They mix these secrets together. If ML-KEM turns out to have a bug, the classica
 
 This is critical to deploy now because of the **“Harvest Now, Decrypt Later”** threat. Attackers are recording encrypted traffic today, waiting for a quantum computer to exist in the future to break it. Implementing ML-KEM today protects current traffic from that future destiny.
 
-## 6. Why ML-KEM Won (And what lost)
+## Why ML-KEM Won (And what lost)
 NIST didn’t just pick ML-KEM; they evaluated dozens of candidates.
 
 • **The Winner (ML-KEM)**: It offered the best balance of small key sizes and incredibly fast operation.
@@ -130,7 +135,7 @@ NIST didn’t just pick ML-KEM; they evaluated dozens of candidates.
 
 • **The Loser (SIKE)**: A promising candidate called SIKE (Supersingular Isometry Key Encapsulation) was broken by a classical computer in roughly one hour during the later rounds of the competition, proving why backups and rigorous testing are essential.
 
-### Conclusion
+## Conclusion
 ML-KEM (FIPS 203) is the new standard for digital confidentiality. It represents a shift from number theory (primes) to geometry (lattices). While the keys are slightly heavier, the algorithm is efficient, robust, and ready for deployment.
 
 ## An Analogy: The Foggy Orchard 
