@@ -1,10 +1,10 @@
 # Building eBPF Uprobes for GPU Monitoring in CUDA
 
-**Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)  
+**Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
+
 **Published:** July 15, 2025
 
-> _Visibility is performance._  
-> Use the GPU you paid for — fully.
+> Visibility is performance. Use the GPU you paid for — fully.
 
 ## Introduction
 
