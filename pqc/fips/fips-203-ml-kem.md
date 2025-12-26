@@ -20,58 +20,63 @@ Here is a deep dive into what ML-KEM is, how it works, and why it is the crown j
 
 ## What is ML-KEM?
 
-ML-KEM stands for **Module-Lattice-Based Key-Encapsulation Mechanism**.
+ML-KEM stands for **Module-Lattice-Based Key-Encapsulation Mechanism**. Before standardization, it was known as **CRYSTALS-Kyber**. NIST selected it as the primary standard for general encryption because of its potent combination of security and speed.
 
-Before standardization, it was known as **CRYSTALS-Kyber**. NIST selected it as the primary standard for general encryption because of its potent combination of security and speed.
+<br>
 
 It is a “KEM,” not just “Encryption”
 
 In classical RSA, you could technically encrypt a message directly with a public key. ML-KEM works differently. It is a Key Encapsulation Mechanism.
 
-• **The Goal**: Two parties (Alice and Bob) need to agree on a shared secret (like a symmetric session key) over an insecure channel.
+- **The Goal**: Two parties (Alice and Bob) need to agree on a shared secret (like a symmetric session key) over an insecure channel.
 
-• **The Process**: Alice generates a public/private key pair. Bob uses Alice’s public key to “encapsulate” a shared secret, creating a “ciphertext.” He sends this to Alice, who uses her private key to “decapsulate” it, recovering the same shared secret.
+- **The Process**: Alice generates a public/private key pair. Bob uses Alice’s public key to “encapsulate” a shared secret, creating a “ciphertext.” He sends this to Alice, who uses her private key to “decapsulate” it, recovering the same shared secret.
 
 This mechanism effectively replaces the Diffie-Hellman (DH) and ECDH key exchanges used in protocols like TLS (Transport Layer Security).
 
 ## Maths Behind ML-KEM
 
-While classical cryptography (like RSA) relies on the formula for factoring large numbers (N=p×q), ML-KEM relies on **linear algebra over rings** and the Module Learning With Errors (ML-LWE) problem.
-
-Here is a breakdown of the mathematical formulas and concepts that drive ML-KEM.
+While classical cryptography (like RSA) relies on the formula for factoring large numbers (N=p×q), ML-KEM relies on **linear algebra over rings** and the Module Learning With Errors (ML-LWE) problem. Here is a breakdown of the mathematical formulas and concepts that drive ML-KEM.
 
 ### 1. The Core Equation: t:=As+e
+
 The fundamental formula for generating a public key in ML-KEM is a matrix equation involving “noise.” It looks like a standard linear algebra equation, but with a twist.
 
-The formula is generally represented as: t=As+e(modq)
+<br>
 
-• **A (The Matrix)**: A public matrix of polynomials. This acts as a grid or coordinate system,.
+The formula is generally represented as: _t=As+e(modq)_, where:
 
-• **s (The Secret)**: A vector of secret polynomials (the private key).
+- **A (The Matrix)**: A public matrix of polynomials. This acts as a grid or coordinate system,.
 
-• **e (The Error)**: A vector of small, random “error” polynomials (noise).
+- **s (The Secret)**: A vector of secret polynomials (the private key).
 
-• **t (The Public Key)**: The resulting vector, which serves as the public key.
+- **e (The Error)**: A vector of small, random “error” polynomials (noise).
+
+- **t (The Public Key)**: The resulting vector, which serves as the public key.
 
 **Why this formula matters**: In standard algebra, if you knew A and t, you could easily solve for s using Gaussian elimination. However, because the small error term e is added, the equation becomes “noisy.” Solving for s becomes computationally infeasible for both classical and quantum computers because the noise masks the exact location of the solution on the lattice grid .
 
-### 2. The “Arena”: Polynomial Rings (Rq​)
+### 2. Polynomial Rings (Rq​)
 
-Unlike RSA, which does math using massive integers, ML-KEM performs these calculations using **polynomials**.
+Unlike RSA, which does math using massive integers, ML-KEM performs these calculations using **polynomials**. The operations take place in a specific mathematical structure called a ring, denoted as
 
-The operations take place in a specific mathematical structure called a ring, denoted as Rq​: Rq​=Zq​[X]/(Xn+1)
+<br>
 
-• Zq​: The coefficients of the polynomials are integers modulo q.
+_Rq​: Rq​=Zq​[X]/(Xn+1)_, where:
 
-• Xn+1: When you multiply polynomials, if the power of X exceeds n, it wraps around (reduces) based on this formula.
+- _Zq​_: The coefficients of the polynomials are integers modulo q.
 
-• n=256: In ML-KEM, the degree of the polynomials (n) is typically fixed at 256.
+- _Xn+1_: When you multiply polynomials, if the power of X exceeds n, it wraps around (reduces) based on this formula.
+
+- _n=256_: In ML-KEM, the degree of the polynomials (n) is typically fixed at 256.
 
 This structure allows the algorithm to be extremely efficient. Instead of doing heavy integer multiplication, the computer is essentially performing operations on arrays of 256 small numbers.
 
-### 3. Conceptual Example: Noisy Linear Equations
+### 3. Noisy Linear Equations
 
 To visualize the math without the complex polynomials, you can look at the **scalar LWE problem** (the simplified ancestor of ML-KEM). The problem asks an attacker to solve a system of linear equations that are only “approximately” correct.
+
+<br>
 
 As described in the sources, an LWE input might look like this system of approximate equations modulo 17:
 
@@ -81,11 +86,11 @@ The goal is to recover the secret numbers s1​,s2​,s3​,s4​. Without the �
 
 ![](../images/fips-203/noisy-linear-equation.png)
 
-## The Engine: Module Lattices
-
-**Why is ML-KEM resistant to quantum computers when RSA is not?**
+## Why is ML-KEM resistant to quantum computers when RSA is not?
 
 RSA relies on integer factorization: taking a massive number and finding its prime factors. A quantum computer running Shor’s Algorithm can solve this effortlessly.
+
+<br>
 
 ML-KEM relies on **Module Lattices**, specifically the hardness of the **Module Learning With Errors (ML-LWE)** problem.
 
@@ -93,9 +98,11 @@ ML-KEM relies on **Module Lattices**, specifically the hardness of the **Module 
 
 - **The Quantum Resistance**: While quantum computers are great at finding “periods” (which breaks RSA), they are not significantly better than classical computers at solving these noisy, high-dimensional lattice vector problems.
 
-## The Specs: Speed vs. Size
+## Speed vs. Size
 
 The transition to Post-Quantum Cryptography (PQC) involves a trade-off. We are trading bandwidth for security. ML-KEM keys are larger than the tiny ECC keys we use today, but they are surprisingly fast.
+
+<br>
 
 **Key Sizes**
 
@@ -103,20 +110,19 @@ ML-KEM is defined in three parameter sets, corresponding to different security l
 
 ![](../images/fips-203/key-size.png)
 
-• **Comparison**: An RSA-2048 public key is roughly 256 bytes. An ML-KEM-768 public key is roughly 1.2 KB. While this is larger, it is small enough to fit inside a single standard TCP packet (usually ~1500 bytes), avoiding the severe fragmentation issues seen with other post-quantum algorithms like McEliece (which has keys in the megabytes).
+- **Comparison**: An RSA-2048 public key is roughly 256 bytes. An ML-KEM-768 public key is roughly 1.2 KB. While this is larger, it is small enough to fit inside a single standard TCP packet (usually ~1500 bytes), avoiding the severe fragmentation issues seen with other post-quantum algorithms like McEliece (which has keys in the megabytes).
 
 **Performance**
 
 Despite the larger size, ML-KEM is computationally lightweight.
 
-• **Encapsulation/Decapsulation**: In many benchmarks, ML-KEM is actually faster than RSA and comparable to Elliptic Curve Diffie-Hellman (ECDH).
+- **Encapsulation/Decapsulation**: In many benchmarks, ML-KEM is actually faster than RSA and comparable to Elliptic Curve Diffie-Hellman (ECDH).
 
-**CPU Load**: The operations involve polynomial math that is very efficient for modern CPUs. Decapsulating a key with ML-KEM is significantly less CPU-intensive than the heavy exponentiation required to decrypt with RSA.
+- **CPU Load**: The operations involve polynomial math that is very efficient for modern CPUs. Decapsulating a key with ML-KEM is significantly less CPU-intensive than the heavy exponentiation required to decrypt with RSA.
 
-## Implementation: The “Hybrid” Transition
-You should not expect to switch to ML-KEM overnight and abandon classical crypto immediately. The industry standard is currently Hybrid Mode.
+## The “Hybrid” Transition
 
-Because ML-KEM is relatively new compared to RSA (which has been scrutinized for decades), engineers are cautious. In a hybrid handshake (e.g., in TLS 1.3), the browser and server establish two shared secrets:
+You should not expect to switch to ML-KEM overnight and abandon classical crypto immediately. The industry standard is currently Hybrid Mode. Because ML-KEM is relatively new compared to RSA (which has been scrutinized for decades), engineers are cautious. In a hybrid handshake (e.g., in TLS 1.3), the browser and server establish two shared secrets:
 
 1. One using classical X25519 (Elliptic Curve).
 
@@ -126,24 +132,28 @@ They mix these secrets together. If ML-KEM turns out to have a bug, the classica
 
 This is critical to deploy now because of the **“Harvest Now, Decrypt Later”** threat. Attackers are recording encrypted traffic today, waiting for a quantum computer to exist in the future to break it. Implementing ML-KEM today protects current traffic from that future destiny.
 
-## Why ML-KEM Won (And what lost)
+## Why ML-KEM Won? (And what lost?)
+
 NIST didn’t just pick ML-KEM; they evaluated dozens of candidates.
 
-• **The Winner (ML-KEM)**: It offered the best balance of small key sizes and incredibly fast operation.
+- **The Winner (ML-KEM)**: It offered the best balance of small key sizes and incredibly fast operation.
 
-• **The Backup (HQC)**: NIST selected HQC (Hamming Quasi-Cyclic) as a backup for KEMs. It uses “Code-Based” cryptography rather than lattices. If a mathematical breakthrough ever breaks Lattices, the world will switch to HQC.
+- **The Backup (HQC)**: NIST selected HQC (Hamming Quasi-Cyclic) as a backup for KEMs. It uses “Code-Based” cryptography rather than lattices. If a mathematical breakthrough ever breaks Lattices, the world will switch to HQC.
 
-• **The Loser (SIKE)**: A promising candidate called SIKE (Supersingular Isometry Key Encapsulation) was broken by a classical computer in roughly one hour during the later rounds of the competition, proving why backups and rigorous testing are essential.
+- **The Loser (SIKE)**: A promising candidate called SIKE (Supersingular Isometry Key Encapsulation) was broken by a classical computer in roughly one hour during the later rounds of the competition, proving why backups and rigorous testing are essential.
 
 ## Conclusion
+
 ML-KEM (FIPS 203) is the new standard for digital confidentiality. It represents a shift from number theory (primes) to geometry (lattices). While the keys are slightly heavier, the algorithm is efficient, robust, and ready for deployment.
 
-## An Analogy: The Foggy Orchard 
+## An Analogy: The Foggy Orchard
+
 To understand why ML-KEM is quantum-resistant while RSA is not, imagine you are trying to hide a treasure.
+
+<br>
 
 **RSA** is like hiding the treasure in a safe protected by a massive multiplication problem. Classical computers are like thieves trying to guess the combination by turning the dial one tick at a time it takes forever. A Quantum computer, however, is like a thief with a specialized stethoscope (Shor’s algorithm) that can hear the tumblers click into place, opening the safe in minutes.
 
 **ML-KEM (Lattices)** is like hiding the treasure in a massive, infinite apple orchard (a lattice). You give the recipient a map to the specific tree, but you add “noise.” You tell them, “Go to row 10,000, tree 500, and then walk 3.2 steps north and 1.5 steps east.” Because the grid is hundreds of dimensions deep (not just rows and columns), and because you added that random noise (the “steps” off the grid), finding the exact original tree is an absolute nightmare.
 
 Crucially, the “stethoscope” that the Quantum Thief used on the RSA safe **does not work here**. Being able to hear tumblers doesn’t help you navigate a noisy, multi-dimensional forest. Both the classical thief and the quantum thief are equally lost in the lattice.
-
