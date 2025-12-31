@@ -2,7 +2,7 @@
 
 **Author:** [Khushi Chhillar](https://www.linkedin.com/in/kcl17/)
 
-**Published:** December 21, 2025
+**Published:** December 20, 2025
 
 _The New Handshake: Understanding ML-KEM (FIPS 203)_
 
