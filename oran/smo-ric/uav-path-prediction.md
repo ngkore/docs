@@ -1,6 +1,6 @@
 # UAV Path Prediction Using AI/ML Framework in Distributed ORAN Architecture
 
-**Author:** [Wafi Hasan](https://www.linkedin.com/in/wafi-hasan-334b3520a/)
+**Author:** [Nitin Rajput](https://www.linkedin.com/in/nitin-rajput-3a321114b/)
 
 **Published:** October 27, 2024
 
