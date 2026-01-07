@@ -1,6 +1,6 @@
 # QoE Prediction Using AI/ML Framework in Distributed ORAN Architecture
 
-**Author:** [Wafi Hasan](https://www.linkedin.com/in/wafi-hasan-334b3520a/)
+**Author:** [Nitin Rajput](https://www.linkedin.com/in/nitin-rajput-3a321114b/)
 
 **Published:** November 8, 2024
 
@@ -8,7 +8,7 @@ In this era of telecommunications where features are being upgraded round the cl
 
 _The degree of delight or annoyance of the user of an application or service. It results from the fulfillment of his or her expectations with respect to the utility and / or enjoyment of the application or service in the light of the user’s personality and current state._
 
-This was given by [Qualinet](<(https://www.qualinet.eu/)>) of COST (European Cooperation in Science and Technology) Association.
+This was given by [Qualinet](https://www.qualinet.eu/) of COST (European Cooperation in Science and Technology) Association.
 
 ## QoE Prediction
 

@@ -1,6 +1,6 @@
 # NgKore Documentation
 
-NgKore (ngkore.org) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
+NgKore Foundation (ngkorefoundation.org) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
 
 ## Contributing
 
@@ -9,10 +9,10 @@ We welcome contributions from the community! See our [How to Contribute](./how-t
 ## Need Help?
 
 - **GitHub Issues**: [Create an issue](https://github.com/ngkore/docs/issues/new)
-- **Email**: contact@ngkore.org
+- **Email**: contact@ngkorefoundation.org
 
 ## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](https://github.com/ngkore/docs/blob/main/LICENSE) file for details.
 
-Copyright © 2023 NgKore Community. All rights reserved.
+Copyright © 2023-2025 NgKore Foundation. All rights reserved.

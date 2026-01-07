@@ -1,6 +1,6 @@
 .. Common link definitions for NgKore Documentation
 
-.. _NgKore: https://ngkore.org/
+.. _NgKore: https://ngkorefoundation.org/
 .. _GitHub: {{ github_url }}
 .. _GitHub Issues: {{ github_url }}/issues
 .. _Contributing Guide: {{ github_url }}/blob/{{ github_version }}/how-to-contribute.md

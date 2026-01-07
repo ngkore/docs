@@ -20,21 +20,21 @@ import os
 
 # Product name
 project = 'NgKore'
-author = 'NgKore'
+author = 'NgKore Foundation'
 
 # The title you want to display for the documentation in the sidebar.
 # You might want to include a version number here.
 # To not display any title, set this option to an empty string.
 html_title = project + ' Documentation'
 
-# Copyright configuration for NgKore
-copyright = '2023 NgKore Community. All rights reserved.'
+# Copyright configuration for NgKore Foundation
+copyright = '2023-2025 NgKore Foundation. All rights reserved.'
 
 # Open Graph configuration - defines what is displayed as a link preview
 # when linking to the documentation from another website (see https://ogp.me/)
 # The URL where the documentation will be hosted (leave empty if you
 # don't know yet)
-ogp_site_url = "https://docs.ngkore.org"
+ogp_site_url = "https://docs.ngkorefoundation.org"
 # The documentation website name (usually the same as the product name)
 ogp_site_name = project
 # The URL of an image or logo that is used in the preview
@@ -44,12 +44,12 @@ ogp_image = ".sphinx/_static/tag.png"
 html_meta = {
     'description': 'NgKore documentation covering Post-Quantum Cryptography (PQC), eBPF Technology, O-RAN, 5G Core Networks, Network Security, AI/ML Integration, NTN, Quantum Technologies and Kernel Bypass Technologies.',
     'keywords': '5G core, PQC, post-quantum cryptography, eBPF, XDP, O-RAN, network security, AI/ML, kernel bypass, UPF, TLS, IPSec, QUIC, NTN, satellite networks, xFAPI, SMO, RIC, DPDK, AF_XDP, SRIOV, Quantum, OQS, Kubernetes, HEXAeBPF, OQS, PQC Migration, Telecom',
-    'author': 'NgKore Community',
+    'author': 'NgKore Foundation',
     'robots': 'index, follow',
     'og:type': 'website',
     'og:description': 'Open-source community driving innovation in 5G, Post-Quantum Cryptography, eBPF, O-RAN, and Cloud-Native Architectures.',
     'twitter:card': 'summary_large_image',
-    'twitter:site': '@kore_ng',
+    'twitter:site': '@ngkore_org',
 }
 
 # Update with the local path to the favicon for your product
@@ -73,7 +73,7 @@ html_context = {
     # Change to the discourse instance you want to be able to link to
     # using the :discourse: metadata at the top of a file
     # (use an empty value if you don't want to link)
-    # 'discourse': 'https://ngkore.org',
+    # 'discourse': 'https://ngkorefoundation.org',
 
     # Change to the GitHub URL for your project
     'github_url': 'https://github.com/ngkore/docs',
@@ -195,8 +195,8 @@ custom_tags = []
 myst_heading_anchors = 3
 
 # SEO Enhancements
-html_use_opensearch = 'https://docs.ngkore.org'
-html_baseurl = 'https://docs.ngkore.org/'
+html_use_opensearch = 'https://docs.ngkorefoundation.org'
+html_baseurl = 'https://docs.ngkorefoundation.org/'
 
 # Sitemap configuration for better search engine indexing
 sitemap_url_scheme = "{link}"
@@ -233,7 +233,7 @@ html_theme_options = {
     "footer_icons": [
         {
             "name": "Email",
-            "url": "mailto:contact@ngkore.org",
+            "url": "mailto:contact@ngkorefoundation.org",
             "html": """
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
@@ -253,7 +253,7 @@ html_theme_options = {
         },
         {
             "name": "X (Twitter)",
-            "url": "https://x.com/kore_ng",
+            "url": "https://x.com/ngkore_org",
             "html": """
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
@@ -273,7 +273,7 @@ html_theme_options = {
         },
         {
             "name": "YouTube",
-            "url": "https://www.youtube.com/@NgKore",
+            "url": "https://www.youtube.com/@ngkore",
             "html": """
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>

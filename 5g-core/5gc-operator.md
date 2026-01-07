@@ -15,7 +15,7 @@
     chart from the repository during the API creation. The Helm chart is
     then stored locally in the Operator project.
 3.  **Building the Docker Image** - Once the API and Controller are set
-    up, we build the ngKore Operator Docker image and then pushed to the
+    up, we build the 5G Operator Docker image and then pushed to the
     Dockerhub registry so it can be accessed and pulled into a
     Kubernetes cluster.
 4.  **Applying the Operator\'s Deployment Manifest** - The Operator is
@@ -24,11 +24,11 @@
     kubectl. The Operator is now running in the cluster.
 5.  **Creating Instances of the Custom Resource** - We can now start
     interacting with the Operator by creating instances of the
-    **ngkore** custom resource. These instances are defined in YAML and
+    **5G** custom resource. These instances are defined in YAML and
     are applied to the cluster using kubectl. This YAML
     defines the desired state of our application.
 6.  **Reconciliation Loop** - The Operator's controller constantly
-    watches the ngkore custom resource for changes. If it detects a
+    watches the 5G custom resource for changes. If it detects a
     change, it performs the necessary actions to make the cluster
     reflect those changes. This is called the reconciliation loop.
 7.  **Modifying the Custom Resource** - The 'spec' field in the CR
