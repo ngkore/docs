@@ -2,9 +2,9 @@ name: Deploy Documentation
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -21,69 +21,48 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6
       with:
-        python-version: '3.11'
+        python-version: '3.12'
+        cache: 'pip'
 
-    - name: Cache pip dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-          
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "Installed packages:"
-        pip list | grep -E "(sphinx|furo|myst)" || echo "Core packages listed above"
-        
+
     - name: Build documentation
       run: |
-        # Ensure .sphinx directory exists
-        mkdir -p .sphinx
         export GITHUB_ACTIONS=true
-        sphinx-build -c . -b dirhtml . _build/html --keep-going -w .sphinx/warnings.txt -v
-        
+        sphinx-build -c . -b dirhtml . _build/html --keep-going -w .sphinx/warnings.txt
+
     - name: Check build warnings
       run: |
-        if [ -f .sphinx/warnings.txt ]; then
-          echo "Build warnings found:"
+        if [ -f .sphinx/warnings.txt ] && [ -s .sphinx/warnings.txt ]; then
+          echo "::warning::Sphinx build produced warnings:"
           cat .sphinx/warnings.txt
-          echo "Warnings logged, but build will continue"
-        else
-          echo "No warnings file found"
         fi
-        
-    - name: Add .nojekyll file and create index.html
+
+    - name: Prepare GitHub Pages output
       run: |
         touch _build/html/.nojekyll
-        # Create index.html files for all directories
-        find _build/html -name "index" -type f -exec sh -c 'cp "$1" "${1%index}index.html"' _ {} \;
-        
+        find _build/html -type f -name "index" ! -name "index.*" \
+          -exec sh -c 'cp "$1" "$1.html"' _ {} \;
+
     - name: Verify build output
       run: |
-        echo "Build directory structure:"
-        find _build/html -type f -name "index*" | head -20
-        echo "HTML directories:"
-        find _build/html -type d -maxdepth 2 | head -20
-        echo "Static files:"
-        find _build/html/_static -type f | head -10
-        echo "Main index exists:" && ls -la _build/html/index.html
-        echo "Checking .nojekyll file:" && ls -la _build/html/.nojekyll
-        echo "Total files built:" && find _build/html -type f | wc -l
-        echo "Build completed successfully"
-        
+        test -f _build/html/index.html || { echo "::error::index.html missing"; exit 1; }
+        test -f _build/html/.nojekyll || { echo "::error::.nojekyll missing"; exit 1; }
+        echo "Build output: $(find _build/html -type f | wc -l) files"
+
     - name: Setup Pages
-      uses: actions/configure-pages@v3
+      uses: actions/configure-pages@v6
 
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v5
       with:
         path: '_build/html'
 
@@ -98,4 +77,4 @@ jobs:
     steps:
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
+      uses: actions/deploy-pages@v5

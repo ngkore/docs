@@ -19,11 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     img.alt = "NgKore Foundation";
     img.loading = "lazy";
     img.decoding = "async";
-    // Prefer optimized asset in .sphinx/_static if available; fallback to repo image path
-    const urlRoot = document.body.getAttribute("data-url_root") || "/";
-    // Prefer the static bundled logo to avoid path issues
-    img.src = urlRoot + "_static/ngkore-logo.png";
-    // Fallback to absolute path if urlRoot missing
+    const contentRoot = document.body.getAttribute("data-content_root") || "/";
+    img.src = contentRoot + "_static/ngkore-logo.png";
     img.onerror = function () {
       img.onerror = null;
       img.src = "/_static/ngkore-logo.png";

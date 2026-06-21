@@ -1,0 +1,33 @@
+# Images (binary files)
+**/images/
+
+# Content documents — Claude only needs config/code files, not article text
+5g-core/**/*.md
+ai-ml/**/*.md
+ebpf/**/*.md
+kernel-bypass/**/*.md
+ntn/**/*.md
+oran/**/*.md
+pqc/**/*.md
+security/**/*.md
+tutorials/**/*.md
+
+# PDF files
+*.pdf
+
+# Build output
+_build/
+
+# Compiled Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+.sphinx/venv/
+
+# Binary assets (favicons, app icons)
+*.ico
+*.png
+*.webp
+*.svg
+*.webmanifest

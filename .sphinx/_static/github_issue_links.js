@@ -1,34 +1,27 @@
-// if we already have an onload function, save that one
-var prev_handler = window.onload;
-
-window.onload = function() {
-    // call the previous onload function
-    if (prev_handler) {
-        prev_handler();
-    }
-
-    const link = document.createElement("a");
-    link.classList.add("muted-link");
-    link.classList.add("github-issue-link");
+document.addEventListener("DOMContentLoaded", function () {
+    var link = document.createElement("a");
+    link.classList.add("muted-link", "github-issue-link");
     link.text = "Give feedback";
     link.href = (
         github_url
         + "/issues/new?"
         + "title=docs%3A+TYPE+YOUR+QUESTION+HERE"
         + "&body=*Please describe the question or issue you're facing with "
-        + `"${document.title}"`
+        + encodeURIComponent('"' + document.title + '"')
         + ".*"
         + "%0A%0A%0A%0A%0A"
         + "---"
         + "%0A"
-        + `*Reported+from%3A+${location.href}*`
+        + "*Reported+from%3A+" + encodeURIComponent(location.href) + "*"
     );
     link.target = "_blank";
 
-    const div = document.createElement("div");
+    var div = document.createElement("div");
     div.classList.add("github-issue-link-container");
-    div.append(link)
+    div.appendChild(link);
 
-    const container = document.querySelector(".article-container > .content-icon-container");
-    container.prepend(div);
-};
+    var container = document.querySelector(".article-container > .content-icon-container");
+    if (container) {
+        container.prepend(div);
+    }
+});

@@ -1,0 +1,244 @@
+/** Content elements — tables, code blocks, admonitions, images, cards, tabs **/
+
+/** Tables **/
+th.head {
+  text-transform: uppercase;
+  font-size: var(--font-size--small);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  background-color: var(--color-background-hover);
+  padding: 1rem 0.75rem;
+}
+
+table.docutils {
+  border: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+table.docutils td,
+table.docutils th {
+  border-right: none;
+  border-left: none;
+  padding: 0.875rem 0.75rem;
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+table.docutils tr:nth-child(even) {
+  background-color: var(--color-background-hover);
+}
+
+table.docutils tr:hover {
+  background-color: var(--color-highlighted-background);
+  transition: background-color 0.2s ease;
+}
+
+table.align-center {
+  text-align: center !important;
+}
+
+table.dec-font-size {
+  font-size: smaller;
+}
+table.break-col-1 td.text-left:first-child {
+  word-break: break-word;
+}
+table.break-col-4 td.text-left:nth-child(4) {
+  word-break: break-word;
+}
+table.min-width-1-15 td.text-left:first-child {
+  min-width: 15em;
+}
+table.min-width-4-8 td.text-left:nth-child(4) {
+  min-width: 8em;
+}
+
+/** Code blocks **/
+.admonition,
+code.literal,
+.sphinx-tabs-tab,
+.sphinx-tabs-panel,
+.highlight {
+  border-radius: 8px;
+}
+
+code.literal {
+  background-color: var(--color-inline-code-background);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-stack--monospace);
+  font-size: 0.9rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.highlight {
+  margin: 1.5rem 0;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+pre {
+  white-space: pre !important;
+}
+
+.highlight pre {
+  padding: 1.25rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.highlight-console pre,
+.highlight-text pre,
+.highlight-none pre {
+  font-family: "Courier New", Courier, monospace !important;
+  tab-size: 4;
+}
+
+/** Admonitions **/
+.admonition {
+  border: 1px solid #d9d9d9;
+  border-left: 4px solid var(--ngkore-primary);
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background-color: var(--color-background-primary);
+}
+
+.admonition .admonition-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-stack);
+}
+
+/** Images **/
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+  display: block;
+}
+
+.figure {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.figure img {
+  margin: 0 auto 1rem;
+}
+
+.figure .caption {
+  font-style: italic;
+  color: var(--color-foreground-muted);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/** Cards **/
+.sd-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background-color: var(--color-background-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.sd-card-header {
+  background-color: var(--color-background-hover);
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sd-card-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-brand-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-stack);
+}
+
+.sd-card-text {
+  color: var(--color-foreground-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 1.5rem;
+  font-family: var(--font-stack);
+}
+
+.sd-container-fluid {
+  padding: 2rem 0;
+}
+
+.sd-row {
+  gap: 2rem;
+}
+
+/** Tabs **/
+[role="tablist"] {
+  border-bottom: 1px solid var(--color-sidebar-item-background--hover);
+  margin: 1.5rem 0 0 0;
+}
+
+.sphinx-tabs-tab[aria-selected="true"] {
+  border: 0;
+  border-bottom: 3px solid var(--color-brand-primary);
+  background-color: var(--color-sidebar-item-background--current);
+  font-weight: 400;
+  font-family: var(--font-stack);
+  border-radius: 4px 4px 0 0;
+}
+
+.sphinx-tabs-tab {
+  color: var(--color-brand-primary);
+  font-weight: 400;
+  font-family: var(--font-stack);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.2s ease;
+}
+
+.sphinx-tabs-panel {
+  border: 0;
+  border-bottom: 1px solid var(--color-sidebar-item-background--hover);
+  background: var(--color-background-primary);
+  padding: 1.5rem;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+button.sphinx-tabs-tab:hover {
+  background-color: var(--color-sidebar-item-background--hover);
+  transform: translateY(-1px);
+}
+
+/** Author/Published metadata spacing **/
+article[role="main"] p:has(strong:first-child:contains("Author:")) {
+  margin-bottom: 0.2rem;
+}
+
+article[role="main"] p:has(strong:first-child:contains("Published:")) {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+article[role="main"] section:first-child p:nth-of-type(1) {
+  margin-bottom: 0rem;
+}
+
+article[role="main"] section:first-child p:nth-of-type(2) {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}

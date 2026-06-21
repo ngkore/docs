@@ -1,0 +1,116 @@
+/** Typography — fonts, headings, paragraphs, lists **/
+
+div.page,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.sidebar-tree .current-page > .reference,
+button,
+input,
+optgroup,
+select,
+textarea,
+th.head {
+  font-weight: 400;
+  font-family: var(--font-stack);
+}
+
+dl.glossary dt,
+dl.simple dt,
+dl:not([class]) dt {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  text-align: justify;
+  font-family: var(--font-stack);
+}
+
+ul,
+ol {
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+
+ol.arabic ol.arabic {
+  list-style: lower-alpha;
+}
+
+a {
+  color: var(--color-brand-content);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  color: var(--color-brand-primary);
+  border-bottom: 1px solid var(--color-brand-primary);
+}
+
+abbr[title] {
+  text-decoration: underline solid #cdcdcd;
+  cursor: help;
+}
+
+::selection {
+  background: #4492f1;
+  color: #fff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+blockquote {
+  border-left: 4px solid var(--color-brand-primary);
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-foreground-muted);
+  background-color: var(--color-background-hover);
+  padding: 1rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+}
+
+details summary {
+  color: var(--color-link);
+}

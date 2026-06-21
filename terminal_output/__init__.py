@@ -1,27 +1,33 @@
+"""Sphinx directive for rendering styled terminal output blocks."""
+
+import os
+
+import sphinx.addnodes
 from docutils import nodes
-from sphinx.util.docutils import SphinxDirective
 from docutils.parsers.rst import directives
-from . import common
-import sphinx
+from sphinx.util.docutils import SphinxDirective
+from sphinx_utils import add_css
 
 
 def parse_contents(contents):
+    """Split directive content into output blocks and :input: commands."""
     command_output = []
-    out = []
+    result = []
 
     for line in contents:
         if line.startswith(":input: "):
-            out.append(command_output)
-            out.append([line])
+            result.append(command_output)
+            result.append([line])
             command_output = []
         else:
             command_output.append(line)
 
-    out.append(command_output)
-    return out
+    result.append(command_output)
+    return result
 
 
 class TerminalOutput(SphinxDirective):
+    """Render a terminal session with prompt, commands, and output."""
 
     required_arguments = 0
     optional_arguments = 0
@@ -36,48 +42,37 @@ class TerminalOutput(SphinxDirective):
 
     @staticmethod
     def input_line(prompt_text, command):
-
+        """Build a docutils node for a single prompt + command line."""
         inpline = nodes.container()
         inpline["classes"].append("input")
 
-        # To let the prompt be styled separately in LaTeX, it needs to be
-        # wrapped in a container. This adds an extra div to the HTML output,
-        # but what's a few bytes between friends?
         prompt_container = nodes.container()
         prompt_container["classes"].append("prompt")
-        prompt = nodes.literal(text=prompt_text)
-        prompt_container.append(prompt)
+        prompt_container.append(nodes.literal(text=prompt_text))
 
         inpline.append(prompt_container)
         inp = nodes.literal(text=command)
         inp["classes"].append("command")
         inpline.append(inp)
-        # inpline.append(nodes.paragraph())
         return inpline
 
     def run(self):
-        # if :user: or :host: are provided, replace those in the prompt
-
+        """Parse options and content, return terminal container node."""
         command = self.options.get("input", "")
         user = self.options.get("user", "user")
         host = self.options.get("host", "host")
-        dir = self.options.get("dir", "~")
+        working_dir = self.options.get("dir", "~")
         user_symbol = "#" if user == "root" else "$"
+
         if user and host:
-            prompt_text = f"{user}@{host}:{dir}{user_symbol} "
-        elif user and not host:
-            # Only the user is supplied
-            prompt_text = f"{user}:{dir}{user_symbol} "
+            prompt_text = f"{user}@{host}:{working_dir}{user_symbol} "
+        elif user:
+            prompt_text = f"{user}:{working_dir}{user_symbol} "
         else:
-            # Omit both user and host, just showing the host
-            # doesn't really make sense
-            prompt_text = f"{dir}{user_symbol} "
+            prompt_text = f"{working_dir}{user_symbol} "
 
         out = nodes.container()
         out["classes"].append("terminal")
-        # The super-large value for linenothreshold is a major hack since I
-        # can't figure out how to disable line numbering and the
-        # linenothreshold kwarg seems to be required.
         out.append(
             sphinx.addnodes.highlightlang(
                 lang="text", force=False, linenothreshold=10000
@@ -86,14 +81,7 @@ class TerminalOutput(SphinxDirective):
         if "scroll" in self.options:
             out["classes"].append("scroll")
 
-        # Add the original prompt and input
-
         out.append(self.input_line(prompt_text, command))
-        # breakpoint()
-
-        # Go through the content and append all lines as output
-        # except for the ones that start with ":input: " - those get
-        # a prompt
 
         parsed_content = parse_contents(self.content)
 
@@ -104,12 +92,13 @@ class TerminalOutput(SphinxDirective):
                 output = nodes.literal_block(text="\n".join(blob))
                 output["classes"].append("terminal-code")
                 out.append(output)
+
         return [out]
 
 
 def setup(app):
+    """Register the terminal directive and its stylesheet."""
     app.add_directive("terminal", TerminalOutput)
-
-    common.add_css(app, "terminal-output.css")
-
-    return {"version": "0.1", "parallel_read_safe": True, "parallel_write_safe": True}
+    add_css(app, "terminal-output.css", os.path.dirname(__file__))
+    return {"version": "0.1", "parallel_read_safe": True,
+            "parallel_write_safe": True}

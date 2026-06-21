@@ -1,46 +1,22 @@
+import glob
 import os
 
-# Custom configuration for the Sphinx documentation builder.
-# All configuration specific to your project should be done in this file.
-#
-# The file is included in the common conf.py configuration file.
-# You can modify any of the settings below or add any configuration that
-# is not covered by the common conf.py file.
-#
-# For the full list of built-in configuration values, see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-#
-# If you're not familiar with Sphinx and don't want to use advanced
-# features, it is sufficient to update the settings in the "Project
-# information" section.
-
 ############################################################
-# Project information
+### Project information
 ############################################################
 
-# Product name
 project = 'NgKore'
 author = 'NgKore Foundation'
 
-# The title you want to display for the documentation in the sidebar.
-# You might want to include a version number here.
-# To not display any title, set this option to an empty string.
 html_title = project + ' Documentation'
 
-# Copyright configuration for NgKore Foundation
 copyright = '2023-2025 NgKore Foundation. All rights reserved.'
 
-# Open Graph configuration - defines what is displayed as a link preview
-# when linking to the documentation from another website (see https://ogp.me/)
-# The URL where the documentation will be hosted (leave empty if you
-# don't know yet)
+# Open Graph link preview configuration
 ogp_site_url = "https://docs.ngkorefoundation.org"
-# The documentation website name (usually the same as the product name)
 ogp_site_name = project
-# The URL of an image or logo that is used in the preview
 ogp_image = ".sphinx/_static/tag.png"
 
-# Enhanced SEO meta tags for better topic discoverability
 html_meta = {
     'description': 'NgKore documentation covering Post-Quantum Cryptography (PQC), eBPF Technology, O-RAN, 5G Core Networks, Network Security, AI/ML Integration, NTN, Quantum Technologies and Kernel Bypass Technologies.',
     'keywords': '5G core, PQC, post-quantum cryptography, eBPF, XDP, O-RAN, network security, AI/ML, kernel bypass, UPF, TLS, IPSec, QUIC, NTN, satellite networks, xFAPI, SMO, RIC, DPDK, AF_XDP, SRIOV, Quantum, OQS, Kubernetes, HEXAeBPF, OQS, PQC Migration, Telecom',
@@ -52,71 +28,24 @@ html_meta = {
     'twitter:site': '@ngkore_org',
 }
 
-# Update with the local path to the favicon for your product
-# (default is the circle of friends)
 html_favicon = '.sphinx/_static/favicon.ico'
 
-# (Some settings must be part of the html_context dictionary, while others
-#  are on root level. Don't move the settings.)
 html_context = {
-
-    # Change to the link to the website of your product (without "https://")
-    # If there is no product website, edit the header template to remove the
-    # link (see the readme for instructions).
     'product_page': 'github.com/ngkore',
-
-    # Add your product tag (the orange part of your logo, will be used in the
-    # header) to ".sphinx/_static" and change the path here (start with "_static")
-    # (default is the circle of friends)
     'product_tag': '_static/tag.png',
-
-    # Change to the discourse instance you want to be able to link to
-    # using the :discourse: metadata at the top of a file
-    # (use an empty value if you don't want to link)
-    # 'discourse': 'https://ngkorefoundation.org',
-
-    # Change to the GitHub URL for your project
     'github_url': 'https://github.com/ngkore/docs',
-
-    # Change to the branch for this version of the documentation
     'github_version': 'main',
-
-    # Change to the folder that contains the documentation
-    # (usually "/" or "/docs/")
     'github_folder': '/',
-
-    # Change to an empty value if your GitHub repo doesn't have issues enabled.
-    # This will disable the feedback button and the issue link in the footer.
-    # 'github_issues': 'enabled',
-
-    # Controls the existence of Previous / Next buttons at the bottom of pages
-    # Valid options: none, prev, next, both
-    # 'sequential_nav': "both"
 }
 
-# slug (for example, "lxd") here.
 slug = ""
 
-# Base URL and environment configuration
-
-# Detect if we're building for GitHub Pages
 is_production = os.environ.get(
     'GITHUB_ACTIONS', False) or os.environ.get('READTHEDOCS', False)
 
-if is_production:
-    html_baseurl = '/'  # For custom domain GitHub Pages
-    # Ensure absolute URLs for production
-    html_theme_options_extra = {}
-else:
-    html_baseurl = '/'
-    html_theme_options_extra = {}
-
 ############################################################
-# Redirects
+### Redirects
 ############################################################
-
-# Set up redirects (https://documatt.gitlab.io/sphinx-reredirects/usage.html)
-# For example: 'explanation/old-name.html': '../how-to/prettify.html',
 
 redirects = {
     'ebpf/introduction-to-ebpf/': '../understanding-ebpf-in-kernel/',
@@ -126,106 +55,63 @@ redirects = {
 }
 
 ############################################################
-# Link checker exceptions
+### Link checker exceptions
 ############################################################
 
-# Links to ignore when checking links
-
 linkcheck_ignore = ['http://127.0.0.1:8000']
-
-# Pages on which to ignore anchors
-# (This list will be appended to linkcheck_anchors_ignore_for_url)
 
 custom_linkcheck_anchors_ignore_for_url = []
 
 ############################################################
-# Additions to default configuration
+### Additions to default configuration
 ############################################################
 
-# The following settings are appended to the default configuration.
-# Use them to extend the default functionality.
-
-# Add extensions
 custom_extensions = ['sphinx.ext.todo', 'sphinx_sitemap']
 
-# Add MyST extensions
 custom_myst_extensions = []
 
-# Add files or directories that should be excluded from processing.
-custom_excludes = ['venv/**']
+custom_excludes = ['venv/**', 'CLAUDE.md', 'README.md']
 
-# Add CSS files (located in .sphinx/_static/)
-custom_html_css_files = ['hide-footer-text.css',
-                         'footer-icons.css', 'ngkore-theme.css']
+custom_html_css_files = []
 
-# Add JavaScript files (located in .sphinx/_static/)
 custom_html_js_files = ['custom-theme-toggle.js', 'bottom-logo.js']
 
-# Ensure proper static files configuration for GitHub Pages
 if is_production:
-    # Additional production-specific static file handling
-    html_extra_path = []  # Add any extra paths if needed
-
-    # Ensure proper link resolution for GitHub Pages
     html_use_index = True
     html_file_suffix = ''
     html_link_suffix = '/'
 
-    # Static files already configured in main conf.py
-
-# The following settings override the default configuration.
-
-# Specify a reST string that is included at the end of each file.
-# If commented out, use the default (which pulls the reuse/links.txt
-# file into each reST file).
-# custom_rst_epilog = ''
-
-# By default, the documentation includes a feedback button at the top.
-# You can disable it by setting the following configuration to True.
 disable_feedback_button = False
 
-# Add tags that you want to use for conditional inclusion of text
-# (https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#tags)
 custom_tags = []
 
 ############################################################
-# Additional configuration
+### Additional configuration
 ############################################################
 
 myst_heading_anchors = 3
 
-# SEO Enhancements
 html_use_opensearch = 'https://docs.ngkorefoundation.org'
 html_baseurl = 'https://docs.ngkorefoundation.org/'
 
-# Sitemap configuration for better search engine indexing
 sitemap_url_scheme = "{link}"
 sitemap_locales = ['en']
 
-# Structured data for search engines  
 html_extra_path = []
 if os.path.exists('robots.txt'):
     html_extra_path.append('robots.txt')
 
-# Ensure the images directory (for bottom-right logo and other assets) is copied
 if os.path.isdir('images') and 'images' not in html_extra_path:
     html_extra_path.append('images')
 
-# Copy PDF files to build directory maintaining directory structure
-import glob
-import os
-
-# Find all PDFs under the source tree but exclude build/virtualenv dirs
+# Include PDF parent directories to preserve directory structure in build output
 pdf_files = [
     p for p in glob.glob('**/*.pdf', recursive=True)
     if not p.startswith('_build/') and not p.startswith('.sphinx/')
 ]
-
-# Add only their parent directories to preserve directory structure
 pdf_dirs = sorted({os.path.dirname(p) or '.' for p in pdf_files})
 html_extra_path.extend(pdf_dirs)
 
-# Furo theme configuration
 html_theme_options = {
     "source_repository": "https://github.com/ngkore/docs",
     "source_branch": "main",
@@ -304,22 +190,5 @@ html_theme_options = {
     ],
 }
 
-# Hide Sphinx attribution and last updated information
 html_show_sphinx = False
 html_last_updated_fmt = None
-
-# Override any existing theme options and merge with footer icons
-if 'html_theme_options' not in locals():
-    html_theme_options = {}
-
-html_theme_options.update({
-    # Remove source repository to disable edit button
-    # "source_repository": "https://github.com/ngkore/docs",
-    # "source_branch": "main",
-    # "source_directory": "",
-})
-
-# Merge production-specific theme options
-html_theme_options.update(html_theme_options_extra)
-
-# Add any configuration that is not covered by the common conf.py file.

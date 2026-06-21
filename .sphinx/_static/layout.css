@@ -1,0 +1,155 @@
+/** Layout — sidebar, TOC, content width, responsive overrides **/
+
+/** Hide edit button and header anchor links **/
+.edit-this-page,
+a[title="Edit this page"],
+.source-link,
+.edit-on-github,
+.headerlink {
+  display: none !important;
+}
+
+/** Left sidebar **/
+.sidebar-drawer {
+  width: 15em !important;
+  min-width: 15em !important;
+  margin-left: 0.5em !important;
+}
+
+.sidebar-tree li.current-page {
+  border-left: 3px solid var(--color-brand-primary);
+  background-color: var(--color-sidebar-item-background--current);
+  border-radius: 0 4px 4px 0;
+}
+
+.sidebar-tree .reference {
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: var(--font-stack);
+}
+
+.sidebar-tree .reference:hover {
+  background-color: var(--color-sidebar-item-background--hover);
+  transform: translateX(2px);
+}
+
+.sidebar-tree .toc-tree,
+.sidebar-tree .toc-tree li,
+.sidebar-tree .toc-tree a {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/** Content area **/
+.content {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: auto !important;
+}
+
+.bottom-of-page .right-details {
+  font-size: var(--font-size--small);
+  display: block;
+}
+
+/** Right TOC ("On this page") — always visible + fixed on desktop **/
+.toc-content-icon {
+  display: none !important;
+}
+
+aside.toc-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  height: 100vh !important;
+  border-left: 2px solid var(--color-sidebar-background-border, #e2e8f0) !important;
+  width: 15em !important;
+  max-width: 15em !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  z-index: 10 !important;
+  background: var(--color-background-primary) !important;
+  padding-top: 1rem !important;
+}
+
+.page {
+  margin-right: 15em !important;
+}
+.main {
+  max-width: calc(100vw - 15em) !important;
+  overflow-x: hidden !important;
+}
+
+.toc-title {
+  color: var(--color-foreground-muted, #999) !important;
+  opacity: 0.6;
+}
+
+.toc-tree {
+  font-size: 13px !important;
+  line-height: 1.4;
+  border-left: none !important;
+}
+
+.toc-scroll .toc-tree,
+.toc-scroll .toc-tree li,
+.toc-scroll .toc-tree a {
+  font-size: 13px !important;
+  line-height: 1.3;
+}
+
+.toc-tree li.scroll-current > .reference {
+  font-weight: 700;
+  color: var(--color-brand-content) !important;
+}
+
+aside.toc-drawer .toc-tree a {
+  display: block !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
+aside.toc-drawer .toc-tree ul ul {
+  padding-left: 0.75em !important;
+}
+
+/** Below 63em: hide TOC, restore margin **/
+@media (max-width: 63em) {
+  aside.toc-drawer {
+    right: -15em !important;
+    border-left: 1px solid var(--color-background-muted) !important;
+  }
+  .page {
+    margin-right: 0 !important;
+  }
+  .main {
+    max-width: 100% !important;
+  }
+  .toc-content-icon {
+    display: none !important;
+  }
+}
+
+/** Footer — hide everything except copyright **/
+.bottom-of-page .left-details {
+  font-size: 0 !important;
+}
+
+.bottom-of-page .left-details > * {
+  display: none !important;
+}
+
+.bottom-of-page .left-details .copyright {
+  display: block !important;
+  font-size: 14px !important;
+}
+
+.bottom-of-page .left-details .last-updated {
+  display: none !important;
+}
+
+.bottom-of-page .left-details a[href*="furo"] {
+  display: none !important;
+}

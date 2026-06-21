@@ -194,13 +194,13 @@ Tunnel mode encapsulates the entire original IP packet within a new IP packet. T
 **Packet Structure:**
 
 _For AH:_
-![alt text](./images/ipsec/transport-ah.webp)
+![alt text](./images/ipsec/tunnel-ah.webp)
 
 _For ESP:_
-![alt text](./images/ipsec/transport-esp.webp)
+![alt text](./images/ipsec/tunnel-esp.webp)
 
 _For AH+ESP:_
-![alt text](./images/ipsec/transport-ah-esp.webp)
+![alt text](./images/ipsec/tunnel-ah-esp.webp)
 
 In tunnel mode processing, the complete original packet is encrypted and becomes the payload of the new packet. Network routing decisions are based on the outer IP header, which usually directs traffic between security gateways. The original communication endpoints are hidden within the encrypted payload, providing location privacy and enabling network-to-network communications.
 

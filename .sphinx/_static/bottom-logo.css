@@ -1,7 +1,7 @@
 .bottom-logo {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 5px;
   z-index: 1000;
   transition: all 0.3s ease;
 }
@@ -25,7 +25,6 @@
   transition: transform 0.3s ease;
   margin: 0rem;
   margin-right: 2rem;
-  filter: none; /* Default - original colors for light theme */
   box-shadow: none;
   border: none;
   background: transparent;
@@ -33,31 +32,18 @@
 
 .bottom-logo-link:hover .bottom-logo-image {
   transform: scale(1.05);
-  /* border-bottom: 1px solid blueviolet; */
-  /* transform: translateY(1); */
 }
 
-/* Light theme support - ensure original colors */
-body[data-theme="light"] .bottom-logo-image {
-  filter: none !important;
-}
-
-@media (prefers-color-scheme: light) {
-  .bottom-logo-image {
-    filter: none !important;
-  }
-}
-
-/* Dark mode support - make logo white */
-@media (prefers-color-scheme: dark) {
-  .bottom-logo-image {
-    filter: brightness(0) saturate(100%) invert(100%);
-  }
-}
-
-/* Dark theme support when explicitly set */
+/* Invert logo to white only when dark theme is explicitly set */
 body[data-theme="dark"] .bottom-logo-image {
   filter: brightness(0) saturate(100%) invert(100%);
+}
+
+/* System dark preference — but not when user explicitly chose light */
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) .bottom-logo-image {
+    filter: brightness(0) saturate(100%) invert(100%);
+  }
 }
 
 /* Responsive adjustments */
@@ -66,7 +52,7 @@ body[data-theme="dark"] .bottom-logo-image {
     bottom: 15px;
     right: 15px;
   }
-  
+
   .bottom-logo-image {
     height: 32px;
   }
@@ -77,7 +63,7 @@ body[data-theme="dark"] .bottom-logo-image {
     bottom: 10px;
     right: 10px;
   }
-  
+
   .bottom-logo-image {
     height: 28px;
   }
