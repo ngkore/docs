@@ -67,6 +67,7 @@ Extensions (`youtube_links`, `related_links`, `terminal_output`) bundle their ow
 - **Code blocks**: use `console` for terminal output with commands, `bash` for scripts only, `groovy` for Gradle (not `gradle`), `diff` for patches.
 - **Images**: store in section's `images/` dir, use relative paths, descriptive lowercase-dash names.
 - **Repo links**: use note blocks at top of doc for related repositories.
+- **Horizontal rules** (`---`): used intentionally in `index.md` and `how-to-contribute.md` as content separators. Do not remove.
 - **New pages**: add to parent `index.md` toctree.
 
 ## Git Conventions

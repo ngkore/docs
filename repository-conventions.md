@@ -79,6 +79,7 @@ When referencing code repositories, implementation guides, or related projects, 
 - Keep language concise and technical.
 - Use code blocks for directory structures, code samples, or examples.
 - Do not use bold styling for headings.
+- Do not use em dash (`—`).
 
 ### Header Hierarchy
 

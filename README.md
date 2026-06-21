@@ -1,6 +1,6 @@
 # NgKore Documentation
 
-NgKore Foundation (ngkorefoundation.org) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
+NgKore Foundation ([ngkorefoundation.org](https://ngkorefoundation.org)) is an open-source community driving innovation across Post-Quantum Cryptography (PQC), 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, Quantum technologies, and Cloud-Native Architectures.
 
 ## Contributing
 

@@ -132,6 +132,20 @@ aside.toc-drawer .toc-tree ul ul {
   }
 }
 
+/** Below 480px: tighten mobile layout **/
+@media (max-width: 480px) {
+  .sidebar-drawer {
+    width: 80vw !important;
+    min-width: 80vw !important;
+  }
+  .mobile-header .header-center .brand {
+    font-size: 0.9rem;
+  }
+  .content {
+    padding: 0 0.5rem !important;
+  }
+}
+
 /** Footer — hide everything except copyright **/
 .bottom-of-page .left-details {
   font-size: 0 !important;

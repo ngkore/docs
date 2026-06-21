@@ -1,0 +1,186 @@
+{% extends "page.html" %} {# Hide both sidebars on 404 page #} {% block
+left_sidebar %}{% endblock %} {% block right_sidebar %}{% endblock %} {% block
+content %}
+<style>
+  /* Full-width layout - no sidebar margins */
+  .page {
+    margin-right: 0 !important;
+  }
+  .main {
+    max-width: 100% !important;
+  }
+  .sidebar-drawer {
+    display: none !important;
+  }
+  aside.toc-drawer {
+    display: none !important;
+  }
+  .mobile-header .nav-overlay-icon {
+    display: none !important;
+  }
+  .mobile-header .toc-overlay-icon {
+    display: none !important;
+  }
+
+  .notfound {
+    text-align: center;
+    padding: 6rem 1.5rem 3rem;
+    max-width: 520px;
+    margin: 0 auto;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .notfound-code {
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 0 0.5rem;
+    color: var(--color-brand-content, #06c);
+    letter-spacing: -3px;
+  }
+  .notfound-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0 0 1.5rem;
+    color: var(--color-foreground-primary, #111);
+  }
+  .notfound p {
+    margin: 0.5rem 0;
+    text-align: center;
+    color: var(--color-foreground-muted, #555);
+    line-height: 1.6;
+  }
+  .notfound-countdown {
+    display: inline-block;
+    min-width: 1.2em;
+    font-weight: 600;
+    color: var(--color-brand-content, #06c);
+  }
+  .notfound-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background: var(--color-brand-content, #06c);
+    color: #fff !important;
+    border-radius: 6px;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.2s ease;
+  }
+  .notfound-btn:hover {
+    opacity: 0.85;
+    border-bottom: none !important;
+  }
+
+  /* Footer: centered, no overlap with bottom-logo */
+  .bottom-logo {
+    display: none !important;
+  }
+  .bottom-of-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 1rem 2rem;
+    gap: 1rem;
+  }
+  .bottom-of-page .left-details {
+    font-size: 0 !important;
+    order: 2;
+  }
+  .bottom-of-page .left-details .copyright {
+    display: block !important;
+    font-size: 14px !important;
+  }
+  .bottom-of-page .right-details {
+    order: 1;
+  }
+  .bottom-of-page .icons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .notfound {
+      padding: 4rem 1.25rem 2rem;
+      min-height: 50vh;
+    }
+    .notfound-code {
+      font-size: 5rem;
+      letter-spacing: -2px;
+    }
+    .notfound-title {
+      font-size: 1.3rem;
+    }
+    .notfound-btn {
+      padding: 0.7rem 1.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .notfound {
+      padding: 3rem 1rem 1.5rem;
+      min-height: 45vh;
+      max-width: 100%;
+    }
+    .notfound-code {
+      font-size: 4rem;
+      letter-spacing: -1px;
+    }
+    .notfound-title {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .notfound p {
+      font-size: 0.9rem;
+    }
+    .notfound-btn {
+      padding: 0.65rem 1.25rem;
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+    }
+    .bottom-of-page {
+      padding: 1rem 0.75rem 1.5rem;
+    }
+    .bottom-of-page .left-details .copyright {
+      font-size: 12px !important;
+    }
+  }
+</style>
+
+<div class="notfound">
+  <p class="notfound-code">404</p>
+  <p class="notfound-title">Page not found</p>
+  <p>The page you are looking for does not exist or has been moved.</p>
+  <p>
+    Redirecting to home in
+    <span id="countdown" class="notfound-countdown">10</span> seconds.
+  </p>
+  <a href="/" class="notfound-btn">Go to Home Page</a>
+</div>
+
+<script>
+  (function () {
+    var seconds = 10;
+    var el = document.getElementById("countdown");
+    var timer = setInterval(function () {
+      seconds--;
+      if (el) el.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = "/";
+      }
+    }, 1000);
+  })();
+</script>
+{% endblock %}

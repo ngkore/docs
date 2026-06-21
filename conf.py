@@ -35,10 +35,13 @@ if 'discourse_prefix' not in html_context and 'discourse' in html_context:
 
 if slug:
     notfound_urls_prefix = '/' + slug + '/en/latest/'
+else:
+    notfound_urls_prefix = '/'
 
+notfound_template = '404.html'
 notfound_context = {
     'title': 'Page not found',
-    'body': '<h1>Page not found</h1>\n\n<p>Sorry, but the documentation page that you are looking for was not found.</p>\n<p>Documentation changes over time, and pages are moved around. We try to redirect you to the updated content where possible, but unfortunately, that didn\'t work this time (maybe because the content you were looking for does not exist in this version of the documentation).</p>\n<p>You can try to use the navigation to locate the content you\'re looking for, or search for a similar page.</p>\n',
+    'body': '',
 }
 
 if 'ogp_image' not in locals():

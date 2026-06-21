@@ -242,3 +242,56 @@ article[role="main"] section:first-child p:nth-of-type(2) {
   margin-top: 0;
   margin-bottom: 1.5rem;
 }
+
+@media (max-width: 768px) {
+  table.docutils {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table.docutils td,
+  table.docutils th {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  .highlight pre {
+    padding: 0.75rem;
+    font-size: 0.82rem;
+  }
+  img {
+    margin: 1rem 0;
+    border-radius: 6px;
+  }
+  .sd-row {
+    gap: 1rem;
+  }
+  .sd-card-header {
+    padding: 1rem;
+  }
+  .sd-card-text {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  .admonition {
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  code.literal {
+    font-size: 0.82rem;
+    padding: 0.15rem 0.3rem;
+  }
+  .highlight pre {
+    font-size: 0.78rem;
+    padding: 0.6rem;
+  }
+  .sphinx-tabs-tab {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .sphinx-tabs-panel {
+    padding: 1rem;
+  }
+}

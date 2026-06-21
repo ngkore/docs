@@ -34,18 +34,19 @@ run:
 
 html:
 	. $(VENV); $(SPHINXBUILD) -c . -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt
+	@if [ -f "$(BUILDDIR)/404/index.html" ]; then cp "$(BUILDDIR)/404/index.html" "$(BUILDDIR)/404.html"; fi
 
 html-github:
 	. $(VENV); export GITHUB_ACTIONS=true; $(SPHINXBUILD) -c . -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt --keep-going
 	touch "$(BUILDDIR)/.nojekyll"
-	# Create index.html files for all directories
 	find "$(BUILDDIR)" -name "index" -type f -exec sh -c 'cp "$$1" "$${1%index}index.html"' _ {} \;
+	@if [ -f "$(BUILDDIR)/404/index.html" ]; then cp "$(BUILDDIR)/404/index.html" "$(BUILDDIR)/404.html"; fi
 
 epub:
 	. $(VENV); $(SPHINXBUILD) -c . -b epub "$(SOURCEDIR)" "$(BUILDDIR)" -w .sphinx/warnings.txt
 
 serve:
-	cd "$(BUILDDIR)"; python3 -m http.server 8000
+	. $(VENV); python3 .sphinx/serve.py 8000 "$(BUILDDIR)"
 
 clean: clean-doc
 	rm -rf .sphinx/venv

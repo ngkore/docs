@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /search/
+Disallow: /genindex/
+Disallow: /opensearch/
+Disallow: /404/
+Disallow: /404.html
+Disallow: /_static/
+Disallow: /_sources/
+
+Sitemap: https://docs.ngkorefoundation.org/sitemap.xml

@@ -17,13 +17,15 @@ ogp_site_url = "https://docs.ngkorefoundation.org"
 ogp_site_name = project
 ogp_image = ".sphinx/_static/tag.png"
 
+ogp_description = 'NgKore Foundation is an open-source community driving innovation across Quantum Safe Network, PQC, eBPF, 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, and Quantum Simulations.'
+
 html_meta = {
-    'description': 'NgKore documentation covering Post-Quantum Cryptography (PQC), eBPF Technology, O-RAN, 5G Core Networks, Network Security, AI/ML Integration, NTN, Quantum Technologies and Kernel Bypass Technologies.',
-    'keywords': '5G core, PQC, post-quantum cryptography, eBPF, XDP, O-RAN, network security, AI/ML, kernel bypass, UPF, TLS, IPSec, QUIC, NTN, satellite networks, xFAPI, SMO, RIC, DPDK, AF_XDP, SRIOV, Quantum, OQS, Kubernetes, HEXAeBPF, OQS, PQC Migration, Telecom',
+    'description': 'NgKore Foundation is an open-source community driving innovation across Quantum Safe Network, PQC, eBPF, 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, and Quantum Simulations.',
+    'keywords': '5G Core, PQC, post-quantum cryptography, eBPF, XDP, O-RAN, network security, AI/ML, kernel bypass, UPF, TLS, IPSec, QUIC, NTN, satellite networks, xFAPI, SMO, RIC, DPDK, AF_XDP, SRIOV, Quantum, OQS, Kubernetes, HEXAeBPF, 6G, Blockchain, Quantum Simulations, Telecom',
     'author': 'NgKore Foundation',
     'robots': 'index, follow',
     'og:type': 'website',
-    'og:description': 'Open-source community driving innovation in 5G, Post-Quantum Cryptography, eBPF, O-RAN, and Cloud-Native Architectures.',
+    'og:description': 'NgKore Foundation is an open-source community driving innovation across Quantum Safe Network, PQC, eBPF, 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, and Quantum Simulations.',
     'twitter:card': 'summary_large_image',
     'twitter:site': '@ngkore_org',
 }
@@ -96,6 +98,14 @@ html_baseurl = 'https://docs.ngkorefoundation.org/'
 
 sitemap_url_scheme = "{link}"
 sitemap_locales = ['en']
+sitemap_excludes = [
+    'search/',
+    'genindex/',
+    'opensearch/',
+    '404/',
+    'repository-conventions/',
+    'how-to-contribute/',
+]
 
 html_extra_path = []
 if os.path.exists('robots.txt'):

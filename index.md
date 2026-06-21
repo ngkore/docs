@@ -2,7 +2,7 @@
 
 ## Overview
 
-NgKore Foundation (_ngkorefoundation.org_) is an open-source community advancing research and development in next-generation network infrastructure, quantum-resistant cryptography, and cloud-native architectures. The foundation focuses on bridging academic research with production-ready implementations across telecommunications, distributed systems, and emerging network technologies.
+NgKore Foundation (_ngkorefoundation.org_) is an open-source community driving innovation across Quantum Safe Network, Post-Quantum Cryptography (PQC), eBPF, 5G Advanced, 6G, O-RAN, NTN, AI/ML, Blockchain, and Quantum Simulations.
 
 ## Technical Domains
 

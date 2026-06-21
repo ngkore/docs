@@ -114,3 +114,19 @@ blockquote {
 details summary {
   color: var(--color-link);
 }
+
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.3rem; }
+  h4, h5, h6 { font-size: 1.1rem; }
+  p { text-align: left; }
+  blockquote { padding: 0.75rem 1rem; margin: 1rem 0; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.7rem; margin-top: 1.25rem; margin-bottom: 1rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.2rem; }
+  h4, h5, h6 { font-size: 1rem; }
+}
