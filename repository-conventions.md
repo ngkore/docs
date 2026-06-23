@@ -70,6 +70,22 @@ When referencing code repositories, implementation guides, or related projects, 
 > Follow this repository ([github/username/repo-name](https://github.com/username/repo-name)) for implementation details.
 ```
 
+## Tutorials
+
+### Replica Note Block
+
+When a tutorial document is based on or mirrors a GitHub repository README, include the following note block immediately after the metadata header (title, author, published date, and intro paragraph):
+
+```markdown
+> **Note:** This documentation is a replica of the README available at the [github/username/repo-name](https://github.com/username/repo-name). Please refer to the original repository for the most up-to-date information.
+```
+
+**Example:**
+
+```markdown
+> **Note:** This documentation is a replica of the README available at the [github/ngkore/OAI-RAN](https://github.com/ngkore/OAI-RAN). Please refer to the original repository for the most up-to-date information.
+```
+
 ## Formatting and Style
 
 ### General Guidelines

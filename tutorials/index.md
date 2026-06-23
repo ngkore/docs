@@ -16,6 +16,6 @@ osc-oam
 :maxdepth: 2
 
 iosmcn/index
-srsran/index
+ocudu-srsran/index
 pqc/index
 ```
