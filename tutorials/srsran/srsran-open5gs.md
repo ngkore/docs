@@ -13,7 +13,7 @@ This repository documents a complete **end-to-end 5G standalone (SA) setup** usi
 
 ![srsran open5gs](../images/srsran/srsran-open5gs.png)
 
-This setup is intended for **testing, learning, and research**, and runs entirely on a **single Ubuntu VM**. **End-to-End 5G Setup using Open5GS + srsRAN gNB + srsUE (ZMQ-based Virtual RF)**
+This setup is intended for testing, learning, and research, and runs entirely on a single Ubuntu VM.
 
 > **Note:** This documentation is a replica of the README available at the [github/ngkore/Open5GS-srsRAN](https://github.com/ngkore/Open5GS-srsRAN). Please refer to the original repository for the most up-to-date information.
 
@@ -24,7 +24,7 @@ This setup is intended for **testing, learning, and research**, and runs entirel
 
 ## Architecture Overview
 
-```console
+```text
 +-----------------------------+
 |        Ubuntu 22.04 VM      |
 |                             |
