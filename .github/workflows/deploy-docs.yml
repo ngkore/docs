@@ -42,8 +42,9 @@ jobs:
     - name: Check build warnings
       run: |
         if [ -f .sphinx/warnings.txt ] && [ -s .sphinx/warnings.txt ]; then
-          echo "::warning::Sphinx build produced warnings:"
+          echo "::error::Sphinx build produced warnings — deployment blocked:"
           cat .sphinx/warnings.txt
+          exit 1
         fi
 
     - name: Prepare GitHub Pages output
@@ -81,3 +82,18 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v5
+
+    - name: Verify deployment
+      run: |
+        URL="https://docs.ngkorefoundation.org"
+        echo "Waiting for CDN to propagate new deployment at $URL"
+        for i in $(seq 1 10); do
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+          if [ "$STATUS" = "200" ]; then
+            echo "Site is live (attempt $i)"
+            exit 0
+          fi
+          echo "Attempt $i: HTTP $STATUS — retrying in 15s"
+          sleep 15
+        done
+        echo "::warning::Site did not return 200 after 150s — CDN may still be propagating"
