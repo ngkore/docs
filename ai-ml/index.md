@@ -9,6 +9,9 @@ openai-120b-model-deployment
 harbor-setup-for-proxy-mirror
 grok2-deployment-via-sglang
 k2-think-deployment-via-sglang
+kimi-k2-deployment-on-h200
+amd-mi210-llm-deployment
+nemotron-550b-single-node-h200
 aiops-in-production
 production-ready-vllm-stack-on-kubernetes-with-hpa-autoscaling
 large-language-models-remain-poisonable-at-scale
