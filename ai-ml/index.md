@@ -10,6 +10,7 @@ harbor-setup-for-proxy-mirror
 grok2-deployment-via-sglang
 k2-think-deployment-via-sglang
 kimi-k2-deployment-on-h200
+amd-mi210-llm-deployment
 aiops-in-production
 production-ready-vllm-stack-on-kubernetes-with-hpa-autoscaling
 large-language-models-remain-poisonable-at-scale
