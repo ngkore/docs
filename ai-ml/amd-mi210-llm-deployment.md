@@ -2,7 +2,7 @@
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
-**Published:** Jun 9, 2025
+**Published:** Jun 9, 2026
 
 *Chat, embedding, and speech models on AMD Instinct MI210 (gfx90a) — with the full manifests and the version/quantization decisions that actually matter.*
 

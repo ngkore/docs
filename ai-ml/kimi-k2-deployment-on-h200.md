@@ -2,7 +2,7 @@
 
 **Author:** [Shivank Chaudhary](https://www.linkedin.com/in/shivank1128/)
 
-**Published:** Feb 19, 2025
+**Published:** Feb 19, 2026
 
 I spent the last few days deploying Moonshot AI's **Kimi K2.5** — a 1 trillion parameter Mixture-of-Experts model — on NVIDIA H200 GPUs using vLLM and llama.cpp. What was supposed to be a straightforward deployment turned into a deep dive through CUDA driver bugs, quantization rabbit holes, and some surprisingly tricky GPU memory math.
 
