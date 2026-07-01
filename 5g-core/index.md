@@ -7,7 +7,7 @@ pqc/index
 hexaebpf/index
 ebpf/index
 security/index
-standards/index
+open-source-comparison/index
 ```
 
 ```{toctree}
@@ -17,5 +17,4 @@ nr-reference-signals
 nr-frame-structure
 5g-upf-architecture
 5gc-operator
-os-5gc-compare
 ```
