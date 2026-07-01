@@ -7,10 +7,14 @@ pqc/index
 hexaebpf/index
 ebpf/index
 security/index
+standards/index
 ```
 
 ```{toctree}
 :maxdepth: 1
+
+nr-reference-signals
+nr-frame-structure
 5g-upf-architecture
 5gc-operator
 os-5gc-compare
