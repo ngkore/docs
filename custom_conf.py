@@ -54,7 +54,7 @@ redirects = {
     'ebpf/ebpf-based-l4-load-balancer/': '../building-ebpf-based-l4-load-balancer/',
     'ebpf/ebpf-in-ssd/': '../data-processing-with-ebpf-in-ssd/',
     'ebpf/ebpf-in-gpu-acceleration/': '../ebpf-for-gpu-acceleration/',
-    '5g-core/standards/': '../open-source-comparison/',
+    # '5g-core/standards/': '../open-source-comparison/',
     '5g-core/standards/oai-free5gc-open5gs-magma-5g-core-standards-for-amf/': '../../open-source-comparison/oai-free5gc-open5gs-magma-5g-core-standards-for-amf/',
     '5g-core/standards/oai-free5gc-open5gs-and-magma-5g-core-standards-for-smf/': '../../open-source-comparison/oai-free5gc-open5gs-and-magma-5g-core-standards-for-smf/',
     '5g-core/standards/oai-free5gc-open-5gs-5g-core-standards-for-upf/': '../../open-source-comparison/oai-free5gc-open-5gs-5g-core-standards-for-upf/',
